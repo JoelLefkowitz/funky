@@ -1,6 +1,6 @@
 [project]
 name = "functional"
-description = "Functional typeclasses and instances."
+description = "Functional type classes and instances."
 version = "0.0.0"
 
 keywords = [

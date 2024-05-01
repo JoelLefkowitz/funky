@@ -1,6 +1,6 @@
 # Functional
 
-Functional typeclasses and instances.
+Functional type classes and instances.
 
 ![Review](https://img.shields.io/github/actions/workflow/status/JoelLefkowitz/functional/review.yml)
 ![Quality](https://img.shields.io/codacy/grade/_)
