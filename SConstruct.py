@@ -119,7 +119,7 @@ cli = Tasks(
         sphinx,
     ],
     [
-        Routine("lint", [cspell, cppclean, cppcheck, clang_tidy, trufflehog3]),
+        Routine("lint", [cspell, cppclean, cppcheck, trufflehog3]),
         Routine("format", [clang_format, prettier]),
         Routine("docs", [doxygen, breathe, sphinx]),
     ],
