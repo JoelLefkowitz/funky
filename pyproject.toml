@@ -5,7 +5,6 @@ version = "0.0.0"
 
 keywords = [
     "functional",
-    "typeclass",
     "instance",
     "functor",
     "applicative",
