@@ -1,5 +1,5 @@
-#ifndef LIMITS_HPP
-#define LIMITS_HPP
+#ifndef FUNCTIONAL_INSTANCES_NUMBERS_LIMITS_HPP
+#define FUNCTIONAL_INSTANCES_NUMBERS_LIMITS_HPP
 
 namespace functional {
     template <typename T>

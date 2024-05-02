@@ -1,5 +1,5 @@
-#ifndef COMPOSE_HPP
-#define COMPOSE_HPP
+#ifndef FUNCTIONAL_GENERICS_SEMIGROUPOID_COMPOSE_HPP
+#define FUNCTIONAL_GENERICS_SEMIGROUPOID_COMPOSE_HPP
 
 namespace functional {
     template <typename F, typename G>

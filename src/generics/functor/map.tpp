@@ -1,5 +1,5 @@
-#ifndef MAP_TPP
-#define MAP_TPP
+#ifndef FUNCTIONAL_GENERICS_FUNCTOR_MAP_TPP
+#define FUNCTIONAL_GENERICS_FUNCTOR_MAP_TPP
 
 #include "map.hpp"
 #include <functional>

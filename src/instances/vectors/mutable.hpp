@@ -1,5 +1,5 @@
-#ifndef MUTABLE_HPP
-#define MUTABLE_HPP
+#ifndef FUNCTIONAL_INSTANCES_VECTORS_MUTABLE_HPP
+#define FUNCTIONAL_INSTANCES_VECTORS_MUTABLE_HPP
 
 #include <cstddef>
 #include <vector>

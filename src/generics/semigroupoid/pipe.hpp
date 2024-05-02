@@ -1,5 +1,5 @@
-#ifndef PIPE_HPP
-#define PIPE_HPP
+#ifndef FUNCTIONAL_GENERICS_SEMIGROUPOID_PIPE_HPP
+#define FUNCTIONAL_GENERICS_SEMIGROUPOID_PIPE_HPP
 
 namespace functional {
     template <typename T, typename... F>

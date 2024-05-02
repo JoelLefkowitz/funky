@@ -1,5 +1,5 @@
-#ifndef FOREACH_HPP
-#define FOREACH_HPP
+#ifndef FUNCTIONAL_GENERICS_FUNCTOR_FOREACH_HPP
+#define FUNCTIONAL_GENERICS_FUNCTOR_FOREACH_HPP
 
 #include <cstddef>
 #include <functional>

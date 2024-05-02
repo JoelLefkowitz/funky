@@ -1,3 +1,6 @@
+#ifndef FUNCTIONAL_INSTANCES_VECTORS_MUTABLE_TPP
+#define FUNCTIONAL_INSTANCES_VECTORS_MUTABLE_TPP
+
 #ifndef MUTABLE_TPP
 #define MUTABLE_TPP
 
@@ -33,4 +36,5 @@ void functional::move_to_back(const std::function<bool(T)> &filter, std::vector<
     }
 }
 
+#endif
 #endif

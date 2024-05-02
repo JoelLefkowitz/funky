@@ -1,5 +1,5 @@
-#ifndef PAGINATOR_TPP
-#define PAGINATOR_TPP
+#ifndef FUNCTIONAL_INSTANCES_VECTORS_PAGINATOR_TPP
+#define FUNCTIONAL_INSTANCES_VECTORS_PAGINATOR_TPP
 
 #include "../numbers/limits.hpp"
 #include "elements.tpp"

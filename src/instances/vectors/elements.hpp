@@ -1,5 +1,5 @@
-#ifndef ELEMENTS_HPP
-#define ELEMENTS_HPP
+#ifndef FUNCTIONAL_INSTANCES_VECTORS_ELEMENTS_HPP
+#define FUNCTIONAL_INSTANCES_VECTORS_ELEMENTS_HPP
 
 #include <cstddef>
 #include <functional>

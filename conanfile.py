@@ -23,7 +23,7 @@ class Recipe(ConanFile):
         SConsDeps(self).generate()
 
     def build(self):
-        self.run("scons build")
+        self.run("scons shared")
 
     def package(self):
         copy(

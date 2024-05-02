@@ -5,6 +5,8 @@ Functional type classes and instances.
 ![Review](https://img.shields.io/github/actions/workflow/status/JoelLefkowitz/functional/review.yml)
 ![Quality](https://img.shields.io/codacy/grade/_)
 
+## Installing
+
 You can download the [sources](https://download-directory.github.io?url=https://github.com/joellefkowitz/functional/tree/master/src).
 
 ## Documentation

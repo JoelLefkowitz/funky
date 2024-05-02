@@ -1,5 +1,5 @@
-#ifndef PRODUCT_TPP
-#define PRODUCT_TPP
+#ifndef FUNCTIONAL_GENERICS_FUNCTOR_PRODUCT_TPP
+#define FUNCTIONAL_GENERICS_FUNCTOR_PRODUCT_TPP
 
 #include "product.hpp"
 #include <functional>

@@ -1,5 +1,5 @@
-#ifndef PAIR_HPP
-#define PAIR_HPP
+#ifndef FUNCTIONAL_GENERICS_FUNCTOR_PAIR_HPP
+#define FUNCTIONAL_GENERICS_FUNCTOR_PAIR_HPP
 
 #include <functional>
 

@@ -11,12 +11,11 @@ from miniscons import (
 )
 from walkmate import tree
 
-
 env = conan()
 
-build = Build(
-    "build",
-    tree("src", r"(?<!\.spec)\.cpp$", ["test.cpp"]),
+shared = Build(
+    "shared",
+    tree("src", r"(?<!\.spec)\.cpp$", ["main.cpp", "test.cpp"]),
     flags("c++17"),
     shared=True,
     rename="functional",
@@ -103,8 +102,10 @@ sphinx = Script(
 )
 
 cli = Tasks(
-    [build, tests],
-    [Target("test", tests, ["--gtest_brief"])],
+    [shared, tests],
+    [
+        Target("test", tests, ["--gtest_brief"]),
+    ],
     [
         clang_format,
         clang_tidy,

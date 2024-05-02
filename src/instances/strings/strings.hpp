@@ -1,5 +1,5 @@
-#ifndef STRINGS_HPP
-#define STRINGS_HPP
+#ifndef FUNCTIONAL_INSTANCES_STRINGS_STRINGS_HPP
+#define FUNCTIONAL_INSTANCES_STRINGS_STRINGS_HPP
 
 #include <cstddef>
 #include <string>

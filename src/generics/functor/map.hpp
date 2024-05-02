@@ -1,5 +1,5 @@
-#ifndef MAP_HPP
-#define MAP_HPP
+#ifndef FUNCTIONAL_GENERICS_FUNCTOR_MAP_HPP
+#define FUNCTIONAL_GENERICS_FUNCTOR_MAP_HPP
 
 #include <functional>
 #include <map>

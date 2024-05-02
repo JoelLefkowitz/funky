@@ -1,5 +1,5 @@
-#ifndef PAIR_TPP
-#define PAIR_TPP
+#ifndef FUNCTIONAL_GENERICS_FUNCTOR_PAIR_TPP
+#define FUNCTIONAL_GENERICS_FUNCTOR_PAIR_TPP
 
 #include "pair.hpp"
 #include <functional>

@@ -1,5 +1,5 @@
-#ifndef FOLD_TPP
-#define FOLD_TPP
+#ifndef FUNCTIONAL_GENERICS_FOLDABLE_FOLD_TPP
+#define FUNCTIONAL_GENERICS_FOLDABLE_FOLD_TPP
 
 #include "fold.hpp"
 #include <functional>

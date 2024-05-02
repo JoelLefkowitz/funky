@@ -1,5 +1,5 @@
-#ifndef ACCUMULATORS_TPP
-#define ACCUMULATORS_TPP
+#ifndef FUNCTIONAL_INSTANCES_VECTORS_ACCUMULATORS_TPP
+#define FUNCTIONAL_INSTANCES_VECTORS_ACCUMULATORS_TPP
 
 #include "../../generics/foldable/fold.tpp"
 #include "accumulators.hpp"

@@ -1,5 +1,5 @@
-#ifndef FOREACH_TPP
-#define FOREACH_TPP
+#ifndef FUNCTIONAL_GENERICS_FUNCTOR_FOREACH_TPP
+#define FUNCTIONAL_GENERICS_FUNCTOR_FOREACH_TPP
 
 #include "foreach.hpp"
 #include <algorithm>

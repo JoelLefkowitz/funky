@@ -1,0 +1,6 @@
+#ifndef FUNCTIONAL_GENERICS_APPLY_APPLY_TPP
+#define FUNCTIONAL_GENERICS_APPLY_APPLY_TPP
+
+#include "apply.hpp"
+
+#endif

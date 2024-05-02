@@ -1,5 +1,5 @@
-#ifndef FOLD_HPP
-#define FOLD_HPP
+#ifndef FUNCTIONAL_GENERICS_FOLDABLE_FOLD_HPP
+#define FUNCTIONAL_GENERICS_FOLDABLE_FOLD_HPP
 
 #include <functional>
 

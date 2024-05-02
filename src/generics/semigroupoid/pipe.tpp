@@ -1,5 +1,5 @@
-#ifndef PIPE_TPP
-#define PIPE_TPP
+#ifndef FUNCTIONAL_GENERICS_SEMIGROUPOID_PIPE_TPP
+#define FUNCTIONAL_GENERICS_SEMIGROUPOID_PIPE_TPP
 
 #include "compose.tpp"
 #include "pipe.hpp"

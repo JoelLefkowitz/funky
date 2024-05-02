@@ -1,5 +1,5 @@
-#ifndef NUMBERS_HPP
-#define NUMBERS_HPP
+#ifndef FUNCTIONAL_INSTANCES_NUMBERS_NUMBERS_HPP
+#define FUNCTIONAL_INSTANCES_NUMBERS_NUMBERS_HPP
 
 #include <cstddef>
 #include <string>

@@ -1,1 +1,4 @@
-// TODO (Joel): Add bind functions
+#ifndef FUNCTIONAL_GENERICS_MONAD_BIND_HPP
+#define FUNCTIONAL_GENERICS_MONAD_BIND_HPP
+
+#endif

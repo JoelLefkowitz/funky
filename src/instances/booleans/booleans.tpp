@@ -1,5 +1,5 @@
-#ifndef BOOLEANS_TPP
-#define BOOLEANS_TPP
+#ifndef FUNCTIONAL_INSTANCES_BOOLEANS_BOOLEANS_TPP
+#define FUNCTIONAL_INSTANCES_BOOLEANS_BOOLEANS_TPP
 
 #include "booleans.hpp"
 #include <cstddef>

@@ -1,5 +1,5 @@
-#ifndef ZIP_HPP
-#define ZIP_HPP
+#ifndef FUNCTIONAL_GENERICS_FUNCTOR_ZIP_HPP
+#define FUNCTIONAL_GENERICS_FUNCTOR_ZIP_HPP
 
 #include <functional>
 

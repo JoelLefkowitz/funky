@@ -1,5 +1,5 @@
-#ifndef ZIP_TPP
-#define ZIP_TPP
+#ifndef FUNCTIONAL_GENERICS_FUNCTOR_ZIP_TPP
+#define FUNCTIONAL_GENERICS_FUNCTOR_ZIP_TPP
 
 #include "zip.hpp"
 #include <functional>

@@ -1,5 +1,5 @@
-#ifndef HEX_HPP
-#define HEX_HPP
+#ifndef FUNCTIONAL_INSTANCES_STRINGS_HEX_HPP
+#define FUNCTIONAL_INSTANCES_STRINGS_HEX_HPP
 
 #include <cstddef>
 #include <string>

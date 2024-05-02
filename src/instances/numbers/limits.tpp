@@ -1,5 +1,5 @@
-#ifndef LIMITS_TPP
-#define LIMITS_TPP
+#ifndef FUNCTIONAL_INSTANCES_NUMBERS_LIMITS_TPP
+#define FUNCTIONAL_INSTANCES_NUMBERS_LIMITS_TPP
 
 #include "limits.hpp"
 #include <algorithm>

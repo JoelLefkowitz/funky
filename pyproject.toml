@@ -3,13 +3,7 @@ name = "functional"
 description = "Functional type classes and instances."
 version = "0.0.0"
 
-keywords = [
-    "functional",
-    "instance",
-    "functor",
-    "applicative",
-    "monad",
-]
+keywords = ["functional", "instance", "functor", "applicative", "monad"]
 
 [project.optional-dependencies]
 all = [

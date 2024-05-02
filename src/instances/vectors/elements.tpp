@@ -1,5 +1,5 @@
-#ifndef ELEMENTS_TPP
-#define ELEMENTS_TPP
+#ifndef FUNCTIONAL_INSTANCES_VECTORS_ELEMENTS_TPP
+#define FUNCTIONAL_INSTANCES_VECTORS_ELEMENTS_TPP
 
 #include "../../generics/foldable/fold.tpp"
 #include "../../generics/functor/map.tpp"

@@ -1,5 +1,5 @@
-#ifndef IMMUTABLE_TPP
-#define IMMUTABLE_TPP
+#ifndef FUNCTIONAL_INSTANCES_VECTORS_IMMUTABLE_TPP
+#define FUNCTIONAL_INSTANCES_VECTORS_IMMUTABLE_TPP
 
 #include "../../generics/foldable/fold.tpp"
 #include "../../generics/functor/map.tpp"

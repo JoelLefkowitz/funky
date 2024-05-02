@@ -1,0 +1,6 @@
+#ifndef FUNCTIONAL_GENERICS_MONAD_BIND_TPP
+#define FUNCTIONAL_GENERICS_MONAD_BIND_TPP
+
+#include "bind.hpp"
+
+#endif

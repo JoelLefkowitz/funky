@@ -1,5 +1,5 @@
-#ifndef FILTER_TPP
-#define FILTER_TPP
+#ifndef FUNCTIONAL_GENERICS_FUNCTOR_FILTER_TPP
+#define FUNCTIONAL_GENERICS_FUNCTOR_FILTER_TPP
 
 #include "filter.hpp"
 #include <algorithm>

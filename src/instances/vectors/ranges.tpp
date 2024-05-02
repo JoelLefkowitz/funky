@@ -1,5 +1,5 @@
-#ifndef RANGES_TPP
-#define RANGES_TPP
+#ifndef FUNCTIONAL_INSTANCES_VECTORS_RANGES_TPP
+#define FUNCTIONAL_INSTANCES_VECTORS_RANGES_TPP
 
 #include "ranges.hpp"
 #include <numeric>

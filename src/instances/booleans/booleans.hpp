@@ -1,5 +1,5 @@
-#ifndef BOOLEANS_HPP
-#define BOOLEANS_HPP
+#ifndef FUNCTIONAL_INSTANCES_BOOLEANS_BOOLEANS_HPP
+#define FUNCTIONAL_INSTANCES_BOOLEANS_BOOLEANS_HPP
 
 #include <cstddef>
 #include <functional>

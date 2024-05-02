@@ -1,1 +1,4 @@
-// TODO (Joel): Add apply functions
+#ifndef FUNCTIONAL_GENERICS_APPLY_APPLY_HPP
+#define FUNCTIONAL_GENERICS_APPLY_APPLY_HPP
+
+#endif
