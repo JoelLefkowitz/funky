@@ -21,7 +21,7 @@ namespace functional {
 
     std::string truncate(const std::string &str, size_t limit, const std::string &ellipsis = "...");
 
-    std::string join(const std::vector<std::string> &strings, const std::string &delimeter);
+    std::string join(const std::vector<std::string> &strings, const std::string &delimiter);
 
     std::string remove_substrings(const std::string &str, const std::vector<std::string> &substr);
 } // namespace functional

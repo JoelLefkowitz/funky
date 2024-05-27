@@ -86,13 +86,13 @@ std::string functional::truncate(const std::string &str, size_t limit, const std
     return str.substr(0, width) + ellipsis;
 }
 
-std::string functional::join(const std::vector<std::string> &strings, const std::string &delimeter) {
+std::string functional::join(const std::vector<std::string> &strings, const std::string &delimiter) {
     std::function<std::string(const std::string &, const std::string &)> append =
-        [&delimeter](const auto &acc, const auto &x) { return acc + x + delimeter; };
+        [&delimiter](const auto &acc, const auto &x) { return acc + x + delimiter; };
 
     auto joined = functional::fold<std::vector<std::string>, std::string, std::string>(append, "", strings);
 
-    return strings.empty() ? "" : joined.substr(0, joined.size() - delimeter.size());
+    return strings.empty() ? "" : joined.substr(0, joined.size() - delimiter.size());
 }
 
 std::string functional::remove_substrings(const std::string &str, const std::vector<std::string> &substrs) {
