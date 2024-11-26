@@ -35,7 +35,7 @@ std::vector<std::string> functional::split(const std::string &str, const std::st
         std::vector<std::string> strs;
 
         for (auto i = str.begin(); i != str.end(); ++i) {
-            strs.emplace_back(std::string(1, *i));
+            strs.emplace_back(1, *i);
         }
 
         return strs;

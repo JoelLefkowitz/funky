@@ -1,4 +1,4 @@
-#include "limits.hpp"
+#include "limits.tpp"
 
 double functional::clamp_proportion(double x) { return clamp(0.0, x, 1.0); }
 

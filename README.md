@@ -7,7 +7,11 @@ Functional type classes and instances.
 
 ## Installing
 
-You can download the [sources](https://download-directory.github.io?url=https://github.com/joellefkowitz/functional/tree/master/src).
+```bash
+conan search functional
+```
+
+You can also download the [sources](https://download-directory.github.io?url=https://github.com/joellefkowitz/functional/tree/master/src).
 
 ## Documentation
 

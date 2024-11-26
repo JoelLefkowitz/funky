@@ -39,7 +39,8 @@ std::string functional::units_prefix(double n) {
     }
 
     auto operand = std::pow(10, std::abs(magnitude) % 3);
-    auto prefix  = magnitude > 0 ? "⋅" : "÷";
+
+    std::string prefix = magnitude > 0 ? "⋅" : "÷";
 
     std::vector<std::string> named = {"f", "p", "n", "μ", "m", "", "k", "M", "G", "T", "P"};
 
