@@ -2,7 +2,7 @@
 
 Functional type classes and instances.
 
-![Review](https://img.shields.io/github/actions/workflow/status/JoelLefkowitz/functional/review.yml)
+![Review](https://img.shields.io/github/actions/workflow/status/JoelLefkowitz/functional/review.yaml)
 ![Quality](https://img.shields.io/codacy/grade/_)
 
 ## Installing
@@ -11,7 +11,7 @@ Functional type classes and instances.
 conan search functional
 ```
 
-You can also download the [sources](https://download-directory.github.io?url=https://github.com/joellefkowitz/functional/tree/master/src).
+You can also download the [sources](https://download-directory.github.io?url=https://github.com/JoelLefkowitz/functional/tree/master/src).
 
 ## Documentation
 

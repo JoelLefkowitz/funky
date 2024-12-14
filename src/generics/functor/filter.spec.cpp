@@ -1,5 +1,5 @@
 #include "filter.tpp"
-#include "../../instances/numbers/division.hpp"
+#include "../../implementations/numbers/division.hpp"
 #include <deque>
 #include <functional>
 #include <gtest/gtest.h>

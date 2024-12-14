@@ -6,6 +6,7 @@
 #include <cstddef>
 #include <functional>
 
+// ∀ F A. (A -> void) -> FA -> void
 template <typename FA, typename A>
 void functional::foreach (const std::function<void(A)> &effect, const FA &source) {
     std::for_each(source.begin(), source.end(), effect);
