@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 
-std::string functional::hex(int n, size_t length) {
+std::string funky::hex(int n, size_t length) {
     std::stringstream stream;
     stream << std::hex << n;
     auto str = stream.str();
@@ -12,7 +12,7 @@ std::string functional::hex(int n, size_t length) {
     return std::string("0", padding) + str;
 }
 
-int functional::parse_hex(const std::string &str) {
+int funky::parse_hex(const std::string &str) {
     std::stringstream ss;
     ss << std::hex << str;
 

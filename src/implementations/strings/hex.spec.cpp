@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-using namespace functional;
+using namespace funky;
 
 TEST(Hex, Hex) {
     EXPECT_EQ(hex(0), "0");

@@ -2,7 +2,7 @@
 #include <functional>
 #include <gtest/gtest.h>
 
-using namespace functional;
+using namespace funky;
 
 TEST(Pipe, Pipe) {
     std::function<int(int)> increment = [](auto x) { return x + 1; };

@@ -2,7 +2,7 @@
 #include <cstddef>
 #include <gtest/gtest.h>
 
-using namespace functional;
+using namespace funky;
 
 TEST(Elements, Min) {
     EXPECT_EQ(min(std::vector<int>({})), 0);

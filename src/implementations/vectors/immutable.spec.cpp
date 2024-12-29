@@ -2,7 +2,7 @@
 #include <cstddef>
 #include <gtest/gtest.h>
 
-using namespace functional;
+using namespace funky;
 
 TEST(Immutable, Unique) {
     EXPECT_EQ(unique(std::vector<int>({})), std::vector<int>({}));

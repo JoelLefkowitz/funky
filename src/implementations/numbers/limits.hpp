@@ -1,7 +1,7 @@
-#ifndef FUNCTIONAL_IMPLEMENTATIONS_NUMBERS_LIMITS_HPP
-#define FUNCTIONAL_IMPLEMENTATIONS_NUMBERS_LIMITS_HPP
+#ifndef FUNKY_IMPLEMENTATIONS_NUMBERS_LIMITS_HPP
+#define FUNKY_IMPLEMENTATIONS_NUMBERS_LIMITS_HPP
 
-namespace functional {
+namespace funky {
     template <typename T>
     bool between(T lower, T x, T higher);
 

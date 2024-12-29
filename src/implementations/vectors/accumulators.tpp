@@ -1,5 +1,5 @@
-#ifndef FUNCTIONAL_IMPLEMENTATIONS_VECTORS_ACCUMULATORS_TPP
-#define FUNCTIONAL_IMPLEMENTATIONS_VECTORS_ACCUMULATORS_TPP
+#ifndef FUNKY_IMPLEMENTATIONS_VECTORS_ACCUMULATORS_TPP
+#define FUNKY_IMPLEMENTATIONS_VECTORS_ACCUMULATORS_TPP
 
 #include "../../generics/foldable/fold.tpp"
 #include "accumulators.hpp"
@@ -7,11 +7,11 @@
 #include <vector>
 
 template <typename T>
-T functional::average(const std::vector<T> &vec) {
+T funky::average(const std::vector<T> &vec) {
     std::function<T(T, T)> sum = [](auto acc, auto x) { return acc + x; };
 
     auto size = static_cast<T>(vec.size());
-    return functional::fold(sum, T(), vec) / size;
+    return funky::fold(sum, T(), vec) / size;
 }
 
 #endif

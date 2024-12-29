@@ -1,7 +1,7 @@
 #include "division.hpp"
 #include <gtest/gtest.h>
 
-using namespace functional;
+using namespace funky;
 
 TEST(Numerics, Factor) {
     EXPECT_TRUE(factor(10, 2));

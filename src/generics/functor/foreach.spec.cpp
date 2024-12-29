@@ -5,7 +5,7 @@
 #include <gtest/gtest.h>
 #include <vector>
 
-using namespace functional;
+using namespace funky;
 
 TEST(Foreach, Foreach) {
     struct Number {

@@ -1,12 +1,12 @@
-#ifndef FUNCTIONAL_GENERICS_FUNCTOR_ZIP_TPP
-#define FUNCTIONAL_GENERICS_FUNCTOR_ZIP_TPP
+#ifndef FUNKY_GENERICS_FUNCTOR_ZIP_TPP
+#define FUNKY_GENERICS_FUNCTOR_ZIP_TPP
 
 #include "zip.hpp"
 #include <functional>
 #include <numeric>
 
 template <template <typename...> typename F, typename A, typename B, typename C>
-F<C> functional::zip(const std::function<C(A, B)> &mapper, const F<A> &a, const F<B> &b) {
+F<C> funky::zip(const std::function<C(A, B)> &mapper, const F<A> &a, const F<B> &b) {
     F<C> target;
 
     auto x = a.begin();
@@ -20,7 +20,7 @@ F<C> functional::zip(const std::function<C(A, B)> &mapper, const F<A> &a, const 
 }
 
 template <template <typename...> typename F, typename A, typename B, typename C>
-F<C> functional::zip(const std::function<C(const A &, B)> &mapper, const F<A> &a, const F<B> &b) {
+F<C> funky::zip(const std::function<C(const A &, B)> &mapper, const F<A> &a, const F<B> &b) {
     F<C> target;
 
     auto x = a.begin();
@@ -34,7 +34,7 @@ F<C> functional::zip(const std::function<C(const A &, B)> &mapper, const F<A> &a
 }
 
 template <template <typename...> typename F, typename A, typename B, typename C>
-F<C> functional::zip(const std::function<C(A, const B &)> &mapper, const F<A> &a, const F<B> &b) {
+F<C> funky::zip(const std::function<C(A, const B &)> &mapper, const F<A> &a, const F<B> &b) {
     F<C> target;
 
     auto x = a.begin();
@@ -48,7 +48,7 @@ F<C> functional::zip(const std::function<C(A, const B &)> &mapper, const F<A> &a
 }
 
 template <template <typename...> typename F, typename A, typename B, typename C>
-F<C> functional::zip(const std::function<C(const A &, const B &)> &mapper, const F<A> &a, const F<B> &b) {
+F<C> funky::zip(const std::function<C(const A &, const B &)> &mapper, const F<A> &a, const F<B> &b) {
     F<C> target;
 
     auto x = a.begin();

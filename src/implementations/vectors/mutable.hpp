@@ -1,10 +1,10 @@
-#ifndef FUNCTIONAL_IMPLEMENTATIONS_VECTORS_MUTABLE_HPP
-#define FUNCTIONAL_IMPLEMENTATIONS_VECTORS_MUTABLE_HPP
+#ifndef FUNKY_IMPLEMENTATIONS_VECTORS_MUTABLE_HPP
+#define FUNKY_IMPLEMENTATIONS_VECTORS_MUTABLE_HPP
 
 #include <cstddef>
 #include <vector>
 
-namespace functional {
+namespace funky {
     template <typename T>
     void insert(const std::vector<T> &source, std::vector<T> &target);
 

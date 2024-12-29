@@ -1,5 +1,5 @@
-#ifndef FUNCTIONAL_IMPLEMENTATIONS_VECTORS_IMMUTABLE_TPP
-#define FUNCTIONAL_IMPLEMENTATIONS_VECTORS_IMMUTABLE_TPP
+#ifndef FUNKY_IMPLEMENTATIONS_VECTORS_IMMUTABLE_TPP
+#define FUNKY_IMPLEMENTATIONS_VECTORS_IMMUTABLE_TPP
 
 #include "../../generics/foldable/fold.tpp"
 #include "../../generics/functor/map.tpp"
@@ -14,7 +14,7 @@
 #include <numeric>
 
 template <typename T>
-std::vector<T> functional::unique(const std::vector<T> &vec) {
+std::vector<T> funky::unique(const std::vector<T> &vec) {
     std::vector<T> unique;
 
     for (auto x : vec) {
@@ -27,7 +27,7 @@ std::vector<T> functional::unique(const std::vector<T> &vec) {
 }
 
 template <typename T>
-std::vector<T> functional::reverse(const std::vector<T> &vec) {
+std::vector<T> funky::reverse(const std::vector<T> &vec) {
     std::vector<T> copy;
 
     if (vec.empty()) {
@@ -44,7 +44,7 @@ std::vector<T> functional::reverse(const std::vector<T> &vec) {
 }
 
 template <typename T>
-std::vector<T> functional::difference(const std::vector<T> &source, const std::vector<T> &target) {
+std::vector<T> funky::difference(const std::vector<T> &source, const std::vector<T> &target) {
     std::vector<T> unique;
 
     for (auto x : source) {
@@ -57,7 +57,7 @@ std::vector<T> functional::difference(const std::vector<T> &source, const std::v
 }
 
 template <typename T>
-std::vector<T> functional::intersection(const std::vector<T> &source, const std::vector<T> &target) {
+std::vector<T> funky::intersection(const std::vector<T> &source, const std::vector<T> &target) {
     std::vector<T> unique;
 
     for (const auto &x : source) {
@@ -70,7 +70,7 @@ std::vector<T> functional::intersection(const std::vector<T> &source, const std:
 }
 
 template <typename T>
-std::vector<T> functional::slice(const std::vector<T> &vec, const size_t start, const size_t end) {
+std::vector<T> funky::slice(const std::vector<T> &vec, const size_t start, const size_t end) {
     auto from = static_cast<int>(std::min(start, vec.size()));
     auto to   = static_cast<int>(std::min(end, vec.size()));
 
@@ -79,27 +79,27 @@ std::vector<T> functional::slice(const std::vector<T> &vec, const size_t start, 
 }
 
 template <typename T>
-std::vector<T> functional::slice_first(const std::vector<T> &vec, size_t width) {
+std::vector<T> funky::slice_first(const std::vector<T> &vec, size_t width) {
     return slice(vec, 0, width);
 }
 
 template <typename T>
-std::vector<T> functional::slice_last(const std::vector<T> &vec, size_t width) {
+std::vector<T> funky::slice_last(const std::vector<T> &vec, size_t width) {
     return vec.size() > width ? slice(vec, vec.size() - width, vec.size()) : vec;
 }
 
 template <typename T>
-std::vector<T> functional::drop_first(const std::vector<T> &vec, size_t width) {
+std::vector<T> funky::drop_first(const std::vector<T> &vec, size_t width) {
     return slice(vec, width, vec.size());
 }
 
 template <typename T>
-std::vector<T> functional::drop_last(const std::vector<T> &vec, size_t width) {
+std::vector<T> funky::drop_last(const std::vector<T> &vec, size_t width) {
     return vec.size() > width ? slice(vec, 0, vec.size() - width) : std::vector<T>();
 }
 
 template <typename T>
-std::vector<std::vector<T>> functional::aperture(const std::vector<T> &vec, size_t width) {
+std::vector<std::vector<T>> funky::aperture(const std::vector<T> &vec, size_t width) {
     std::vector<std::vector<T>> slides;
 
     if (width == 0 || width > vec.size()) {
@@ -120,30 +120,30 @@ std::vector<std::vector<T>> functional::aperture(const std::vector<T> &vec, size
 }
 
 template <typename T>
-std::vector<T> functional::concat(const std::vector<T> &vec, const T &x) {
+std::vector<T> funky::concat(const std::vector<T> &vec, const T &x) {
     std::vector<T> copy(vec);
     copy.push_back(x);
     return copy;
 }
 
 template <typename T>
-std::vector<T> functional::concat(const std::vector<T> &vec, const std::vector<T> &x) {
+std::vector<T> funky::concat(const std::vector<T> &vec, const std::vector<T> &x) {
     std::vector<T> copy(vec);
     insert(x, copy);
     return copy;
 }
 
 template <typename T>
-std::vector<T> functional::flatten(const std::vector<std::vector<T>> &vec) {
+std::vector<T> funky::flatten(const std::vector<std::vector<T>> &vec) {
     // Proxy concat to pick the correct overload.
     std::function<std::vector<T>(const std::vector<T> &, const std::vector<T> &)> snoc =
         [](const auto &acc, const auto &x) { return concat(acc, x); };
 
-    return functional::fold(snoc, {}, vec);
+    return funky::fold(snoc, {}, vec);
 }
 
 template <typename T>
-std::vector<T> functional::from_deque(const std::deque<T> &deque) {
+std::vector<T> funky::from_deque(const std::deque<T> &deque) {
     return std::vector<T>({deque.begin(), deque.end()});
 }
 

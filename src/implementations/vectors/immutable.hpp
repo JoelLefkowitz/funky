@@ -1,11 +1,11 @@
-#ifndef FUNCTIONAL_IMPLEMENTATIONS_VECTORS_IMMUTABLE_HPP
-#define FUNCTIONAL_IMPLEMENTATIONS_VECTORS_IMMUTABLE_HPP
+#ifndef FUNKY_IMPLEMENTATIONS_VECTORS_IMMUTABLE_HPP
+#define FUNKY_IMPLEMENTATIONS_VECTORS_IMMUTABLE_HPP
 
 #include <cstddef>
 #include <deque>
 #include <vector>
 
-namespace functional {
+namespace funky {
     template <typename T>
     std::vector<T> unique(const std::vector<T> &vec);
 

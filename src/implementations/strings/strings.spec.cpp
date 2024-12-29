@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-using namespace functional;
+using namespace funky;
 
 TEST(Strings, ReverseCopy) {
     std::string str = "abc";
@@ -78,13 +78,13 @@ TEST(Strings, Lowercase) {
 }
 
 TEST(Strings, Truncate) {
-    EXPECT_EQ(functional::truncate("abcdef", 0), "...");
-    EXPECT_EQ(functional::truncate("abcdef", 1), "...");
-    EXPECT_EQ(functional::truncate("abcdef", 2), "...");
-    EXPECT_EQ(functional::truncate("abcdef", 3), "...");
-    EXPECT_EQ(functional::truncate("abcdef", 4), "a...");
-    EXPECT_EQ(functional::truncate("abcdef", 5), "ab...");
-    EXPECT_EQ(functional::truncate("abcdef", 6), "abcdef");
+    EXPECT_EQ(funky::truncate("abcdef", 0), "...");
+    EXPECT_EQ(funky::truncate("abcdef", 1), "...");
+    EXPECT_EQ(funky::truncate("abcdef", 2), "...");
+    EXPECT_EQ(funky::truncate("abcdef", 3), "...");
+    EXPECT_EQ(funky::truncate("abcdef", 4), "a...");
+    EXPECT_EQ(funky::truncate("abcdef", 5), "ab...");
+    EXPECT_EQ(funky::truncate("abcdef", 6), "abcdef");
 }
 
 TEST(Strings, Join) {

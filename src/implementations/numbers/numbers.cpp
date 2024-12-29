@@ -5,17 +5,17 @@
 #include <string>
 #include <vector>
 
-double functional::frac(double x) {
+double funky::frac(double x) {
     double integral = 0;
     return std::modf(x, &integral);
 }
 
-double functional::round(double x, size_t dps) {
+double funky::round(double x, size_t dps) {
     auto scale = std::pow(10, dps);
     return std::round(x * scale) / scale;
 }
 
-int functional::sign(int n) {
+int funky::sign(int n) {
     if (n == 0) {
         return 0;
     }
@@ -23,7 +23,7 @@ int functional::sign(int n) {
     return n > 0 ? 1 : -1;
 }
 
-int functional::order(double n) {
+int funky::order(double n) {
     if (n > 0) {
         return static_cast<int>(std::floor(std::log10(n)));
     };
@@ -31,7 +31,7 @@ int functional::order(double n) {
     return 0;
 }
 
-std::string functional::units_prefix(double n) {
+std::string funky::units_prefix(double n) {
     auto magnitude = order(std::abs(n));
 
     if (magnitude == 0) {

@@ -1,9 +1,9 @@
-#ifndef FUNCTIONAL_IMPLEMENTATIONS_NUMBERS_DIVISION_HPP
-#define FUNCTIONAL_IMPLEMENTATIONS_NUMBERS_DIVISION_HPP
+#ifndef FUNKY_IMPLEMENTATIONS_NUMBERS_DIVISION_HPP
+#define FUNKY_IMPLEMENTATIONS_NUMBERS_DIVISION_HPP
 
 #include <cstddef>
 
-namespace functional {
+namespace funky {
     bool factor(int dividend, int divisor);
 
     double ratio(size_t dividend, double divisor);

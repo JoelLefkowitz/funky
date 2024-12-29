@@ -1,10 +1,10 @@
-#ifndef FUNCTIONAL_IMPLEMENTATIONS_NUMBERS_NUMBERS_HPP
-#define FUNCTIONAL_IMPLEMENTATIONS_NUMBERS_NUMBERS_HPP
+#ifndef FUNKY_IMPLEMENTATIONS_NUMBERS_NUMBERS_HPP
+#define FUNKY_IMPLEMENTATIONS_NUMBERS_NUMBERS_HPP
 
 #include <cstddef>
 #include <string>
 
-namespace functional {
+namespace funky {
     double frac(double x);
     double round(double x, size_t dps);
 

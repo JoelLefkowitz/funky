@@ -1,7 +1,7 @@
 #include "numbers.hpp"
 #include <gtest/gtest.h>
 
-using namespace functional;
+using namespace funky;
 
 TEST(Numerics, Frac) {
     EXPECT_NEAR(frac(1), 0, 0.001);

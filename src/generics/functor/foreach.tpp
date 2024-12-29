@@ -1,5 +1,5 @@
-#ifndef FUNCTIONAL_GENERICS_FUNCTOR_FOREACH_TPP
-#define FUNCTIONAL_GENERICS_FUNCTOR_FOREACH_TPP
+#ifndef FUNKY_GENERICS_FUNCTOR_FOREACH_TPP
+#define FUNKY_GENERICS_FUNCTOR_FOREACH_TPP
 
 #include "foreach.hpp"
 #include <algorithm>
@@ -8,12 +8,12 @@
 
 // ∀ F A. (A -> void) -> FA -> void
 template <typename FA, typename A>
-void functional::foreach (const std::function<void(A)> &effect, const FA &source) {
+void funky::foreach (const std::function<void(A)> &effect, const FA &source) {
     std::for_each(source.begin(), source.end(), effect);
 }
 
 template <typename FA, typename A>
-void functional::foreach (const std::function<void(A, size_t)> &effect, const FA &source) {
+void funky::foreach (const std::function<void(A, size_t)> &effect, const FA &source) {
     for (auto x = source.begin(); x != source.end(); ++x) {
         auto index = static_cast<size_t>(x - source.begin());
         effect(*x, index);
@@ -21,12 +21,12 @@ void functional::foreach (const std::function<void(A, size_t)> &effect, const FA
 }
 
 template <typename FA, typename A>
-void functional::foreach (const std::function<void(const A &)> &effect, const FA &source) {
+void funky::foreach (const std::function<void(const A &)> &effect, const FA &source) {
     std::for_each(source.begin(), source.end(), effect);
 }
 
 template <typename FA, typename A>
-void functional::foreach (const std::function<void(const A &, size_t)> &effect, const FA &source) {
+void funky::foreach (const std::function<void(const A &, size_t)> &effect, const FA &source) {
     for (auto x = source.begin(); x != source.end(); ++x) {
         auto index = static_cast<size_t>(x - source.begin());
         effect(*x, index);
@@ -34,7 +34,7 @@ void functional::foreach (const std::function<void(const A &, size_t)> &effect, 
 }
 
 template <typename FA, typename FB, typename A, typename B>
-void functional::foreach (const std::function<void(A, B)> &effect, const FA &a, const FB &b) {
+void funky::foreach (const std::function<void(A, B)> &effect, const FA &a, const FB &b) {
     auto x = a.begin();
     auto y = b.begin();
 
@@ -44,7 +44,7 @@ void functional::foreach (const std::function<void(A, B)> &effect, const FA &a, 
 }
 
 template <typename FA, typename FB, typename A, typename B>
-void functional::foreach (const std::function<void(A, B, size_t)> &effect, const FA &a, const FB &b) {
+void funky::foreach (const std::function<void(A, B, size_t)> &effect, const FA &a, const FB &b) {
     auto x = a.begin();
     auto y = b.begin();
 
@@ -55,7 +55,7 @@ void functional::foreach (const std::function<void(A, B, size_t)> &effect, const
 }
 
 template <typename FA, typename FB, typename A, typename B>
-void functional::foreach (const std::function<void(const A &, B)> &effect, const FA &a, const FB &b) {
+void funky::foreach (const std::function<void(const A &, B)> &effect, const FA &a, const FB &b) {
     auto x = a.begin();
     auto y = b.begin();
 
@@ -65,7 +65,7 @@ void functional::foreach (const std::function<void(const A &, B)> &effect, const
 }
 
 template <typename FA, typename FB, typename A, typename B>
-void functional::foreach (const std::function<void(const A &, B, size_t)> &effect, const FA &a, const FB &b) {
+void funky::foreach (const std::function<void(const A &, B, size_t)> &effect, const FA &a, const FB &b) {
     auto x = a.begin();
     auto y = b.begin();
 
@@ -76,7 +76,7 @@ void functional::foreach (const std::function<void(const A &, B, size_t)> &effec
 }
 
 template <typename FA, typename FB, typename A, typename B>
-void functional::foreach (const std::function<void(A, const B &)> &effect, const FA &a, const FB &b) {
+void funky::foreach (const std::function<void(A, const B &)> &effect, const FA &a, const FB &b) {
     auto x = a.begin();
     auto y = b.begin();
 
@@ -86,7 +86,7 @@ void functional::foreach (const std::function<void(A, const B &)> &effect, const
 }
 
 template <typename FA, typename FB, typename A, typename B>
-void functional::foreach (const std::function<void(A, const B &, size_t)> &effect, const FA &a, const FB &b) {
+void funky::foreach (const std::function<void(A, const B &, size_t)> &effect, const FA &a, const FB &b) {
     auto x = a.begin();
     auto y = b.begin();
 
@@ -97,7 +97,7 @@ void functional::foreach (const std::function<void(A, const B &, size_t)> &effec
 }
 
 template <typename FA, typename FB, typename A, typename B>
-void functional::foreach (const std::function<void(const A &, const B &)> &effect, const FA &a, const FB &b) {
+void funky::foreach (const std::function<void(const A &, const B &)> &effect, const FA &a, const FB &b) {
     auto x = a.begin();
     auto y = b.begin();
 
@@ -107,7 +107,7 @@ void functional::foreach (const std::function<void(const A &, const B &)> &effec
 }
 
 template <typename FA, typename FB, typename A, typename B>
-void functional::foreach (const std::function<void(const A &, const B &, size_t)> &effect, const FA &a, const FB &b) {
+void funky::foreach (const std::function<void(const A &, const B &, size_t)> &effect, const FA &a, const FB &b) {
     auto x = a.begin();
     auto y = b.begin();
 

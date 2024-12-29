@@ -5,10 +5,10 @@
 #include <gtest/gtest.h>
 #include <vector>
 
-using namespace functional;
+using namespace funky;
 
 TEST(Filter, Filter) {
-    std::function<bool(int)> even = [](auto x) { return functional::factor(x, 2); };
+    std::function<bool(int)> even = [](auto x) { return funky::factor(x, 2); };
 
     EXPECT_EQ(filter(even, std::vector<int>({})), std::vector<int>({}));
     EXPECT_EQ(filter(even, std::vector<int>({1, 2, 3, 4})), std::vector<int>({2, 4}));

@@ -1,11 +1,11 @@
-#ifndef FUNCTIONAL_IMPLEMENTATIONS_VECTORS_ELEMENTS_HPP
-#define FUNCTIONAL_IMPLEMENTATIONS_VECTORS_ELEMENTS_HPP
+#ifndef FUNKY_IMPLEMENTATIONS_VECTORS_ELEMENTS_HPP
+#define FUNKY_IMPLEMENTATIONS_VECTORS_ELEMENTS_HPP
 
 #include <cstddef>
 #include <functional>
 #include <vector>
 
-namespace functional {
+namespace funky {
     template <typename T>
     T min(const std::vector<T> &vec);
 

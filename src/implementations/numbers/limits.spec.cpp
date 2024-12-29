@@ -1,7 +1,7 @@
 #include "limits.tpp"
 #include <gtest/gtest.h>
 
-using namespace functional;
+using namespace funky;
 
 TEST(Numerics, Between) {
     EXPECT_TRUE(between(1, 2, 3));

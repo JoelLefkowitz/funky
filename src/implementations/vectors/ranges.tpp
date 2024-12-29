@@ -1,12 +1,12 @@
-#ifndef FUNCTIONAL_IMPLEMENTATIONS_VECTORS_RANGES_TPP
-#define FUNCTIONAL_IMPLEMENTATIONS_VECTORS_RANGES_TPP
+#ifndef FUNKY_IMPLEMENTATIONS_VECTORS_RANGES_TPP
+#define FUNKY_IMPLEMENTATIONS_VECTORS_RANGES_TPP
 
 #include "ranges.hpp"
 #include <numeric>
 #include <utility>
 
 template <typename T>
-std::vector<T> functional::range(T start, T stop, T step) {
+std::vector<T> funky::range(T start, T stop, T step) {
     std::vector<T> sequence;
 
     auto width = static_cast<double>(stop - start);
@@ -21,7 +21,7 @@ std::vector<T> functional::range(T start, T stop, T step) {
 }
 
 template <typename T>
-std::vector<T> functional::linspace(T start, T stop, size_t count) {
+std::vector<T> funky::linspace(T start, T stop, size_t count) {
     if (count == 0) {
         return {};
     }
@@ -43,7 +43,7 @@ std::vector<T> functional::linspace(T start, T stop, size_t count) {
 }
 
 template <typename T>
-std::vector<std::pair<size_t, T>> functional::enumerate(const std::vector<T> &vec) {
+std::vector<std::pair<size_t, T>> funky::enumerate(const std::vector<T> &vec) {
     std::vector<std::pair<size_t, T>> pairs;
 
     for (std::size_t i = 0; i < vec.size(); ++i) {

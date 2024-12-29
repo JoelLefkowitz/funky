@@ -4,7 +4,7 @@
 #include <gtest/gtest.h>
 #include <vector>
 
-using namespace functional;
+using namespace funky;
 
 TEST(Fold, Fold) {
     std::function<int(int, int)> sum = [](auto acc, auto x) { return acc + x; };

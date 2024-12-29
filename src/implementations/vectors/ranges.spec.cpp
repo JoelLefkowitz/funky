@@ -3,7 +3,7 @@
 #include <gtest/gtest.h>
 #include <utility>
 
-using namespace functional;
+using namespace funky;
 
 TEST(Ranges, Range) {
     EXPECT_EQ(range(0), std::vector<size_t>({}));

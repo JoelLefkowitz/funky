@@ -1,12 +1,12 @@
-#ifndef FUNCTIONAL_GENERICS_FUNCTOR_PRODUCT_TPP
-#define FUNCTIONAL_GENERICS_FUNCTOR_PRODUCT_TPP
+#ifndef FUNKY_GENERICS_FUNCTOR_PRODUCT_TPP
+#define FUNKY_GENERICS_FUNCTOR_PRODUCT_TPP
 
 #include "product.hpp"
 #include <functional>
 #include <numeric>
 
 template <template <typename...> typename F, typename A, typename B, typename C>
-F<C> functional::product(const std::function<C(A, B)> &mapper, const F<A> &a, const F<B> &b) {
+F<C> funky::product(const std::function<C(A, B)> &mapper, const F<A> &a, const F<B> &b) {
     F<C> target;
 
     for (auto x = a.begin(); x != a.end(); ++x) {
@@ -19,7 +19,7 @@ F<C> functional::product(const std::function<C(A, B)> &mapper, const F<A> &a, co
 }
 
 template <template <typename...> typename F, typename A, typename B, typename C>
-F<C> functional::product(const std::function<C(const A &, B)> &mapper, const F<A> &a, const F<B> &b) {
+F<C> funky::product(const std::function<C(const A &, B)> &mapper, const F<A> &a, const F<B> &b) {
     F<C> target;
 
     for (auto x = a.begin(); x != a.end(); ++x) {
@@ -32,7 +32,7 @@ F<C> functional::product(const std::function<C(const A &, B)> &mapper, const F<A
 }
 
 template <template <typename...> typename F, typename A, typename B, typename C>
-F<C> functional::product(const std::function<C(A, const B &)> &mapper, const F<A> &a, const F<B> &b) {
+F<C> funky::product(const std::function<C(A, const B &)> &mapper, const F<A> &a, const F<B> &b) {
     F<C> target;
 
     for (auto x = a.begin(); x != a.end(); ++x) {
@@ -45,7 +45,7 @@ F<C> functional::product(const std::function<C(A, const B &)> &mapper, const F<A
 }
 
 template <template <typename...> typename F, typename A, typename B, typename C>
-F<C> functional::product(const std::function<C(const A &, const B &)> &mapper, const F<A> &a, const F<B> &b) {
+F<C> funky::product(const std::function<C(const A &, const B &)> &mapper, const F<A> &a, const F<B> &b) {
     F<C> target;
 
     for (auto x = a.begin(); x != a.end(); ++x) {

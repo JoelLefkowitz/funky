@@ -76,6 +76,14 @@
         "regex": "cpp",
         "source_location": "cpp",
         "span": "cpp",
-        "typeindex": "cpp"
+        "typeindex": "cpp",
+        "__availability": "cpp",
+        "__config": "cpp",
+        "chrono": "cpp",
+        "iterator": "cpp",
+        "ranges": "cpp",
+        "*.def": "cpp",
+        "version": "cpp",
+        "*.inc": "cpp"
     }
 }

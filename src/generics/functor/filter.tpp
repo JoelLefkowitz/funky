@@ -1,12 +1,12 @@
-#ifndef FUNCTIONAL_GENERICS_FUNCTOR_FILTER_TPP
-#define FUNCTIONAL_GENERICS_FUNCTOR_FILTER_TPP
+#ifndef FUNKY_GENERICS_FUNCTOR_FILTER_TPP
+#define FUNKY_GENERICS_FUNCTOR_FILTER_TPP
 
 #include "filter.hpp"
 #include <algorithm>
 #include <functional>
 
 template <typename FA, typename A>
-FA functional::filter(const std::function<bool(A)> &condition, const FA &source) {
+FA funky::filter(const std::function<bool(A)> &condition, const FA &source) {
     FA filtered;
 
     auto inserter = std::back_inserter(filtered);
@@ -21,7 +21,7 @@ FA functional::filter(const std::function<bool(A)> &condition, const FA &source)
 }
 
 template <typename FA, typename A>
-FA functional::filter(const std::function<bool(const A &)> &condition, const FA &source) {
+FA funky::filter(const std::function<bool(const A &)> &condition, const FA &source) {
     FA filtered;
 
     auto inserter = std::back_inserter(filtered);

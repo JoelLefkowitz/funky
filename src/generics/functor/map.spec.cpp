@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-using namespace functional;
+using namespace funky;
 
 TEST(Map, Map) {
     std::function<int(int)>    increment = [](auto x) { return x + 1; };

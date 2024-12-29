@@ -2,7 +2,7 @@
 #include <cstddef>
 #include <gtest/gtest.h>
 
-using namespace functional;
+using namespace funky;
 
 TEST(Mutable, Insert) {
     auto x = std::vector<int>({3, 4});

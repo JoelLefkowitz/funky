@@ -1,12 +1,12 @@
-#ifndef FUNCTIONAL_GENERICS_FUNCTOR_PAIR_TPP
-#define FUNCTIONAL_GENERICS_FUNCTOR_PAIR_TPP
+#ifndef FUNKY_GENERICS_FUNCTOR_PAIR_TPP
+#define FUNKY_GENERICS_FUNCTOR_PAIR_TPP
 
 #include "pair.hpp"
 #include <functional>
 #include <numeric>
 
 template <template <typename...> typename F, typename A, typename B>
-F<B> functional::pair(const std::function<B(A, A)> &mapper, const F<A> &source) {
+F<B> funky::pair(const std::function<B(A, A)> &mapper, const F<A> &source) {
     F<B> target;
 
     if (!source.empty()) {
@@ -19,7 +19,7 @@ F<B> functional::pair(const std::function<B(A, A)> &mapper, const F<A> &source) 
 }
 
 template <template <typename...> typename F, typename A, typename B>
-F<B> functional::pair(const std::function<B(const A &, A)> &mapper, const F<A> &source) {
+F<B> funky::pair(const std::function<B(const A &, A)> &mapper, const F<A> &source) {
     F<B> target;
 
     if (!source.empty()) {
@@ -32,7 +32,7 @@ F<B> functional::pair(const std::function<B(const A &, A)> &mapper, const F<A> &
 }
 
 template <template <typename...> typename F, typename A, typename B>
-F<B> functional::pair(const std::function<B(A, const A &)> &mapper, const F<A> &source) {
+F<B> funky::pair(const std::function<B(A, const A &)> &mapper, const F<A> &source) {
     F<B> target;
 
     if (!source.empty()) {
@@ -45,7 +45,7 @@ F<B> functional::pair(const std::function<B(A, const A &)> &mapper, const F<A> &
 }
 
 template <template <typename...> typename F, typename A, typename B>
-F<B> functional::pair(const std::function<B(const A &, const A &)> &mapper, const F<A> &source) {
+F<B> funky::pair(const std::function<B(const A &, const A &)> &mapper, const F<A> &source) {
     F<B> target;
 
     if (!source.empty()) {

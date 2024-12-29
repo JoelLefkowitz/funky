@@ -10,23 +10,23 @@
 // iwyu-disable-next-line
 #include "../vectors/ranges.tpp"
 
-std::string functional::reverse_copy(const std::string &str) {
+std::string funky::reverse_copy(const std::string &str) {
     std::string copy = str;
     std::reverse(copy.begin(), copy.end());
     return copy;
 }
 
-std::string functional::pad(const std::string &str, size_t size) {
+std::string funky::pad(const std::string &str, size_t size) {
     return size > str.size() ? str + std::string(size - str.size(), ' ') : str;
 }
 
-std::vector<std::string> functional::chunk(const std::string &str, size_t size) {
+std::vector<std::string> funky::chunk(const std::string &str, size_t size) {
     std::function<std::string(size_t)> slice = [size, &str](auto x) { return str.substr(size * x, size); };
 
-    return functional::map(slice, functional::range(size > 0 ? str.length() / size : 0));
+    return funky::map(slice, funky::range(size > 0 ? str.length() / size : 0));
 }
 
-std::vector<std::string> functional::split(const std::string &str, const std::string &delimiter) {
+std::vector<std::string> funky::split(const std::string &str, const std::string &delimiter) {
     if (str.empty()) {
         return {str};
     }
@@ -59,25 +59,25 @@ std::vector<std::string> functional::split(const std::string &str, const std::st
     return chunks;
 }
 
-bool functional::starts_with(const std::string &str, const std::string &prefix) {
+bool funky::starts_with(const std::string &str, const std::string &prefix) {
     return str.length() >= prefix.length() && str.substr(0, prefix.length()) == prefix;
 }
 
-bool functional::ends_with(const std::string &str, const std::string &suffix) {
+bool funky::ends_with(const std::string &str, const std::string &suffix) {
     return str.length() >= suffix.length() && str.substr(str.length() - suffix.length(), str.length()) == suffix;
 }
 
-std::string functional::uppercase(const std::string &str) {
+std::string funky::uppercase(const std::string &str) {
     std::function<char(char)> upper = [](auto x) { return std::toupper(x); };
-    return functional::map(upper, str);
+    return funky::map(upper, str);
 }
 
-std::string functional::lowercase(const std::string &str) {
+std::string funky::lowercase(const std::string &str) {
     std::function<char(char)> lower = [](auto x) { return std::tolower(x); };
-    return functional::map(lower, str);
+    return funky::map(lower, str);
 }
 
-std::string functional::truncate(const std::string &str, size_t limit, const std::string &ellipsis) {
+std::string funky::truncate(const std::string &str, size_t limit, const std::string &ellipsis) {
     if (str.size() <= limit) {
         return str;
     }
@@ -86,16 +86,16 @@ std::string functional::truncate(const std::string &str, size_t limit, const std
     return str.substr(0, width) + ellipsis;
 }
 
-std::string functional::join(const std::vector<std::string> &strings, const std::string &delimiter) {
+std::string funky::join(const std::vector<std::string> &strings, const std::string &delimiter) {
     std::function<std::string(const std::string &, const std::string &)> append =
         [&delimiter](const auto &acc, const auto &x) { return acc + x + delimiter; };
 
-    auto joined = functional::fold<std::vector<std::string>, std::string, std::string>(append, "", strings);
+    auto joined = funky::fold<std::vector<std::string>, std::string, std::string>(append, "", strings);
 
     return strings.empty() ? "" : joined.substr(0, joined.size() - delimiter.size());
 }
 
-std::string functional::remove_substrings(const std::string &str, const std::vector<std::string> &substrs) {
+std::string funky::remove_substrings(const std::string &str, const std::vector<std::string> &substrs) {
     std::string copy = str;
 
     for (size_t i = 0; i < copy.size();) {

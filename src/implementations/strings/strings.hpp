@@ -1,11 +1,11 @@
-#ifndef FUNCTIONAL_IMPLEMENTATIONS_STRINGS_STRINGS_HPP
-#define FUNCTIONAL_IMPLEMENTATIONS_STRINGS_STRINGS_HPP
+#ifndef FUNKY_IMPLEMENTATIONS_STRINGS_STRINGS_HPP
+#define FUNKY_IMPLEMENTATIONS_STRINGS_STRINGS_HPP
 
 #include <cstddef>
 #include <string>
 #include <vector>
 
-namespace functional {
+namespace funky {
     std::string reverse_copy(const std::string &str);
 
     std::string pad(const std::string &str, size_t size);

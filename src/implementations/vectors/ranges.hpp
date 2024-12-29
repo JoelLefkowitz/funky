@@ -1,11 +1,11 @@
-#ifndef FUNCTIONAL_IMPLEMENTATIONS_VECTORS_RANGES_HPP
-#define FUNCTIONAL_IMPLEMENTATIONS_VECTORS_RANGES_HPP
+#ifndef FUNKY_IMPLEMENTATIONS_VECTORS_RANGES_HPP
+#define FUNKY_IMPLEMENTATIONS_VECTORS_RANGES_HPP
 
 #include <cstddef>
 #include <utility>
 #include <vector>
 
-namespace functional {
+namespace funky {
     std::vector<size_t> range(size_t limit);
 
     template <typename T>
