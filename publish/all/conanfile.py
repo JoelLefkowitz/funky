@@ -1,15 +1,14 @@
 import os
 
 from conan import ConanFile
-from conan.tools.files import copy
+from conan.tools.files import copy, get
 from conan.tools.scons import SConsDeps
 from conan.tools.layout import basic_layout
 
 
 class FunkyConan(ConanFile):
     name = "funky"
-    description = "Functional type classes and instances."
-    version = "0.0.0"
+    description = "Funky type classes and instances."
     license = "MIT"
 
     url = "https://github.com/conan-io/conan-center-index"
@@ -43,8 +42,8 @@ class FunkyConan(ConanFile):
     def generate(self):
         SConsDeps(self).generate()
 
-    def build_requirements(self):
-        self.test_requires("gtest/1.12.1")
+    def source(self):
+        get(self, **self.conan_data["sources"][self.version], strip_root=True)
 
     def build(self):
         os.chdir("..")
@@ -54,7 +53,7 @@ class FunkyConan(ConanFile):
         copy(
             self,
             "LICENSE.md",
-            os.path.join(self.build_folder),
+            os.path.join(self.build_folder, ".."),
             os.path.join(self.package_folder, "licenses"),
         )
         copy(

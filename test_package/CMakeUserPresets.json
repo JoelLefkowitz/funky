@@ -1,9 +1,0 @@
-{
-    "version": 4,
-    "vendor": {
-        "conan": {}
-    },
-    "include": [
-        "/Users/joel.lefkowitz/Workspace/packages/cpp/functional/test_package/build/apple-clang-15-armv8-gnu17-release/generators/CMakePresets.json"
-    ]
-}

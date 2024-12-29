@@ -1,4 +1,4 @@
-# Functional
+# Funky
 
 Functional type classes and instances.
 
@@ -8,7 +8,7 @@ Functional type classes and instances.
 ## Installing
 
 ```bash
-conan search functional
+conan search funky
 ```
 
 You can also download the [sources](https://download-directory.github.io?url=https://github.com/JoelLefkowitz/functional/tree/master/src).

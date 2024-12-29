@@ -3,8 +3,8 @@ from cgitb import html
 from datetime import date
 from glob import glob
 
-project = "Functional"
-package = "functional"
+project = "Funky"
+package = "funky"
 version = "0.0.0"
 
 project_copyright = f"{date.today().year} Joel Lefkowitz"
