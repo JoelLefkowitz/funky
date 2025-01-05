@@ -1,25 +1,44 @@
-import { src, headers } from "./files";
+import { logger } from "file-loggers";
+import { drop } from "ramda";
 import fs from "fs";
 import path from "path";
 
-headers.forEach((file) => {
-  const lines = fs.readFileSync(file, "utf8").split("\n");
+export default {
+  name: "guards",
+  description: "Check header guards are consistent",
+  action: () =>
+    logger(
+      `src/**/*.hpp`,
+      async (file) => {
+        const lines = fs.readFileSync(file, "utf8").split("\n");
+        const guard = drop("#ifndef".length + 1, lines[0]);
 
-  const guard = ["funky"]
-    .concat(path.relative(src, file).split(path.sep))
-    .join("_")
-    .replaceAll(".", "_")
-    .toUpperCase();
+        const derived = ["funky"]
+          .concat(path.relative("src", file).split(path.sep))
+          .join("_")
+          .replace(/\./g, "_")
+          .toUpperCase();
 
-  if (lines.length < 2) {
-    console.log(`${file} has no header guard`);
-  } else if (lines[0] !== `#ifndef ${guard}`) {
-    console.log(`${file}: The first line should be "#ifndef ${guard}"`);
-  } else if (lines[1] !== `#define ${guard}`) {
-    console.log(`${file}: The second line should be #define ${guard}`);
-  } else if (lines[lines.length - 2] !== `#endif`) {
-    console.log(`${file}: The second last line should be #endif`);
-  } else if (lines[lines.length - 1] !== "") {
-    console.log(`${file}: The last line should be ""`);
-  }
-});
+        if (
+          lines.length < 2 ||
+          !lines[0].startsWith("#ifndef") ||
+          !lines[1].startsWith("#define")
+        ) {
+          throw new Error("The first lines should be a header guard");
+        }
+
+        if (guard !== derived) {
+          console.log(`Replacing ${guard} with ${derived}`);
+          lines[0] = `#ifndef ${derived}`;
+          lines[1] = `#define ${derived}`;
+        }
+
+        fs.writeFileSync(file, lines.join("\n"));
+      },
+      {
+        count: true,
+        trail: true,
+        timer: true,
+      },
+    ),
+};

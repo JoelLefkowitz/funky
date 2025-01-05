@@ -1,27 +1,50 @@
 import { Signature } from "cpp-signatures";
-import { headers } from "./files";
+import { logger } from "file-loggers";
 import { range } from "ramda";
 import fs from "fs";
 
-headers.forEach((file) => {
-  const lines = fs.readFileSync(file, "utf8").split("\n");
+export default {
+  name: "docstrings",
+  description: "Check docstring formats",
+  action: () =>
+    logger(
+      "src/**/*.hpp",
+      async (file) => {
+        const lines = fs.readFileSync(file, "utf8").split("\n");
 
-  range(0, lines.length - 2).forEach((i) => {
-    const line = lines[i];
-    const signature = lines[i + 2].trim().replace(";", "");
+        range(0, lines.length - 2).forEach((i) => {
+          const signature = lines[i];
+          const definition = (
+            lines[i + 2].includes("(") ? lines[i + 2] : lines[i + 1]
+          )
+            .trim()
+            .replace(";", "");
 
-    if (
-      line.includes("//") &&
-      !["namespace", "clang-format"].some((str) => line.includes(str))
-    ) {
-      if (signature !== "") {
-        lines[i] = line
-          .split("//", 1)
-          .concat("// ", new Signature(signature).format())
-          .join("");
-      }
-    }
-  });
+          if (
+            definition !== "" &&
+            signature.includes("//") &&
+            !["namespace", "clang-format"].some((str) =>
+              signature.includes(str),
+            )
+          ) {
+            const derived = signature
+              .split("//", 1)
+              .concat("// ", new Signature(definition).format())
+              .join("");
 
-  fs.writeFileSync(file, lines.join("\n"));
-});
+            if (signature !== derived) {
+              console.log(`Replacing ${signature} with ${derived}`);
+              lines[i] = derived;
+            }
+          }
+        });
+
+        fs.writeFileSync(file, lines.join("\n"));
+      },
+      {
+        count: true,
+        trail: true,
+        timer: true,
+      },
+    ),
+};

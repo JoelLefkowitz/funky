@@ -1,5 +1,5 @@
-#include <funky/generics/functor/map.tpp>
 #include <functional>
+#include <funky/generics/functor/map.tpp>
 #include <vector>
 
 int main() {

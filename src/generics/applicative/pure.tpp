@@ -1,6 +1,0 @@
-#ifndef FUNKY_GENERICS_APPLICATIVE_PURE_TPP
-#define FUNKY_GENERICS_APPLICATIVE_PURE_TPP
-
-#include "pure.hpp"
-
-#endif

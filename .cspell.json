@@ -30,6 +30,7 @@
     "cstddef",
     "dblite",
     "deque",
+    "docstrings",
     "doxyfile",
     "endl",
     "filelist",
