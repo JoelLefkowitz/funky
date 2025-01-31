@@ -1,7 +1,26 @@
-import { Signature } from "cpp-signatures";
+import { Parameter, Signature } from "cpp-signatures";
 import { logger } from "file-loggers";
-import { range } from "ramda";
 import fs from "fs";
+
+const rewrite = (file: string, update: (text: string) => string): void =>
+  fs.writeFileSync(file, update(fs.readFileSync(file, "utf8")));
+
+const simplify = (
+  input: Parameter,
+  replacements: Record<string, string>,
+): Parameter => {
+  const parameter = Object.create(input);
+
+  parameter.constant = false;
+  parameter.reference = false;
+
+  parameter.typename = Object.entries(replacements).reduce(
+    (acc, [k, v]) => acc.replace(k, v),
+    input.typename,
+  );
+
+  return parameter;
+};
 
 export default {
   name: "docstrings",
@@ -9,38 +28,48 @@ export default {
   action: () =>
     logger(
       "src/**/*.hpp",
-      async (file) => {
-        const lines = fs.readFileSync(file, "utf8").split("\n");
+      async (file) =>
+        rewrite(file, (text) =>
+          text.split("\n\n").reduce((acc, block) => {
+            const lines = block
+              .split("\n")
+              .filter((i) => !["namespace funky {", "}"].includes(i))
+              .map((i) => i.trimStart());
 
-        range(0, lines.length - 2).forEach((i) => {
-          const signature = lines[i];
-          const definition = (
-            lines[i + 2].includes("(") ? lines[i + 2] : lines[i + 1]
-          )
-            .trim()
-            .replace(";", "");
+            const [comment] = lines;
 
-          if (
-            definition !== "" &&
-            signature.includes("//") &&
-            !["namespace", "clang-format"].some((str) =>
-              signature.includes(str),
-            )
-          ) {
-            const derived = signature
-              .split("//", 1)
-              .concat("// ", new Signature(definition).format())
-              .join("");
+            if (comment.startsWith("//")) {
+              const [definition, concepts] = lines.reverse();
+              const signature = new Signature(definition.replace(";", ""));
 
-            if (signature !== derived) {
-              console.log(`Replacing ${signature} with ${derived}`);
-              lines[i] = derived;
+              const replacements = {
+                FA: "[ A ]",
+                FB: "[ B ]",
+              };
+
+              const [_, type, output, inputs] =
+                /requires Callable<(.*), (.*)\((.*)\)>/.exec(concepts) ?? [];
+
+              if (type && output && inputs) {
+                const callback = inputs.split(", ").concat(output).join(" -> ");
+                replacements[type] = `( ${callback} )`;
+              }
+
+              signature.output = simplify(signature.output, replacements);
+              signature.inputs = signature.inputs.map((input) =>
+                simplify(input, replacements),
+              );
+
+              const formatted = `// ${signature.name} :: ${signature.format()}`;
+
+              if (comment !== formatted) {
+                return acc.replace(comment, formatted);
+              }
             }
-          }
-        });
 
-        fs.writeFileSync(file, lines.join("\n"));
-      },
+            return acc;
+          }, text),
+        ),
       {
         count: true,
         trail: true,

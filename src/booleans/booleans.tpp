@@ -42,8 +42,9 @@ bool funky::any(const FA &source) {
     return false;
 }
 
-template <typename FA, typename A>
-bool funky::at_least(const std::function<bool(A)> &mapper, size_t min, const FA &source) {
+template <typename T, typename FA, typename A>
+requires Callable<T, bool(A)>
+bool funky::at_least(const T &mapper, size_t min, const FA &source) {
     if (min == 0) {
         return true;
     }

@@ -90,7 +90,8 @@ std::string funky::join(const std::vector<std::string> &strings, const std::stri
     std::function<std::string(const std::string &, const std::string &)> append =
         [&delimiter](const auto &acc, const auto &x) { return acc + x + delimiter; };
 
-    auto joined = funky::fold<std::vector<std::string>, std::string, std::string>(append, "", strings);
+    auto joined = funky::fold<std::string>(append, "", strings);
+    // std::string joined = "";
 
     return strings.empty() ? "" : joined.substr(0, joined.size() - delimiter.size());
 }
@@ -115,4 +116,3 @@ std::string funky::remove_substrings(const std::string &str, const std::vector<s
 
     return copy;
 }
-

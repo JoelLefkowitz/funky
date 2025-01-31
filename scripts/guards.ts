@@ -3,38 +3,44 @@ import { drop } from "ramda";
 import fs from "fs";
 import path from "path";
 
+const rewrite = (file: string, update: (text: string) => string): void =>
+  fs.writeFileSync(file, update(fs.readFileSync(file, "utf8")));
+
 export default {
   name: "guards",
   description: "Check header guards are consistent",
   action: () =>
     logger(
-      `src/**/*.hpp`,
-      async (file) => {
-        const lines = fs.readFileSync(file, "utf8").split("\n");
-        const guard = drop("#ifndef".length + 1, lines[0]);
+      "src/**/*.hpp",
+      async (file) =>
+        rewrite(file, (text) => {
+          const lines = text.split("\n");
+          const guard = drop("#ifndef".length + 1, lines[0]);
 
-        const derived = ["funky"]
-          .concat(path.relative("src", file).split(path.sep))
-          .join("_")
-          .replace(/\./g, "_")
-          .toUpperCase();
+          const derived = ["funky"]
+            .concat(path.relative("src", file).split(path.sep))
+            .join("_")
+            .replace(/\./g, "_")
+            .toUpperCase();
 
-        if (
-          lines.length < 2 ||
-          !lines[0].startsWith("#ifndef") ||
-          !lines[1].startsWith("#define")
-        ) {
-          throw new Error("The first lines should be a header guard");
-        }
+          const [ifndef, define] = lines;
 
-        if (guard !== derived) {
-          console.log(`Replacing ${guard} with ${derived}`);
-          lines[0] = `#ifndef ${derived}`;
-          lines[1] = `#define ${derived}`;
-        }
+          if (
+            lines.length < 2 ||
+            !ifndef.startsWith("#ifndef") ||
+            !define.startsWith("#define")
+          ) {
+            throw new Error("The first lines should be a header guard");
+          }
 
-        fs.writeFileSync(file, lines.join("\n"));
-      },
+          if (guard !== derived) {
+            return [`#ifndef ${derived}`, `#define ${derived}`]
+              .concat(lines.slice(2))
+              .join("\n");
+          }
+
+          return text;
+        }),
       {
         count: true,
         trail: true,

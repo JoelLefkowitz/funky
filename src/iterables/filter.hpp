@@ -1,16 +1,14 @@
 #ifndef FUNKY_ITERABLES_FILTER_HPP
 #define FUNKY_ITERABLES_FILTER_HPP
 
-#include <functional>
+#include "../templates/callables.hpp"
+#include "../templates/ranges.hpp"
 
 namespace funky {
-    // (A -> bool) -> const FA & -> FA
-    template <typename FA, typename A>
-    FA filter(const std::function<bool(A)> &condition, const FA &source);
-
-    // (const A & -> bool) -> const FA & -> FA
-    template <typename FA, typename A>
-    FA filter(const std::function<bool(const A &)> &condition, const FA &source);
+    // filter :: ( A -> bool ) -> [ A ] -> [ A ]
+    template <typename T, typename FA, typename A = elements<FA>>
+    requires Callable<T, bool(A)>
+    FA filter(const T &condition, const FA &source);
 }
 
 #endif

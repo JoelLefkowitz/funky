@@ -135,11 +135,7 @@ std::vector<T> funky::concat(const std::vector<T> &vec, const std::vector<T> &x)
 
 template <typename T>
 std::vector<T> funky::flatten(const std::vector<std::vector<T>> &vec) {
-    // Proxy concat to pick the correct overload.
-    std::function<std::vector<T>(const std::vector<T> &, const std::vector<T> &)> snoc =
-        [](const auto &acc, const auto &x) { return concat(acc, x); };
-
-    return fold(snoc, {}, vec);
+    return fold<std::vector<T>>([](const auto &acc, const auto &x) { return concat(acc, x); }, {}, vec);
 }
 
 template <typename T>

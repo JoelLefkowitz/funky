@@ -84,6 +84,8 @@
     "ranges": "cpp",
     "*.def": "cpp",
     "version": "cpp",
-    "*.inc": "cpp"
+    "*.inc": "cpp",
+    "concepts": "cpp",
+    "type_traits": "cpp"
   }
 }

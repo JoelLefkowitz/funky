@@ -43,4 +43,5 @@ SortIncludes: CaseSensitive
 SortUsingDeclarations: true
 FixNamespaceComments: false
 InsertNewlineAtEOF: true
-InsertNewlineAtEOF: true
+RequiresClausePosition: OwnLine
+IndentRequiresClause: false
