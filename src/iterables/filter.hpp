@@ -5,8 +5,8 @@
 #include "../templates/ranges.hpp"
 
 namespace funky {
-    // filter :: ( A -> bool ) -> [ A ] -> [ A ]
-    template <typename T, typename FA, typename A = elements<FA>>
+    // filter: ( A → bool ) → [ A ] → [ A ]
+    template <typename FA, typename A = elements<FA>,  typename T>
     requires Callable<T, bool(A)>
     FA filter(const T &condition, const FA &source);
 }

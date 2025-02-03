@@ -7,14 +7,14 @@
 #include <algorithm>
 #include <cstddef>
 
-template <typename T, typename FA, typename A>
-requires Callable<T, void(A)>
+template <typename FA, typename A, typename T>
+requires funky::Callable<T, void(A)>
 void funky::foreach (const T &effect, const FA &source) {
     std::for_each(source.begin(), source.end(), effect);
 }
 
-template <typename T, typename FA, typename A>
-requires Callable<T, void(A, size_t)>
+template <typename FA, typename A, typename T>
+requires funky::Callable<T, void(A, size_t)>
 void funky::foreach (const T &effect, const FA &source) {
     for (auto x = source.begin(); x != source.end(); ++x) {
         auto index = static_cast<size_t>(x - source.begin());
@@ -22,8 +22,8 @@ void funky::foreach (const T &effect, const FA &source) {
     }
 }
 
-template <typename T, typename FA, typename FB, typename A, typename B>
-requires Callable<T, void(A, B)>
+template <typename FA, typename FB, typename A, typename B, typename T>
+requires funky::Callable<T, void(A, B)>
 void funky::foreach (const T &effect, const FA &a, const FB &b) {
     auto x = a.begin();
     auto y = b.begin();
@@ -33,8 +33,8 @@ void funky::foreach (const T &effect, const FA &a, const FB &b) {
     }
 }
 
-template <typename T, typename FA, typename FB, typename A, typename B>
-requires Callable<T, void(A, B, size_t)>
+template <typename FA, typename FB, typename A, typename B, typename T>
+requires funky::Callable<T, void(A, B, size_t)>
 void funky::foreach (const T &effect, const FA &a, const FB &b) {
     auto x = a.begin();
     auto y = b.begin();

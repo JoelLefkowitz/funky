@@ -1,56 +1,18 @@
 #ifndef FUNKY_GENERICS_FUNCTOR_PRODUCT_TPP
 #define FUNKY_GENERICS_FUNCTOR_PRODUCT_TPP
 
+#include "../templates/callables.hpp"
+#include "../templates/ranges.hpp"
 #include "product.hpp"
-#include <functional>
 #include <numeric>
 
-template <template <typename...> typename F, typename A, typename B, typename C>
-F<C> funky::product(const std::function<C(A, B)> &mapper, const F<A> &a, const F<B> &b) {
-    F<C> target;
+template <typename FB, typename FA, typename B, typename A>
+std::vector<std::pair<A, B>> funky::product(const FA &a, const FB &b) {
+    std::vector<std::pair<A, B>> target;
 
     for (auto x = a.begin(); x != a.end(); ++x) {
         for (auto y = b.begin(); y != b.end(); ++y) {
-            target.push_back(mapper(*x, *y));
-        }
-    }
-
-    return target;
-}
-
-template <template <typename...> typename F, typename A, typename B, typename C>
-F<C> funky::product(const std::function<C(const A &, B)> &mapper, const F<A> &a, const F<B> &b) {
-    F<C> target;
-
-    for (auto x = a.begin(); x != a.end(); ++x) {
-        for (auto y = b.begin(); y != b.end(); ++y) {
-            target.push_back(mapper(*x, *y));
-        }
-    }
-
-    return target;
-}
-
-template <template <typename...> typename F, typename A, typename B, typename C>
-F<C> funky::product(const std::function<C(A, const B &)> &mapper, const F<A> &a, const F<B> &b) {
-    F<C> target;
-
-    for (auto x = a.begin(); x != a.end(); ++x) {
-        for (auto y = b.begin(); y != b.end(); ++y) {
-            target.push_back(mapper(*x, *y));
-        }
-    }
-
-    return target;
-}
-
-template <template <typename...> typename F, typename A, typename B, typename C>
-F<C> funky::product(const std::function<C(const A &, const B &)> &mapper, const F<A> &a, const F<B> &b) {
-    F<C> target;
-
-    for (auto x = a.begin(); x != a.end(); ++x) {
-        for (auto y = b.begin(); y != b.end(); ++y) {
-            target.push_back(mapper(*x, *y));
+            target.push_back({*x, *y});
         }
     }
 

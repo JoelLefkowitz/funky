@@ -6,7 +6,12 @@
 #include <tuple>
 #include <type_traits>
 
-template <typename T>
-using elements = std::ranges::range_value_t<T>;
+namespace funky {
+    template <typename T>
+    using elements = std::ranges::range_value_t<T>;
+
+    template <typename T>
+    using Indexed = std::pair<size_t, T>;
+}
 
 #endif

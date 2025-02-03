@@ -5,8 +5,8 @@
 #include "../templates/ranges.hpp"
 #include "filter.hpp"
 
-template <typename T, typename FA, typename A>
-requires Callable<T, bool(A)>
+template <typename FA, typename A, typename T>
+requires funky::Callable<T, bool(A)>
 FA funky::filter(const T &condition, const FA &source) {
     FA filtered;
 

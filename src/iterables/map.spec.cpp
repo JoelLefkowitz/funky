@@ -1,4 +1,5 @@
 #include "map.tpp"
+#include <cctype>
 #include <cmath>
 #include <functional>
 #include <gtest/gtest.h>
@@ -7,33 +8,33 @@
 
 using namespace funky;
 
-TEST(Map, Map) {
-    std::function<int(int)>    increment = [](auto x) { return x + 1; };
-    std::function<int(double)> round     = [](auto x) { return std::round(x); };
+auto append = [](auto x, auto y) {
+    return x + ": " + std::to_string(y);
+};
 
-    EXPECT_EQ(map(increment, std::vector<int>({})), std::vector<int>({}));
-    EXPECT_EQ(map(increment, std::vector<int>({1, 2})), std::vector<int>({2, 3}));
-    EXPECT_EQ(map(round, std::vector<double>({1.0, 2.0})), std::vector<int>({1, 2}));
-}
+auto increment = [](auto x) {
+    return x + 1;
+};
+
+std::map<std::string, int> points({
+    {"a", 1},
+    {"b", 2}
+});
 
 TEST(Map, MapString) {
-    std::function<int(const std::string &)> length = [](const auto &x) { return x.length(); };
-
-    std::function<char(char)> upper = [](auto x) { return toupper(x); };
-
-    EXPECT_EQ(map(length, std::vector<std::string>({"a", "b"})), std::vector<int>({1, 1}));
-    EXPECT_EQ(map(upper, "abc"), "ABC");
+    EXPECT_EQ(map(::toupper, "abc"), "ABC");
 }
 
 TEST(Map, MapMap) {
-    std::function<std::string(const std::string &, const std::string &)> join = [](const auto &x, const auto &y) {
-        return x + y;
-    };
+    EXPECT_EQ(
+        map<std::string>(append, points),
+        std::vector<std::string>({"a: 1", "b: 2"})
+    );
+}
 
-    std::map<std::string, std::string> capitals({
-        {"a", "A"},
-        {"b", "B"}
-    });
-
-    EXPECT_EQ(map(join, capitals), std::vector<std::string>({"aA", "bB"}));
+TEST(Map, Map) {
+    EXPECT_EQ(
+        map<std::vector<int>>(increment, std::vector<int>({1, 2})),
+        std::vector<int>({2, 3})
+    );
 }

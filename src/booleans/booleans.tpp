@@ -1,15 +1,11 @@
 #ifndef FUNKY_IMPLEMENTATIONS_BOOLEANS_BOOLEANS_TPP
 #define FUNKY_IMPLEMENTATIONS_BOOLEANS_BOOLEANS_TPP
 
+#include "../templates/callables.hpp"
+#include "../templates/ranges.hpp"
 #include "booleans.hpp"
 #include <cstddef>
-#include <functional>
 #include <vector>
-
-template <typename FA, typename A>
-bool funky::all(const std::function<bool(A)> &mapper, const FA &source) {
-    return std::all_of(source.begin(), source.end(), mapper);
-}
 
 template <typename FA>
 bool funky::all(const FA &source) {
@@ -24,9 +20,10 @@ bool funky::all(const FA &source) {
     return true;
 }
 
-template <typename FA, typename A>
-bool funky::any(const std::function<bool(A)> &mapper, const FA &source) {
-    return std::any_of(source.begin(), source.end(), mapper);
+template <typename FA, typename A, typename T>
+requires funky::Callable<T, bool(A)>
+bool funky::all(const T &mapper, const FA &source) {
+    return std::all_of(source.begin(), source.end(), mapper);
 }
 
 template <typename FA>
@@ -42,15 +39,20 @@ bool funky::any(const FA &source) {
     return false;
 }
 
-template <typename T, typename FA, typename A>
-requires Callable<T, bool(A)>
-bool funky::at_least(const T &mapper, size_t min, const FA &source) {
+template <typename FA, typename A, typename T>
+requires funky::Callable<T, bool(A)>
+bool funky::any(const T &mapper, const FA &source) {
+    return std::any_of(source.begin(), source.end(), mapper);
+}
+
+template <typename FA>
+bool funky::at_least(size_t min, const FA &source) {
     if (min == 0) {
         return true;
     }
 
     for (auto x : source) {
-        if (mapper(x)) {
+        if (x) {
             --min;
         }
 
@@ -62,14 +64,15 @@ bool funky::at_least(const T &mapper, size_t min, const FA &source) {
     return false;
 }
 
-template <typename FA>
-bool funky::at_least(size_t min, const FA &source) {
+template <typename FA, typename A, typename T>
+requires funky::Callable<T, bool(A)>
+bool funky::at_least(const T &mapper, size_t min, const FA &source) {
     if (min == 0) {
         return true;
     }
 
     for (auto x : source) {
-        if (x) {
+        if (mapper(x)) {
             --min;
         }
 

@@ -10,7 +10,6 @@
 #include "ranges.tpp"
 #include <algorithm>
 #include <deque>
-#include <functional>
 #include <numeric>
 
 template <typename T>

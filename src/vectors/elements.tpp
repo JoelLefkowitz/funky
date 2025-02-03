@@ -6,7 +6,6 @@
 #include "elements.hpp"
 #include "immutable.tpp"
 #include <algorithm>
-#include <functional>
 #include <numeric>
 
 template <typename T>

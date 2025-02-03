@@ -6,13 +6,15 @@
 #include <tuple>
 #include <type_traits>
 
-template <typename, typename>
-struct is_applicable : std::false_type {};
+namespace funky {
+    template <typename, typename>
+    struct is_applicable : std::false_type {};
 
-template <typename Func, template <typename...> typename Tuple, typename... Args>
-struct is_applicable<Func, Tuple<Args...>> : std::is_invocable<Func, Args...> {};
+    template <typename Func, template <typename...> typename Tuple, typename... Args>
+    struct is_applicable<Func, Tuple<Args...>> : std::is_invocable<Func, Args...> {};
 
-template <typename F, typename Tuple>
-concept applicable = is_applicable<F, Tuple>::value;
+    template <typename F, typename Tuple>
+    concept applicable = is_applicable<F, Tuple>::value;
+}
 
 #endif

@@ -21,9 +21,10 @@ std::string funky::pad(const std::string &str, size_t size) {
 }
 
 std::vector<std::string> funky::chunk(const std::string &str, size_t size) {
-    std::function<std::string(size_t)> slice = [size, &str](auto x) { return str.substr(size * x, size); };
-
-    return funky::map(slice, funky::range(size > 0 ? str.length() / size : 0));
+    return map<std::vector<std::string>>(
+        [size, &str](auto x) { return str.substr(size * x, size); },
+        funky::range(size > 0 ? str.length() / size : 0)
+    );
 }
 
 std::vector<std::string> funky::split(const std::string &str, const std::string &delimiter) {

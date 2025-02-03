@@ -38,14 +38,15 @@ export default {
 
             const [comment] = lines;
 
-            if (comment.startsWith("//")) {
+            if (comment?.startsWith("//")) {
               const [definition, concepts] = lines.reverse();
               const signature = new Signature(definition.replace(";", ""));
 
-              const replacements = {
-                FA: "[ A ]",
-                FB: "[ B ]",
-              };
+              const replacements = Object.fromEntries(
+                ["A", "B", "C"].map((i) => [`F${i}`, `[ ${i} ]`]),
+              );
+
+              replacements["<A,B>"] = "<A, B>";
 
               const [_, type, output, inputs] =
                 /requires Callable<(.*), (.*)\((.*)\)>/.exec(concepts) ?? [];
@@ -60,7 +61,7 @@ export default {
                 simplify(input, replacements),
               );
 
-              const formatted = `// ${signature.name} :: ${signature.format()}`;
+              const formatted = `// ${signature.name}: ${signature.format().replaceAll("->", "→")}`;
 
               if (comment !== formatted) {
                 return acc.replace(comment, formatted);

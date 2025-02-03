@@ -4,7 +4,10 @@
 
 using namespace funky;
 
+auto increment = [](auto x) {
+    return x + 1;
+};
+
 TEST(Compose, Compose) {
-    std::function<int(int)> increment = [](auto x) { return x + 1; };
     EXPECT_EQ(compose(increment, increment)(0), 2);
 }

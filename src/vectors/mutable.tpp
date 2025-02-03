@@ -10,7 +10,6 @@
 #include "immutable.tpp"
 #include "mutable.hpp"
 #include <algorithm>
-#include <functional>
 #include <numeric>
 
 template <typename T>

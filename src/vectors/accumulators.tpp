@@ -3,7 +3,6 @@
 
 #include "../iterables/fold.tpp"
 #include "accumulators.hpp"
-#include <functional>
 #include <vector>
 
 template <typename T>

@@ -4,6 +4,7 @@
 #include <vector>
 
 namespace funky {
+    // average: std::vector<T> → T
     template <typename T>
     T average(const std::vector<T> &vec);
 }

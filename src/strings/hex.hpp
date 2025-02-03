@@ -5,8 +5,10 @@
 #include <string>
 
 namespace funky {
-    std::string hex(int n, size_t length = 0);
+    // hex: int → size_t → std::string
+    std::string hex(int n, size_t length);
 
+    // parse_hex: std::string → int
     int parse_hex(const std::string &str);
 }
 

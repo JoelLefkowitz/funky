@@ -6,9 +6,13 @@
 
 using namespace funky;
 
+auto even = [](auto x) {
+    return funky::factor(x, 2);
+};
+
 TEST(Filter, Filter) {
     EXPECT_EQ(
-        funky::filter([](auto x) { return funky::factor(x, 2); }, std::vector<int>({1, 2, 3, 4})),
+        funky::filter(even, std::vector<int>({1, 2, 3, 4})),
         std::vector<int>({2, 4})
     );
 }
