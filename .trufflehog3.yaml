@@ -27,5 +27,6 @@ exclude:
       - docs/build
       - docs/dist
       - docs/*/dist
+      - docs/*/html
       - yarn-error.log
       - yarn.lock

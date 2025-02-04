@@ -9,6 +9,7 @@ __pycache__/
 build/
 build-release/
 dist/
+html/
 metadata/
 node_modules/
 venv/
