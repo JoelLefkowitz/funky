@@ -1,6 +1,6 @@
 # Funky
 
-Functional type classes and instances.
+Expressible and immutable methods for generics.
 
 ![Review](https://img.shields.io/github/actions/workflow/status/JoelLefkowitz/funky/review.yaml)
 ![Quality](https://img.shields.io/codacy/grade/_)
@@ -8,14 +8,70 @@ Functional type classes and instances.
 ## Installing
 
 ```bash
-conan search funky
+conan install funky
 ```
 
 You can also download the [sources](https://download-directory.github.io?url=https://github.com/JoelLefkowitz/funky/tree/master/src).
 
+## Motivation
+
+Rather than this:
+
+```cpp
+#include <algorithm>
+#include <functional>
+#include <vector>
+
+std::vector<int> numbers({1, 2, 3});
+std::vector<int> output;
+
+std::transform(
+    numbers.begin(),
+    numbers.end(),
+    std::back_inserter(output),
+    [](auto x) { return x + 1; }
+);
+```
+
+Let's write this:
+
+```cpp
+#include <funky/iterables/map.tpp>
+#include <vector>
+
+std::vector<int> numbers({1, 2, 3});
+
+auto output = map<std::vector<int>>(
+    [](auto x) { return x + 1; },
+    numbers
+);
+```
+
+Now `output` will still be:
+
+```cpp
+std::vector<int>({2, 3, 4});
+```
+
+And this function doesn't mutate the input and is much easier to read.
+
+> Most structures are small enough that immutability makes transformations easier to read and thread safe without loss of performance.
+
+The C++ templating system is smart enough to evaluate the types involved in these kinds of transformations for us. This means we can avoid using std::function or interfaces to declare the types involved. This also means we don't need to define concepts for `Functor` or `Foldable` to use `map` and `fold`.
+
+Our `map` function makes an empty container and still uses `.begin()` and `.end()` internally to map the results. This makes it just as generic as `std::transform` and suitable for transforming any iterable structure. This is reflected in its type signature:
+
+```cpp
+// map ≔ (A → B) → [ A ] → [ B ]
+```
+
 ## Documentation
 
 Documentation and more detailed examples are hosted on [Github Pages](https://joellefkowitz.github.io/funky).
+
+## Usage
+
+This package makes use of templates. The definitions and implementations are split between `.hpp` and `.tpp` files. If you are calling the functions implemented in them then include the `.tpp` file instead.
 
 ## Overview
 

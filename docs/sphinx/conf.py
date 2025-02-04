@@ -65,7 +65,7 @@ def filter_inputs(app, build):
 
     for path in glob("docs/**/class/*.rst", recursive=True):
         with open(path, "a") as stream:
-            stream.write("   :allow-dot-graphs:\n")
+            stream.write(" " * 3 + ":allow-dot-graphs:\n")
 
 
 def copy_static(app, build):

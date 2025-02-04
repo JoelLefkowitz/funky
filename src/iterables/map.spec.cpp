@@ -37,4 +37,13 @@ TEST(Map, Map) {
         map<std::vector<int>>(increment, std::vector<int>({1, 2})),
         std::vector<int>({2, 3})
     );
+
+    std::vector<int> numbers({1, 2, 3});
+
+    auto output = map<std::vector<int>>(
+        [](auto x) {
+            return x + 1;
+        },
+        numbers
+    );
 }

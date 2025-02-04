@@ -1,9 +1,6 @@
 #ifndef FUNKY_IMPLEMENTATIONS_VECTORS_MUTABLE_TPP
 #define FUNKY_IMPLEMENTATIONS_VECTORS_MUTABLE_TPP
 
-#ifndef MUTABLE_TPP
-#define MUTABLE_TPP
-
 #include "../iterables/fold.tpp"
 #include "../iterables/map.tpp"
 #include "../numbers/limits.hpp"
@@ -38,5 +35,4 @@ void funky::move_to_back(
     }
 }
 
-#endif
 #endif
