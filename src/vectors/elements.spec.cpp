@@ -22,7 +22,9 @@ TEST(Elements, Index) {
     EXPECT_EQ(index(std::vector<int>({1, 2, 3}), 3), 2UL);
     EXPECT_EQ(index(std::vector<int>({1, 2, 3}), 4), 0UL);
 
-    std::function<bool(const std::string &)> single = [](const auto &x) { return x.size() == 1; };
+    std::function<bool(const std::string &)> single = [](const auto &x) {
+        return x.size() == 1;
+    };
     EXPECT_EQ(index(single, std::vector<std::string>({"aa", "b", "cc"})), 1UL);
 }
 

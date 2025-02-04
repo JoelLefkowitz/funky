@@ -5,10 +5,10 @@
 #include <string>
 
 namespace funky {
-    // hex: int → size_t → std::string
+    // hex ≔ int → size_t → std::string
     std::string hex(int n, size_t length);
 
-    // parse_hex: std::string → int
+    // parse_hex ≔ std::string → int
     int parse_hex(const std::string &str);
 }
 

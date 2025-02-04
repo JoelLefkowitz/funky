@@ -42,7 +42,8 @@ std::string funky::units_prefix(double n) {
 
     std::string prefix = magnitude > 0 ? "⋅" : "÷";
 
-    std::vector<std::string> named = {"f", "p", "n", "μ", "m", "", "k", "M", "G", "T", "P"};
+    std::vector<std::string> named =
+        {"f", "p", "n", "μ", "m", "", "k", "M", "G", "T", "P"};
 
     auto index  = (magnitude / 3) + 5;
     auto symbol = index >= 0 && index < named.size() ? named.at(index) : "";

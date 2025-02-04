@@ -23,7 +23,8 @@ namespace funky {
         typename Unpack = callable_unpack<Sig>,
         typename ArgsT  = Unpack::args,
         typename Rtype  = Unpack::rtype>
-    concept Callable = applicable<F, ArgsT> && apply_results_in<F, Rtype, ArgsT>;
+    concept Callable = applicable<F, ArgsT> &&
+        apply_results_in<F, Rtype, ArgsT>;
 }
 
 #endif

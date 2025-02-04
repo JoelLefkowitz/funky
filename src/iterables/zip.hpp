@@ -6,7 +6,7 @@
 #include <functional>
 
 namespace funky {
-    // product: [ A ] → [ B ] → std::vector<std::pair<A, B>>
+    // zip ≔ [ A ] → [ B ] → std::vector<std::pair<A, B>>
     template <
         typename FB,
         typename FA,

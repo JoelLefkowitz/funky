@@ -22,12 +22,17 @@ std::string funky::pad(const std::string &str, size_t size) {
 
 std::vector<std::string> funky::chunk(const std::string &str, size_t size) {
     return map<std::vector<std::string>>(
-        [size, &str](auto x) { return str.substr(size * x, size); },
+        [size, &str](auto x) {
+            return str.substr(size * x, size);
+        },
         funky::range(size > 0 ? str.length() / size : 0)
     );
 }
 
-std::vector<std::string> funky::split(const std::string &str, const std::string &delimiter) {
+std::vector<std::string> funky::split(
+    const std::string &str,
+    const std::string &delimiter
+) {
     if (str.empty()) {
         return {str};
     }
@@ -61,24 +66,34 @@ std::vector<std::string> funky::split(const std::string &str, const std::string 
 }
 
 bool funky::starts_with(const std::string &str, const std::string &prefix) {
-    return str.length() >= prefix.length() && str.substr(0, prefix.length()) == prefix;
+    return str.length() >= prefix.length() &&
+        str.substr(0, prefix.length()) == prefix;
 }
 
 bool funky::ends_with(const std::string &str, const std::string &suffix) {
-    return str.length() >= suffix.length() && str.substr(str.length() - suffix.length(), str.length()) == suffix;
+    return str.length() >= suffix.length() &&
+        str.substr(str.length() - suffix.length(), str.length()) == suffix;
 }
 
 std::string funky::uppercase(const std::string &str) {
-    std::function<char(char)> upper = [](auto x) { return std::toupper(x); };
+    std::function<char(char)> upper = [](auto x) {
+        return std::toupper(x);
+    };
     return funky::map(upper, str);
 }
 
 std::string funky::lowercase(const std::string &str) {
-    std::function<char(char)> lower = [](auto x) { return std::tolower(x); };
+    std::function<char(char)> lower = [](auto x) {
+        return std::tolower(x);
+    };
     return funky::map(lower, str);
 }
 
-std::string funky::truncate(const std::string &str, size_t limit, const std::string &ellipsis) {
+std::string funky::truncate(
+    const std::string &str,
+    size_t limit,
+    const std::string &ellipsis
+) {
     if (str.size() <= limit) {
         return str;
     }
@@ -87,17 +102,26 @@ std::string funky::truncate(const std::string &str, size_t limit, const std::str
     return str.substr(0, width) + ellipsis;
 }
 
-std::string funky::join(const std::vector<std::string> &strings, const std::string &delimiter) {
-    std::function<std::string(const std::string &, const std::string &)> append =
-        [&delimiter](const auto &acc, const auto &x) { return acc + x + delimiter; };
+std::string funky::join(
+    const std::vector<std::string> &strings,
+    const std::string &delimiter
+) {
+    std::function<std::string(const std::string &, const std::string &)>
+        append = [&delimiter](const auto &acc, const auto &x) {
+            return acc + x + delimiter;
+        };
 
     auto joined = funky::fold<std::string>(append, "", strings);
     // std::string joined = "";
 
-    return strings.empty() ? "" : joined.substr(0, joined.size() - delimiter.size());
+    return strings.empty() ? ""
+                           : joined.substr(0, joined.size() - delimiter.size());
 }
 
-std::string funky::remove_substrings(const std::string &str, const std::vector<std::string> &substrs) {
+std::string funky::remove_substrings(
+    const std::string &str,
+    const std::vector<std::string> &substrs
+) {
     std::string copy = str;
 
     for (size_t i = 0; i < copy.size();) {

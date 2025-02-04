@@ -1,6 +1,8 @@
 #include "division.hpp"
 
-bool funky::factor(int dividend, int divisor) { return dividend % divisor == 0; }
+bool funky::factor(int dividend, int divisor) {
+    return dividend % divisor == 0;
+}
 
 double funky::ratio(size_t dividend, double divisor) {
     auto numerator = static_cast<double>(dividend);

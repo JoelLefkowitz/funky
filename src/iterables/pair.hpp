@@ -6,7 +6,7 @@
 #include <utility>
 
 namespace funky {
-    // pair: [ A ] → [ B ] → std::vector<std::pair<A, B>>
+    // pair ≔ [ A ] → std::vector<std::pair<A,A>>
     template <typename FA, typename A = elements<FA>>
     std::vector<std::pair<A, A>> pair(const FA &source);
 }

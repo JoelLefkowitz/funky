@@ -30,7 +30,10 @@ size_t funky::index(const std::vector<T> &vec, const T &x) {
 }
 
 template <typename T>
-size_t funky::index(std::function<bool(const T &)> condition, const std::vector<T> &vec) {
+size_t funky::index(
+    std::function<bool(const T &)> condition,
+    const std::vector<T> &vec
+) {
     for (size_t i = 0; i < vec.size(); ++i) {
         if (condition(vec.at(i))) {
             return i;
@@ -51,7 +54,10 @@ bool funky::repeats(const std::vector<T> &vec) {
 }
 
 template <typename T>
-bool funky::overlaps(const std::vector<T> &source, const std::vector<T> &target) {
+bool funky::overlaps(
+    const std::vector<T> &source,
+    const std::vector<T> &target
+) {
     return !intersection(source, target).empty();
 }
 

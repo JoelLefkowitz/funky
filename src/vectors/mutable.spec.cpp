@@ -25,7 +25,9 @@ TEST(Mutable, Erase) {
 TEST(Mutable, MoveToBack) {
     std::vector<int> sequence({1, 2, 3});
 
-    std::function<bool(int)> filter = [](auto x) { return x == 2; };
+    std::function<bool(int)> filter = [](auto x) {
+        return x == 2;
+    };
 
     move_to_back(filter, sequence);
     EXPECT_EQ(sequence, std::vector<int>({1, 3, 2}));

@@ -1,7 +1,7 @@
 AlignAfterOpenBracket: BlockIndent
 AlignArrayOfStructures: Left
 AlignConsecutiveAssignments: true
-AlignConsecutiveDeclarations: true
+AlignConsecutiveDeclarations: false
 AlignOperands: false
 AlignTrailingComments: true
 AllowAllArgumentsOnNextLine: false

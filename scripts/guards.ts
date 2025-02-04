@@ -33,13 +33,11 @@ export default {
             throw new Error("The first lines should be a header guard");
           }
 
-          if (guard !== derived) {
-            return [`#ifndef ${derived}`, `#define ${derived}`]
-              .concat(lines.slice(2))
-              .join("\n");
-          }
-
-          return text;
+          return guard === derived
+            ? text
+            : [`#ifndef ${derived}`, `#define ${derived}`]
+                .concat(lines.slice(2))
+                .join("\n");
         }),
       {
         count: true,

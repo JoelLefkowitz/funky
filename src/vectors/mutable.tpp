@@ -24,7 +24,10 @@ void funky::erase(std::vector<T> &vec, T x) {
 }
 
 template <typename T>
-void funky::move_to_back(const std::function<bool(T)> &filter, std::vector<T> &vec) {
+void funky::move_to_back(
+    const std::function<bool(T)> &filter,
+    std::vector<T> &vec
+) {
     for (auto i = vec.begin(); i != vec.end(); ++i) {
         if (filter(*i)) {
             auto x = std::move(*i);

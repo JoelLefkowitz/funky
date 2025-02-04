@@ -5,7 +5,9 @@
 
 template <typename T, typename U>
 auto funky::compose(const T &f, const U &g) {
-    return [f, g](const auto &x) { return g(f(x)); };
+    return [f, g](const auto &x) {
+        return g(f(x));
+    };
 }
 
 template <typename T, typename... U>

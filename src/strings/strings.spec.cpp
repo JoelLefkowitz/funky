@@ -40,7 +40,10 @@ TEST(Strings, Split) {
 
     EXPECT_EQ(split("a-a", "-"), std::vector<std::string>({"a", "a"}));
     EXPECT_EQ(split("a-a-a", "-"), std::vector<std::string>({"a", "a", "a"}));
-    EXPECT_EQ(split("ab-a-ab", "-"), std::vector<std::string>({"ab", "a", "ab"}));
+    EXPECT_EQ(
+        split("ab-a-ab", "-"),
+        std::vector<std::string>({"ab", "a", "ab"})
+    );
 }
 
 TEST(Strings, StartsWith) {

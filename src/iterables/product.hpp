@@ -5,7 +5,7 @@
 #include "../templates/ranges.hpp"
 
 namespace funky {
-    // product: [ A ] → [ B ] → std::vector<std::pair<A, B>>
+    // product ≔ [ A ] → [ B ] → std::vector<std::pair<A, B>>
     template <
         typename FB,
         typename FA,
