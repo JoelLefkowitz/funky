@@ -1,6 +1,6 @@
 # Funky
 
-Expressible and immutable methods for generics.
+Functional and ergonomic transformations.
 
 ![Review](https://img.shields.io/github/actions/workflow/status/JoelLefkowitz/funky/review.yaml)
 ![Quality](https://img.shields.io/codacy/grade/_)
@@ -75,43 +75,37 @@ This package makes use of templates. The definitions and implementations are spl
 
 ## Overview
 
-### Ranges
+### Pair
 
-Available in: `funky/vectors/ranges.hpp`
+Available in: `funky/generics/pair.hpp`
 
-#### range
+#### pairs
 
-`size_t → std::vector<size_t>`
+`[ A ] → std::vector<std::pair<A,A>>`
 
 ```cpp
-std::vector<size_t> range(size_t limit);
+std::vector<std::pair<A, A>> pairs(const FA &source);
 ```
 
-`T → T → T → std::vector<T>`
+#### product
+
+`[ A ] → [ B ] → std::vector<std::pair<A, B>>`
 
 ```cpp
-std::vector<T> range(T start, T stop, T step = 1);
+std::vector<std::pair<A, B>> product(const FA &a, const FB &b);
 ```
 
-#### linspace
+#### zip
 
-`T → T → size_t → std::vector<T>`
-
-```cpp
-std::vector<T> linspace(T start, T stop, size_t count);
-```
-
-#### enumerate
-
-`std::vector<T> → std::vector<Indexed<T>>`
+`[ A ] → [ B ] → std::vector<std::pair<A, B>>`
 
 ```cpp
-std::vector<Indexed<T>> enumerate(const std::vector<T> &vec);
+std::vector<std::pair<A, B>> zip(const FA &a, const FB &b);
 ```
 
 ### Mutable
 
-Available in: `funky/vectors/mutable.hpp`
+Available in: `funky/generics/mutable.hpp`
 
 #### insert
 
@@ -137,9 +131,125 @@ void erase(std::vector<T> &vec, T x);
 void move_to_back(const std::function<bool(T)> &filter,std::vector<T> &vec);
 ```
 
-### Immutable
+### Map
 
-Available in: `funky/vectors/immutable.hpp`
+Available in: `funky/generics/map.hpp`
+
+#### map
+
+`(char → char) → std::string → std::string`
+
+```cpp
+std::string map(const T &mapper, const std::string &source);
+```
+
+`(A → B → C) → std::map<A, B> → std::vector<C>`
+
+```cpp
+std::vector<C> map(const T &mapper, const std::map<A, B> &source);
+```
+
+`(A → B) → [ A ] → [ B ]`
+
+```cpp
+FB map(const T &mapper, const FA &source);
+```
+
+#### foreach
+
+`(A → void) → [ A ] → void`
+
+```cpp
+void foreach (const T &effect, const FA &source);
+```
+
+`(A → size_t → void) → [ A ] → void`
+
+```cpp
+void foreach (const T &effect, const FA &source);
+```
+
+`(A → B → void) → [ A ] → [ B ] → void`
+
+```cpp
+void foreach (const T &effect, const FA &a, const FB &b);
+```
+
+`(A → B → size_t → void) → [ A ] → [ B ] → void`
+
+```cpp
+void foreach (const T &effect, const FA &a, const FB &b);
+```
+
+#### filter
+
+`(A → bool) → [ A ] → [ A ]`
+
+```cpp
+FA filter(const T &condition, const FA &source);
+```
+
+#### fold
+
+`(B → A → B) → B → [ A ] → B`
+
+```cpp
+B fold(const T &folder, const B &initial, const FA &source);
+```
+
+#### min
+
+`std::vector<T> → T`
+
+```cpp
+T min(const std::vector<T> &vec);
+```
+
+#### max
+
+`std::vector<T> → T`
+
+```cpp
+T max(const std::vector<T> &vec);
+```
+
+#### index
+
+`std::vector<T> → T → size_t`
+
+```cpp
+size_t index(const std::vector<T> &vec, const T &x);
+```
+
+`(const T & → bool) → std::vector<T> → size_t`
+
+```cpp
+size_t index(std::function<bool(const T &)> condition,const std::vector<T> &vec);
+```
+
+#### contains
+
+`std::vector<T> → T → bool`
+
+```cpp
+bool contains(const std::vector<T> &vec, const T &x);
+```
+
+#### repeats
+
+`std::vector<T> → bool`
+
+```cpp
+bool repeats(const std::vector<T> &vec);
+```
+
+#### overlaps
+
+`std::vector<T> → std::vector<T> → bool`
+
+```cpp
+bool overlaps(const std::vector<T> &source, const std::vector<T> &target);
+```
 
 #### unique
 
@@ -251,79 +361,69 @@ std::vector<T> flatten(const std::vector<std::vector<T>> &vec);
 std::vector<T> from_deque(const std::deque<T> &deque);
 ```
 
-### Elements
+### Callables
 
-Available in: `funky/vectors/elements.hpp`
+Available in: `funky/generics/callables.hpp`
 
-#### min
+#### compose
 
-`std::vector<T> → T`
+`T → U → auto`
 
 ```cpp
-T min(const std::vector<T> &vec);
+auto compose(const T &f, const U &g);
 ```
 
-#### max
-
-`std::vector<T> → T`
+`T → U → auto`
 
 ```cpp
-T max(const std::vector<T> &vec);
+auto compose(const T &f, const U &...gs);
 ```
 
-#### index
+#### pipe
 
-`std::vector<T> → T → size_t`
+`T → U → auto`
 
 ```cpp
-size_t index(const std::vector<T> &vec, const T &x);
+auto pipe(const T &f, const U &...gs);
 ```
 
-`(const T & → bool) → std::vector<T> → size_t`
+### Vectors
+
+Available in: `funky/concrete/vectors.hpp`
+
+#### range
+
+`size_t → std::vector<size_t>`
 
 ```cpp
-size_t index(std::function<bool(const T &)> condition,const std::vector<T> &vec);
+std::vector<size_t> range(size_t limit);
 ```
 
-#### contains
-
-`std::vector<T> → T → bool`
+`T → T → T → std::vector<T>`
 
 ```cpp
-bool contains(const std::vector<T> &vec, const T &x);
+std::vector<T> range(T start, T stop, T step = 1);
 ```
 
-#### repeats
+#### linspace
 
-`std::vector<T> → bool`
+`T → T → size_t → std::vector<T>`
 
 ```cpp
-bool repeats(const std::vector<T> &vec);
+std::vector<T> linspace(T start, T stop, size_t count);
 ```
 
-#### overlaps
+#### enumerate
 
-`std::vector<T> → std::vector<T> → bool`
-
-```cpp
-bool overlaps(const std::vector<T> &source, const std::vector<T> &target);
-```
-
-### Accumulators
-
-Available in: `funky/vectors/accumulators.hpp`
-
-#### average
-
-`std::vector<T> → T`
+`std::vector<T> → std::vector<Indexed<T>>`
 
 ```cpp
-T average(const std::vector<T> &vec);
+std::vector<Indexed<T>> enumerate(const std::vector<T> &vec);
 ```
 
 ### Strings
 
-Available in: `funky/strings/strings.hpp`
+Available in: `funky/concrete/strings.hpp`
 
 #### reverse_copy
 
@@ -413,10 +513,6 @@ std::string join(const std::vector<std::string> &strings,const std::string &deli
 std::string remove_substrings(const std::string &str,const std::vector<std::string> &substr);
 ```
 
-### Hex
-
-Available in: `funky/strings/hex.hpp`
-
 #### hex
 
 `int → size_t → std::string`
@@ -435,7 +531,7 @@ int parse_hex(const std::string &str);
 
 ### Numbers
 
-Available in: `funky/numbers/numbers.hpp`
+Available in: `funky/concrete/numbers.hpp`
 
 #### frac
 
@@ -477,10 +573,6 @@ int order(double n);
 std::string units_prefix(double n);
 ```
 
-### Limits
-
-Available in: `funky/numbers/limits.hpp`
-
 #### between
 
 `T → T → T → bool`
@@ -521,10 +613,6 @@ double clamp_proportion(double x);
 double normalise(double x, double min, double max, double scale);
 ```
 
-### Division
-
-Available in: `funky/numbers/division.hpp`
-
 #### factor
 
 `int → int → bool`
@@ -553,153 +641,9 @@ double ratio(double dividend, size_t divisor);
 double ratio(size_t dividend, size_t divisor);
 ```
 
-### Zip
-
-Available in: `funky/iterables/zip.hpp`
-
-#### zip
-
-`[ A ] → [ B ] → std::vector<std::pair<A, B>>`
-
-```cpp
-std::vector<std::pair<A, B>> zip(const FA &a, const FB &b);
-```
-
-### Product
-
-Available in: `funky/iterables/product.hpp`
-
-#### product
-
-`[ A ] → [ B ] → std::vector<std::pair<A, B>>`
-
-```cpp
-std::vector<std::pair<A, B>> product(const FA &a, const FB &b);
-```
-
-### Pair
-
-Available in: `funky/iterables/pair.hpp`
-
-#### pair
-
-`[ A ] → std::vector<std::pair<A,A>>`
-
-```cpp
-std::vector<std::pair<A, A>> pair(const FA &source);
-```
-
-### Map
-
-Available in: `funky/iterables/map.hpp`
-
-#### map
-
-`(char → char) → std::string → std::string`
-
-```cpp
-std::string map(const T &mapper, const std::string &source);
-```
-
-`(A → B → C) → std::map<A, B> → std::vector<C>`
-
-```cpp
-std::vector<C> map(const T &mapper, const std::map<A, B> &source);
-```
-
-`(A → B) → [ A ] → [ B ]`
-
-```cpp
-FB map(const T &mapper, const FA &source);
-```
-
-### Foreach
-
-Available in: `funky/iterables/foreach.hpp`
-
-#### foreach
-
-`(A → void) → [ A ] → void`
-
-```cpp
-void foreach (const T &effect, const FA &source);
-```
-
-`(A → size_t → void) → [ A ] → void`
-
-```cpp
-void foreach (const T &effect, const FA &source);
-```
-
-`(A → B → void) → [ A ] → [ B ] → void`
-
-```cpp
-void foreach (const T &effect, const FA &a, const FB &b);
-```
-
-`(A → B → size_t → void) → [ A ] → [ B ] → void`
-
-```cpp
-void foreach (const T &effect, const FA &a, const FB &b);
-```
-
-### Fold
-
-Available in: `funky/iterables/fold.hpp`
-
-#### fold
-
-`(B → A → B) → B → [ A ] → B`
-
-```cpp
-B fold(const T &folder, const B &initial, const FA &source);
-```
-
-### Filter
-
-Available in: `funky/iterables/filter.hpp`
-
-#### filter
-
-`(A → bool) → [ A ] → [ A ]`
-
-```cpp
-FA filter(const T &condition, const FA &source);
-```
-
-### Pipe
-
-Available in: `funky/callables/pipe.hpp`
-
-#### pipe
-
-`T → U → auto`
-
-```cpp
-auto pipe(const T &f, const U &...gs);
-```
-
-### Compose
-
-Available in: `funky/callables/compose.hpp`
-
-#### compose
-
-`T → U → auto`
-
-```cpp
-auto compose(const T &f, const U &g);
-```
-
-`T → U → auto`
-
-```cpp
-auto compose(const T &f, const U &...gs);
-```
-
 ### Booleans
 
-Available in: `funky/booleans/booleans.hpp`
+Available in: `funky/concrete/booleans.hpp`
 
 #### all
 

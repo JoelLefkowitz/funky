@@ -86,6 +86,7 @@
     "version": "cpp",
     "*.inc": "cpp",
     "concepts": "cpp",
-    "type_traits": "cpp"
+    "type_traits": "cpp",
+    "utility": "cpp"
   }
 }
