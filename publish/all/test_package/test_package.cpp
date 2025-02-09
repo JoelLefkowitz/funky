@@ -1,11 +1,12 @@
-#include <functional>
-#include <funky/generics/functor/map.tpp>
+#include <funky/iterables/iterables.tpp>
 #include <vector>
 
+auto increment = [](auto x) {
+    return x + 1;
+};
+
 int main() {
-    std::function<int(int)> increment = [](int x) {
-        return x + 1;
-    };
-    funky::map(increment, std::vector<int>({1, 2, 3}));
+    std::vector<int> numbers({1, 2, 3});
+    auto output = map<std::vector<int>>(increment, numbers);
     return 0;
 }

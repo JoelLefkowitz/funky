@@ -1,12 +1,12 @@
-#ifndef FUNKY_NUMBERS_NUMBERS_HPP
-#define FUNKY_NUMBERS_NUMBERS_HPP
+#ifndef FUNKY_CONCRETE_NUMBERS_HPP
+#define FUNKY_CONCRETE_NUMBERS_HPP
 
 #include <cstddef>
 #include <string>
 
 namespace funky {
-    // frac ≔ double → double
-    double frac(double x);
+    // fractional ≔ double → double
+    double fractional(double x);
 
     // round ≔ double → size_t → double
     double round(double x, size_t dps);
@@ -20,17 +20,17 @@ namespace funky {
     // units_prefix ≔ double → std::string
     std::string units_prefix(double n);
 
-    // between ≔ T → T → T → bool
-    template <typename T>
-    bool between(T lower, T x, T higher);
+    // between ≔ A → A → A → bool
+    template <typename A>
+    bool between(A lower, A x, A higher);
 
-    // contains ≔ T → T → T → bool
-    template <typename T>
-    bool contains(T lower, T x, T higher);
+    // contains ≔ A → A → A → bool
+    template <typename A>
+    bool contains(A lower, A x, A higher);
 
-    // clamp ≔ T → T → T → T
-    template <typename T>
-    T clamp(T lower, T x, T higher);
+    // clamp ≔ A → A → A → A
+    template <typename A>
+    A clamp(A lower, A x, A higher);
 
     // clamp_proportion ≔ double → double
     double clamp_proportion(double x);

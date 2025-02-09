@@ -1,8 +1,8 @@
-#ifndef FUNKY_IMPLEMENTATIONS_VECTORS_MUTABLE_TPP
-#define FUNKY_IMPLEMENTATIONS_VECTORS_MUTABLE_TPP
+#ifndef FUNKY_GENERICS_MUTABLE_TPP
+#define FUNKY_GENERICS_MUTABLE_TPP
 
-#include "map.tpp"
 #include "../concrete/numbers.tpp"
+#include "iterables.tpp"
 #include "mutable.hpp"
 #include <algorithm>
 #include <numeric>
@@ -12,16 +12,16 @@ void funky::insert(const std::vector<T> &source, std::vector<T> &target) {
     target.insert(target.end(), source.begin(), source.end());
 }
 
-template <typename T>
-void funky::erase(std::vector<T> &vec, T x) {
+template <typename A>
+void funky::remove(std::vector<A> &vec, A x) {
     auto removed = std::remove(vec.begin(), vec.end(), x);
     vec.erase(removed, vec.end());
 }
 
-template <typename T>
+template <typename A>
 void funky::move_to_back(
-    const std::function<bool(T)> &filter,
-    std::vector<T> &vec
+    const std::function<bool(A)> &filter,
+    std::vector<A> &vec
 ) {
     for (auto i = vec.begin(); i != vec.end(); ++i) {
         if (filter(*i)) {

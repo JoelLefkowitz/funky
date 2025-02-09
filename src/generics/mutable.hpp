@@ -1,23 +1,23 @@
-#ifndef FUNKY_VECTORS_MUTABLE_HPP
-#define FUNKY_VECTORS_MUTABLE_HPP
+#ifndef FUNKY_GENERICS_MUTABLE_HPP
+#define FUNKY_GENERICS_MUTABLE_HPP
 
 #include <cstddef>
 #include <vector>
 
 namespace funky {
-    // insert ≔ std::vector<T> → std::vector<T> → void
-    template <typename T>
-    void insert(const std::vector<T> &source, std::vector<T> &target);
+    // insert ≔ std::vector<A> → std::vector<A> → void
+    template <typename A>
+    void insert(const std::vector<A> &source, std::vector<A> &target);
 
-    // erase ≔ std::vector<T> → T → void
-    template <typename T>
-    void erase(std::vector<T> &vec, T x);
+    // remove ≔ std::vector<A> → A → void
+    template <typename A>
+    void remove(std::vector<A> &vec, A x);
 
-    // move_to_back ≔ (T → bool) → std::vector<T> → void
-    template <typename T>
+    // move_to_back ≔ (A → bool) → std::vector<A> → void
+    template <typename A>
     void move_to_back(
-        const std::function<bool(T)> &filter,
-        std::vector<T> &vec
+        const std::function<bool(A)> &filter,
+        std::vector<A> &vec
     );
 }
 

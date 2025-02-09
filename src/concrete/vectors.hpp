@@ -1,8 +1,10 @@
-#ifndef FUNKY_VECTORS_RANGES_HPP
-#define FUNKY_VECTORS_RANGES_HPP
+#ifndef FUNKY_CONCRETE_VECTORS_HPP
+#define FUNKY_CONCRETE_VECTORS_HPP
 
-#include "../generics/templates.hpp"
+#include "../generics/aliases.hpp"
+#include "../generics/concepts.hpp"
 #include <cstddef>
+#include <deque>
 #include <utility>
 #include <vector>
 
@@ -10,17 +12,21 @@ namespace funky {
     // range ≔ size_t → std::vector<size_t>
     std::vector<size_t> range(size_t limit);
 
-    // range ≔ T → T → T → std::vector<T>
-    template <typename T>
-    std::vector<T> range(T start, T stop, T step = 1);
+    // range ≔ A → A → A → std::vector<A>
+    template <typename A>
+    std::vector<A> range(A start, A stop, A step = 1);
 
-    // linspace ≔ T → T → size_t → std::vector<T>
-    template <typename T>
-    std::vector<T> linspace(T start, T stop, size_t count);
+    // linspace ≔ A → A → size_t → std::vector<A>
+    template <typename A>
+    std::vector<A> linspace(A start, A stop, size_t count);
 
-    // enumerate ≔ std::vector<T> → std::vector<Indexed<T>>
-    template <typename T>
-    std::vector<Indexed<T>> enumerate(const std::vector<T> &vec);
+    // enumerate ≔ std::vector<A> → std::vector<Indexed<A>>
+    template <typename A>
+    std::vector<Indexed<A>> enumerate(const std::vector<A> &vec);
+
+    // from_deque ≔ std::deque<A> → std::vector<A>
+    template <typename A>
+    std::vector<A> from_deque(const std::deque<A> &deque);
 }
 
 #endif

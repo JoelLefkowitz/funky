@@ -1,12 +1,11 @@
+#ifndef FUNKY_GENERICS_ITERABLES_TPP
+#define FUNKY_GENERICS_ITERABLES_TPP
 
-#ifndef FUNKY_GENERICS_FUNCTOR_MAP_TPP
-#define FUNKY_GENERICS_FUNCTOR_MAP_TPP
-
-#include "templates.hpp"
 #include "../concrete/numbers.hpp"
 #include "../concrete/vectors.tpp"
+#include "iterables.hpp"
 #include "mutable.tpp"
-#include "map.hpp"
+#include "concepts.hpp"
 #include <algorithm>
 #include <deque>
 #include <map>
@@ -115,78 +114,9 @@ B funky::fold(const T &folder, const B &initial, const FA &source) {
     return std::reduce(source.begin(), source.end(), initial, folder);
 }
 
-
-template <typename T>
-T funky::min(const std::vector<T> &vec) {
-    return vec.empty() ? T() : *std::min_element(vec.begin(), vec.end());
-}
-
-template <typename T>
-T funky::max(const std::vector<T> &vec) {
-    return vec.empty() ? T() : *std::max_element(vec.begin(), vec.end());
-}
-
-template <typename T>
-size_t funky::index(const std::vector<T> &vec, const T &x) {
-    for (size_t i = 0; i < vec.size(); ++i) {
-        if (vec.at(i) == x) {
-            return i;
-        }
-    }
-
-    return 0;
-}
-
-template <typename T>
-size_t funky::index(
-    std::function<bool(const T &)> condition,
-    const std::vector<T> &vec
-) {
-    for (size_t i = 0; i < vec.size(); ++i) {
-        if (condition(vec.at(i))) {
-            return i;
-        }
-    }
-
-    return 0;
-}
-
-template <typename T>
-bool funky::contains(const std::vector<T> &vec, const T &x) {
-    return std::find(vec.begin(), vec.end(), x) != vec.end();
-}
-
-template <typename T>
-bool funky::repeats(const std::vector<T> &vec) {
-    return vec.size() > unique(vec).size();
-}
-
-template <typename T>
-bool funky::overlaps(
-    const std::vector<T> &source,
-    const std::vector<T> &target
-) {
-    return !intersection(source, target).empty();
-}
-
-
-
-template <typename T>
-std::vector<T> funky::unique(const std::vector<T> &vec) {
-    std::vector<T> unique;
-
-    for (auto x : vec) {
-        if (!contains(unique, x)) {
-            unique.push_back(x);
-        }
-    }
-
-    return unique;
-}
-
-template <typename T>
-std::vector<T> funky::reverse(const std::vector<T> &vec) {
-    std::vector<T> copy;
+template <typename A>
+std::vector<A> funky::reverse(const std::vector<A> &vec) {
+    std::vector<A> copy;
 
     if (vec.empty()) {
         return copy;
@@ -201,41 +131,9 @@ std::vector<T> funky::reverse(const std::vector<T> &vec) {
     return copy;
 }
 
-template <typename T>
-std::vector<T> funky::difference(
-    const std::vector<T> &source,
-    const std::vector<T> &target
-) {
-    std::vector<T> unique;
-
-    for (auto x : source) {
-        if (!contains(target, x) && !contains(unique, x)) {
-            unique.push_back(x);
-        }
-    }
-
-    return unique;
-}
-
-template <typename T>
-std::vector<T> funky::intersection(
-    const std::vector<T> &source,
-    const std::vector<T> &target
-) {
-    std::vector<T> unique;
-
-    for (const auto &x : source) {
-        if (contains(target, x) && !contains(unique, x)) {
-            unique.push_back(x);
-        }
-    }
-
-    return unique;
-}
-
-template <typename T>
-std::vector<T> funky::slice(
-    const std::vector<T> &vec,
+template <typename A>
+std::vector<A> funky::slice(
+    const std::vector<A> &vec,
     const size_t start,
     const size_t end
 ) {
@@ -243,45 +141,45 @@ std::vector<T> funky::slice(
     auto to   = static_cast<int>(std::min(end, vec.size()));
 
     // cppcheck-suppress internalAstError
-    return to > from ? std::vector<T>(vec.begin() + from, vec.begin() + to)
-                     : std::vector<T>({});
+    return to > from ? std::vector<A>(vec.begin() + from, vec.begin() + to)
+                     : std::vector<A>({});
 }
 
-template <typename T>
-std::vector<T> funky::slice_first(const std::vector<T> &vec, size_t width) {
+template <typename A>
+std::vector<A> funky::slice_first(const std::vector<A> &vec, size_t width) {
     return slice(vec, 0, width);
 }
 
-template <typename T>
-std::vector<T> funky::slice_last(const std::vector<T> &vec, size_t width) {
+template <typename A>
+std::vector<A> funky::slice_last(const std::vector<A> &vec, size_t width) {
     return vec.size() > width ? slice(vec, vec.size() - width, vec.size())
                               : vec;
 }
 
-template <typename T>
-std::vector<T> funky::drop_first(const std::vector<T> &vec, size_t width) {
+template <typename A>
+std::vector<A> funky::drop_first(const std::vector<A> &vec, size_t width) {
     return slice(vec, width, vec.size());
 }
 
-template <typename T>
-std::vector<T> funky::drop_last(const std::vector<T> &vec, size_t width) {
+template <typename A>
+std::vector<A> funky::drop_last(const std::vector<A> &vec, size_t width) {
     return vec.size() > width ? slice(vec, 0, vec.size() - width)
-                              : std::vector<T>();
+                              : std::vector<A>();
 }
 
-template <typename T>
-std::vector<std::vector<T>> funky::aperture(
-    const std::vector<T> &vec,
+template <typename FA, typename A>
+std::vector<FA> funky::aperture(
+    const FA &vec,
     size_t width
 ) {
-    std::vector<std::vector<T>> slides;
+    std::vector<FA> slides;
 
     if (width == 0 || width > vec.size()) {
         return {};
     }
 
     for (std::size_t i = 0; i < vec.size() - width + 1; ++i) {
-        std::vector<T> slide;
+        FA slide;
 
         for (const auto j : range(width)) {
             slide.push_back(vec.at(i + j));
@@ -293,26 +191,26 @@ std::vector<std::vector<T>> funky::aperture(
     return slides;
 }
 
-template <typename T>
-std::vector<T> funky::concat(const std::vector<T> &vec, const T &x) {
-    std::vector<T> copy(vec);
+template <typename A>
+std::vector<A> funky::concat(const std::vector<A> &vec, const A &x) {
+    std::vector<A> copy(vec);
     copy.push_back(x);
     return copy;
 }
 
-template <typename T>
-std::vector<T> funky::concat(
-    const std::vector<T> &vec,
-    const std::vector<T> &x
+template <typename A>
+std::vector<A> funky::concat(
+    const std::vector<A> &vec,
+    const std::vector<A> &x
 ) {
     auto copy(vec);
     insert(x, copy);
     return copy;
 }
 
-template <typename T>
-std::vector<T> funky::flatten(const std::vector<std::vector<T>> &vec) {
-    return fold<std::vector<T>>(
+template <typename A>
+std::vector<A> funky::flatten(const std::vector<std::vector<A>> &vec) {
+    return fold<std::vector<A>>(
         [](const auto &acc, const auto &x) {
             return concat(acc, x);
         },
@@ -320,11 +218,5 @@ std::vector<T> funky::flatten(const std::vector<std::vector<T>> &vec) {
         vec
     );
 }
-
-template <typename T>
-std::vector<T> funky::from_deque(const std::deque<T> &deque) {
-    return std::vector<T>({deque.begin(), deque.end()});
-}
-
 
 #endif

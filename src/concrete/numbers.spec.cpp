@@ -4,9 +4,9 @@
 using namespace funky;
 
 TEST(Numerics, Frac) {
-    EXPECT_NEAR(frac(1), 0, 0.001);
-    EXPECT_NEAR(frac(1.1), 0.1, 0.001);
-    EXPECT_NEAR(frac(-1.1), -0.1, 0.001);
+    EXPECT_NEAR(fractional(1), 0, 0.001);
+    EXPECT_NEAR(fractional(1.1), 0.1, 0.001);
+    EXPECT_NEAR(fractional(-1.1), -0.1, 0.001);
 }
 
 TEST(Numerics, Round) {

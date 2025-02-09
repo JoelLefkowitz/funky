@@ -1,7 +1,8 @@
-#ifndef FUNKY_BOOLEANS_BOOLEANS_HPP
-#define FUNKY_BOOLEANS_BOOLEANS_HPP
+#ifndef FUNKY_CONCRETE_BOOLEANS_HPP
+#define FUNKY_CONCRETE_BOOLEANS_HPP
 
-#include "../generics/templates.hpp"
+#include "../generics/aliases.hpp"
+#include "../generics/concepts.hpp"
 #include <cstddef>
 #include <functional>
 #include <vector>

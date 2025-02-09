@@ -1,5 +1,5 @@
-#ifndef FUNKY_STRINGS_STRINGS_HPP
-#define FUNKY_STRINGS_STRINGS_HPP
+#ifndef FUNKY_CONCRETE_STRINGS_HPP
+#define FUNKY_CONCRETE_STRINGS_HPP
 
 #include <cstddef>
 #include <string>

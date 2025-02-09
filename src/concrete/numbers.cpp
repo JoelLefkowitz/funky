@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-double funky::frac(double x) {
+double funky::fractional(double x) {
     double integral = 0;
     return std::modf(x, &integral);
 }
@@ -62,6 +62,7 @@ double funky::clamp_proportion(double x) {
 double funky::normalise(double x, double min, double max, double scale) {
     return (x * scale - min) / (max - min);
 }
+
 bool funky::factor(int dividend, int divisor) {
     return dividend % divisor == 0;
 }

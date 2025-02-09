@@ -1,5 +1,5 @@
-#ifndef FUNKY_CALLABLES_COMPOSE_HPP
-#define FUNKY_CALLABLES_COMPOSE_HPP
+#ifndef FUNKY_GENERICS_CALLABLES_HPP
+#define FUNKY_GENERICS_CALLABLES_HPP
 
 namespace funky {
     // compose ≔ T → U → auto

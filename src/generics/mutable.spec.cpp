@@ -14,10 +14,10 @@ TEST(Mutable, Insert) {
     EXPECT_EQ(y, std::vector<int>({1, 2, 3, 4}));
 }
 
-TEST(Mutable, Erase) {
-    auto x = std::vector<int>({1, 2, 2, 3});
+TEST(Mutable, Remove) {
+    auto x = std::vector<int>({1, 2, 3, 2});
 
-    erase(x, 2);
+    remove(x, 2);
 
     EXPECT_EQ(x, std::vector<int>({1, 3}));
 }

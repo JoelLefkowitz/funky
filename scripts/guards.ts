@@ -11,7 +11,7 @@ export default {
   description: "Check header guards are consistent",
   action: () =>
     logger(
-      "src/**/*.hpp",
+      "src/**/*.[ht]pp",
       async (file) =>
         rewrite(file, (text) => {
           const lines = text.split("\n");

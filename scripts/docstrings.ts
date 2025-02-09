@@ -13,6 +13,8 @@ import {
   mergeWith,
   prop,
   replace,
+  reverse,
+  sortBy,
 } from "ramda";
 import fs from "fs";
 
@@ -192,7 +194,21 @@ export default {
         groupBy(prop("include"), definitions),
       );
 
-      const docs = Object.entries(hierarchy).reduce(
+      const sections = [
+        "callables",
+        "iterables",
+        "sets",
+        "pairs",
+        "mutable",
+        "booleans",
+        "numbers",
+        "strings",
+        "vectors",
+      ];
+      const docs = sortBy(
+        ([i]) => -reverse(sections).indexOf(format.domain(i)),
+        Object.entries(hierarchy),
+      ).reduce(
         (acc, [include, named]) =>
           acc.concat(
             markdown.h3(capitalise(format.domain(include))),
@@ -201,10 +217,13 @@ export default {
               (acc, [name, definitions]) =>
                 acc.concat(
                   markdown.h4(name),
-                  definitions.flatMap(({ signature, docstring }) => [
-                    markdown.inline(docstring),
-                    markdown.block(signature),
-                  ]),
+                  markdown.block(
+                    definitions
+                      .map(({ signature, docstring }) =>
+                        ["// ", docstring, "\n", signature].join(""),
+                      )
+                      .join("\n\n"),
+                  ),
                 ),
               [],
             ),

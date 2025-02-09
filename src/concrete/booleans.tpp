@@ -1,7 +1,7 @@
-#ifndef FUNKY_IMPLEMENTATIONS_BOOLEANS_BOOLEANS_TPP
-#define FUNKY_IMPLEMENTATIONS_BOOLEANS_BOOLEANS_TPP
+#ifndef FUNKY_CONCRETE_BOOLEANS_TPP
+#define FUNKY_CONCRETE_BOOLEANS_TPP
 
-#include "../generics/templates.hpp"
+#include "../generics/concepts.hpp"
 #include "booleans.hpp"
 #include <cstddef>
 #include <vector>

@@ -8,7 +8,7 @@ from conan.tools.layout import basic_layout
 
 class FunkyConan(ConanFile):
     name = "funky"
-    description = "Funky type classes and instances."
+    description = "Functional and ergonomic transformations."
     license = "MIT"
 
     url = "https://github.com/conan-io/conan-center-index"

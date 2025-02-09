@@ -1,10 +1,10 @@
 #include "strings.hpp"
-#include "../generics/map.tpp"
+#include "../generics/iterables.tpp"
 #include "vectors.tpp"
 #include <algorithm>
-#include <sstream>
 #include <cstddef>
 #include <functional>
+#include <sstream>
 #include <string>
 #include <vector>
 
@@ -139,7 +139,6 @@ std::string funky::remove_substrings(
 
     return copy;
 }
-
 
 std::string funky::hex(int n, size_t length) {
     std::stringstream stream;
