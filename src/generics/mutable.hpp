@@ -5,20 +5,18 @@
 #include <vector>
 
 namespace funky {
-    // insert ≔ std::vector<A> → std::vector<A> → void
-    template <typename A>
-    void insert(const std::vector<A> &source, std::vector<A> &target);
+    // insert ≔ [ A ] → [ A ] → void
+    template <typename FA, typename A = Elements<FA>>
+    void insert(const FA &source, FA &target);
 
-    // remove ≔ std::vector<A> → A → void
-    template <typename A>
-    void remove(std::vector<A> &vec, A x);
+    // remove ≔ [ A ] → A → void
+    template <typename FA, typename A = Elements<FA>>
+    void remove(FA &vec, const A &x);
 
-    // move_to_back ≔ (A → bool) → std::vector<A> → void
-    template <typename A>
-    void move_to_back(
-        const std::function<bool(A)> &filter,
-        std::vector<A> &vec
-    );
+    // partition ≔ (A → bool) → [ A ] → void
+    template <typename FA, typename A = Elements<FA>, typename T>
+    requires Callable<T, bool(A)>
+    void partition(const T &filter, FA &vec);
 }
 
 #endif

@@ -7,27 +7,25 @@
 #include <algorithm>
 #include <numeric>
 
-template <typename T>
-void funky::insert(const std::vector<T> &source, std::vector<T> &target) {
+template <typename FA, typename A>
+void funky::insert(const FA &source, FA &target) {
     target.insert(target.end(), source.begin(), source.end());
 }
 
-template <typename A>
-void funky::remove(std::vector<A> &vec, A x) {
-    auto removed = std::remove(vec.begin(), vec.end(), x);
-    vec.erase(removed, vec.end());
+template <typename FA, typename A>
+void funky::remove(FA &source, const A &x) {
+    auto removed = std::remove(source.begin(), source.end(), x);
+    source.erase(removed, source.end());
 }
 
-template <typename A>
-void funky::move_to_back(
-    const std::function<bool(A)> &filter,
-    std::vector<A> &vec
-) {
-    for (auto i = vec.begin(); i != vec.end(); ++i) {
+template <typename FA, typename A, typename T>
+requires funky::Callable<T, bool(A)>
+void funky::partition(const T &filter, FA &source) {
+    for (auto i = source.begin(); i != source.end(); ++i) {
         if (filter(*i)) {
             auto x = std::move(*i);
-            vec.erase(i);
-            vec.insert(vec.end(), x);
+            source.erase(i);
+            source.insert(source.end(), x);
             break;
         }
     }

@@ -1,61 +1,53 @@
 #ifndef FUNKY_GENERICS_SETS_HPP
 #define FUNKY_GENERICS_SETS_HPP
 
-#include "concepts.hpp"
+#include "../concepts/callable.hpp"
 #include <deque>
 #include <map>
 #include <string>
 #include <vector>
 
 namespace funky {
-    // min ≔ std::vector<A> → A → A
-    template <typename A>
-    A min(const std::vector<A> &vec, A empty);
+    // contains ≔ [ A ] → A → bool
+    template <typename FA, typename A = Elements<FA>>
+    bool contains(const FA &vec, const A &x);
 
-    // max ≔ std::vector<A> → A → A
-    template <typename A>
-    A max(const std::vector<A> &vec, A empty);
+    // is_unique ≔ [ A ] → bool
+    template <typename FA, typename A = Elements<FA>>
+    bool is_unique(const FA &vec);
 
-    // index ≔ std::vector<A> → A → size_t
-    template <typename A>
-    size_t index(const std::vector<A> &vec, const A &x);
+    // unique ≔ [ A ] → [ A ]
+    template <typename FA, typename A = Elements<FA>>
+    FA unique(const FA &vec);
 
-    // index ≔ (const A & → bool) → std::vector<A> → size_t
-    template <typename A>
-    size_t index(
-        std::function<bool(const A &)> condition,
-        const std::vector<A> &vec
-    );
+    // intersects ≔ [ A ] → [ A ] → bool
+    template <typename FA, typename A = Elements<FA>>
+    bool intersects(const FA &source, const FA &target);
 
-    // contains ≔ std::vector<A> → A → bool
-    template <typename A>
-    bool contains(const std::vector<A> &vec, const A &x);
+    // intersection ≔ [ A ] → [ A ] → [ A ]
+    template <typename FA, typename A = Elements<FA>>
+    FA intersection(const FA &source, const FA &target);
 
-    // repeats ≔ std::vector<A> → bool
-    template <typename A>
-    bool repeats(const std::vector<A> &vec);
+    // difference ≔ [ A ] → [ A ] → [ A ]
+    template <typename FA, typename A = Elements<FA>>
+    FA difference(const FA &source, const FA &target);
 
-    // overlaps ≔ std::vector<A> → std::vector<A> → bool
-    template <typename A>
-    bool overlaps(const std::vector<A> &source, const std::vector<A> &target);
+    // index ≔ [ A ] → A → size_t
+    template <typename FA, typename A = Elements<FA>>
+    size_t index(const FA &vec, const A &x);
 
-    // unique ≔ std::vector<A> → std::vector<A>
-    template <typename A>
-    std::vector<A> unique(const std::vector<A> &vec);
+    // find ≔ (A → bool) → [ A ] → size_t
+    template <typename FA, typename A = Elements<FA>, typename T>
+    requires Callable<T, bool(A)>
+    size_t find(const T &condition, const FA &source);
 
-    // difference ≔ std::vector<A> → std::vector<A> → std::vector<A>
-    template <typename A>
-    std::vector<A> difference(
-        const std::vector<A> &source,
-        const std::vector<A> &target
-    );
+    // min ≔ [ A ] → A → A
+    template <typename FA, typename A = Elements<FA>>
+    A min(const FA &vec, A empty);
 
-    // intersection ≔ std::vector<A> → std::vector<A> → std::vector<A>
-    template <typename A>
-    std::vector<A> intersection(
-        const std::vector<A> &source,
-        const std::vector<A> &target
-    );
+    // max ≔ [ A ] → A → A
+    template <typename FA, typename A = Elements<FA>>
+    A max(const FA &vec, A empty);
 }
 
 #endif

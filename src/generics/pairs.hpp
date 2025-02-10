@@ -1,8 +1,8 @@
 #ifndef FUNKY_GENERICS_PAIRS_HPP
 #define FUNKY_GENERICS_PAIRS_HPP
 
-#include "concepts.hpp"
-#include "aliases.hpp"
+#include "../concepts/aliases.hpp"
+#include "../concepts/callable.hpp"
 #include <utility>
 
 namespace funky {

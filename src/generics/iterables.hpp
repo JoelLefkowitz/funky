@@ -1,14 +1,22 @@
 #ifndef FUNKY_GENERICS_ITERABLES_HPP
 #define FUNKY_GENERICS_ITERABLES_HPP
 
-#include "concepts.hpp"
-#include "aliases.hpp"
+#include "../concepts/aliases.hpp"
+#include "../concepts/callable.hpp"
 #include <deque>
 #include <map>
 #include <string>
 #include <vector>
 
 namespace funky {
+    // convert ≔ [ A ] → [ B ]
+    template <typename FB, typename FA>
+    FB convert(const FA &source);
+
+    // reverse ≔ [ A ] → [ A ]
+    template <typename FA, typename A = Elements<FA>>
+    FA reverse(const FA &vec);
+
     // map ≔ (char → char) → std::string → std::string
     template <typename T>
     requires Callable<T, char(char)>
@@ -69,49 +77,41 @@ namespace funky {
     requires Callable<T, B(B, A)>
     B fold(const T &folder, const B &initial, const FA &source);
 
-    // reverse ≔ std::vector<A> → std::vector<A>
-    template <typename A>
-    std::vector<A> reverse(const std::vector<A> &vec);
+    // concat ≔ [ A ] → A → [ A ]
+    template <typename FA, typename A = Elements<FA>>
+    FA concat(const FA &vec, const A &x);
 
-    // slice ≔ std::vector<A> → size_t → size_t → std::vector<A>
-    template <typename A>
-    std::vector<A> slice(
-        const std::vector<A> &vec,
-        const size_t start,
-        const size_t end
-    );
+    // concat ≔ [ A ] → [ A ] → [ A ]
+    template <typename FA, typename A = Elements<FA>>
+    FA concat(const FA &vec, const FA &x);
 
-    // slice_first ≔ std::vector<A> → size_t → std::vector<A>
-    template <typename A>
-    std::vector<A> slice_first(const std::vector<A> &vec, size_t width);
+    // flatten ≔ std::vector<[ A ]> → [ A ]
+    template <typename FA, typename A = Elements<FA>>
+    FA flatten(const std::vector<FA> &vec);
 
-    // slice_last ≔ std::vector<A> → size_t → std::vector<A>
-    template <typename A>
-    std::vector<A> slice_last(const std::vector<A> &vec, size_t width);
+    // slice ≔ [ A ] → size_t → size_t → [ A ]
+    template <typename FA, typename A = Elements<FA>>
+    FA slice(const FA &vec, const size_t start, const size_t end);
 
-    // drop_first ≔ std::vector<A> → size_t → std::vector<A>
-    template <typename A>
-    std::vector<A> drop_first(const std::vector<A> &vec, size_t width);
+    // slice_first ≔ [ A ] → size_t → [ A ]
+    template <typename FA, typename A = Elements<FA>>
+    FA slice_first(const FA &vec, size_t width);
 
-    // drop_last ≔ std::vector<A> → size_t → std::vector<A>
-    template <typename A>
-    std::vector<A> drop_last(const std::vector<A> &vec, size_t width);
+    // slice_last ≔ [ A ] → size_t → [ A ]
+    template <typename FA, typename A = Elements<FA>>
+    FA slice_last(const FA &vec, size_t width);
+
+    // drop_first ≔ [ A ] → size_t → [ A ]
+    template <typename FA, typename A = Elements<FA>>
+    FA drop_first(const FA &vec, size_t width);
+
+    // drop_last ≔ [ A ] → size_t → [ A ]
+    template <typename FA, typename A = Elements<FA>>
+    FA drop_last(const FA &vec, size_t width);
 
     // aperture ≔ [ A ] → size_t → std::vector<[ A ]>
     template <typename FA, typename A = Elements<FA>>
     std::vector<FA> aperture(const FA &vec, size_t width);
-
-    // concat ≔ std::vector<A> → A → std::vector<A>
-    template <typename A>
-    std::vector<A> concat(const std::vector<A> &vec, const A &x);
-
-    // concat ≔ std::vector<A> → std::vector<A> → std::vector<A>
-    template <typename A>
-    std::vector<A> concat(const std::vector<A> &vec, const std::vector<A> &x);
-
-    // flatten ≔ std::vector<std::vector<A>> → std::vector<A>
-    template <typename A>
-    std::vector<A> flatten(const std::vector<std::vector<A>> &vec);
 }
 
 #endif

@@ -4,6 +4,10 @@
 
 using namespace funky;
 
+auto even = [](auto x) {
+    return factor(x, 2);
+};
+
 TEST(Mutable, Insert) {
     auto x = std::vector<int>({3, 4});
     auto y = std::vector<int>({1, 2});
@@ -22,13 +26,10 @@ TEST(Mutable, Remove) {
     EXPECT_EQ(x, std::vector<int>({1, 3}));
 }
 
-TEST(Mutable, MoveToBack) {
+TEST(Mutable, Partition) {
     std::vector<int> sequence({1, 2, 3});
 
-    std::function<bool(int)> filter = [](auto x) {
-        return x == 2;
-    };
+    partition(even, sequence);
 
-    move_to_back(filter, sequence);
     EXPECT_EQ(sequence, std::vector<int>({1, 3, 2}));
 }

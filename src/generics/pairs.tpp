@@ -1,8 +1,8 @@
 #ifndef FUNKY_GENERICS_PAIRS_TPP
 #define FUNKY_GENERICS_PAIRS_TPP
 
+#include "../concepts/callable.hpp"
 #include "pairs.hpp"
-#include "concepts.hpp"
 #include <numeric>
 #include <utility>
 #include <vector>

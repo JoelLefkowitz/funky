@@ -1,6 +1,5 @@
 #include "booleans.tpp"
 #include "numbers.hpp"
-#include <functional>
 #include <gtest/gtest.h>
 #include <vector>
 

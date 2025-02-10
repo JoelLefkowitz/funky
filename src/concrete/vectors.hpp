@@ -1,8 +1,8 @@
 #ifndef FUNKY_CONCRETE_VECTORS_HPP
 #define FUNKY_CONCRETE_VECTORS_HPP
 
-#include "../generics/aliases.hpp"
-#include "../generics/concepts.hpp"
+#include "../concepts/aliases.hpp"
+#include "../concepts/callable.hpp"
 #include <cstddef>
 #include <deque>
 #include <utility>
@@ -23,10 +23,6 @@ namespace funky {
     // enumerate ≔ std::vector<A> → std::vector<Indexed<A>>
     template <typename A>
     std::vector<Indexed<A>> enumerate(const std::vector<A> &vec);
-
-    // from_deque ≔ std::deque<A> → std::vector<A>
-    template <typename A>
-    std::vector<A> from_deque(const std::deque<A> &deque);
 }
 
 #endif

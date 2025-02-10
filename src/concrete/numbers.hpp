@@ -17,23 +17,8 @@ namespace funky {
     // order ≔ double → int
     int order(double n);
 
-    // units_prefix ≔ double → std::string
-    std::string units_prefix(double n);
-
-    // between ≔ A → A → A → bool
-    template <typename A>
-    bool between(A lower, A x, A higher);
-
-    // contains ≔ A → A → A → bool
-    template <typename A>
-    bool contains(A lower, A x, A higher);
-
-    // clamp ≔ A → A → A → A
-    template <typename A>
-    A clamp(A lower, A x, A higher);
-
-    // clamp_proportion ≔ double → double
-    double clamp_proportion(double x);
+    // proportion ≔ double → double
+    double proportion(double x);
 
     // normalise ≔ double → double → double → double → double
     double normalise(double x, double min, double max, double scale);
@@ -49,6 +34,21 @@ namespace funky {
 
     // ratio ≔ size_t → size_t → double
     double ratio(size_t dividend, size_t divisor);
+
+    // unit ≔ double → std::string → std::string
+    std::string unit(double n, const std::string &metric);
+
+    // between ≔ A → A → A → bool
+    template <typename A>
+    bool between(A lower, A x, A higher);
+
+    // included ≔ A → A → A → bool
+    template <typename A>
+    bool included(A lower, A x, A higher);
+
+    // clamp ≔ A → A → A → A
+    template <typename A>
+    A clamp(A lower, A x, A higher);
 }
 
 #endif

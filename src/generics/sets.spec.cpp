@@ -1,69 +1,74 @@
-#include "../concrete/numbers.hpp"
 #include "sets.tpp"
+#include "../concrete/numbers.hpp"
 #include <cctype>
 #include <cmath>
-#include <functional>
 #include <gtest/gtest.h>
 #include <string>
 #include <vector>
 
 using namespace funky;
 
-TEST(Elements, Min) {
-    EXPECT_EQ(min(std::vector<int>({}), 0), 0);
-    EXPECT_EQ(min(std::vector<int>({1}), 0), 1);
-    EXPECT_EQ(min(std::vector<int>({1, 2}), 0), 1);
-}
+auto even = [](auto x) {
+    return factor(x, 2);
+};
 
-TEST(Elements, Max) {
-    EXPECT_EQ(max(std::vector<int>({}), 0), 0);
-    EXPECT_EQ(max(std::vector<int>({1}), 0), 1);
-    EXPECT_EQ(max(std::vector<int>({1, 2}), 0), 2);
-}
-
-TEST(Elements, Index) {
-    EXPECT_EQ(index(std::vector<int>({1, 2, 3}), 1), 0UL);
-    EXPECT_EQ(index(std::vector<int>({1, 2, 3}), 2), 1UL);
-    EXPECT_EQ(index(std::vector<int>({1, 2, 3}), 3), 2UL);
-    EXPECT_EQ(index(std::vector<int>({1, 2, 3}), 4), 0UL);
-
-    std::function<bool(const std::string &)> single = [](const auto &x) {
-        return x.size() == 1;
-    };
-    EXPECT_EQ(index(single, std::vector<std::string>({"aa", "b", "cc"})), 1UL);
-}
-
-TEST(Elements, Contains) {
+TEST(Sets, Contains) {
     EXPECT_TRUE(contains(std::vector<int>({1, 2, 3}), 1));
 
     EXPECT_FALSE(contains(std::vector<int>({}), 1));
     EXPECT_FALSE(contains(std::vector<int>({1}), 2));
 }
 
-TEST(Elements, Repeats) {
-    EXPECT_TRUE(repeats(std::vector<int>({1, 1})));
-    EXPECT_TRUE(repeats(std::vector<int>({1, 1, 2})));
+TEST(Sets, IsUnique) {
+    EXPECT_TRUE(is_unique(std::vector<int>({})));
+    EXPECT_TRUE(is_unique(std::vector<int>({1})));
 
-    EXPECT_FALSE(repeats(std::vector<int>({})));
-    EXPECT_FALSE(repeats(std::vector<int>({1})));
+    EXPECT_FALSE(is_unique(std::vector<int>({1, 1})));
+    EXPECT_FALSE(is_unique(std::vector<int>({1, 1, 2})));
 }
 
-TEST(Elements, Overlaps) {
-    EXPECT_TRUE(overlaps(std::vector<int>({1}), std::vector<int>({1})));
-    EXPECT_TRUE(overlaps(std::vector<int>({1, 2}), std::vector<int>({2, 3})));
-
-    EXPECT_FALSE(overlaps(std::vector<int>({1, 2}), std::vector<int>({3, 4})));
-    EXPECT_FALSE(overlaps(std::vector<int>({}), std::vector<int>({1, 2})));
-    EXPECT_FALSE(overlaps(std::vector<int>({}), std::vector<int>({})));
-}
-
-TEST(Immutable, Unique) {
+TEST(Sets, Unique) {
     EXPECT_EQ(unique(std::vector<int>({})), std::vector<int>({}));
     EXPECT_EQ(unique(std::vector<int>({1, 2, 3})), std::vector<int>({1, 2, 3}));
     EXPECT_EQ(unique(std::vector<int>({1, 2, 2})), std::vector<int>({1, 2}));
 }
 
-TEST(Immutable, Difference) {
+TEST(Sets, Intersects) {
+    EXPECT_TRUE(intersects(std::vector<int>({1}), std::vector<int>({1})));
+    EXPECT_TRUE(intersects(std::vector<int>({1, 2}), std::vector<int>({2, 3})));
+
+    EXPECT_FALSE(intersects(std::vector<int>({1, 2}), std::vector<int>({3, 4}))
+    );
+    EXPECT_FALSE(intersects(std::vector<int>({}), std::vector<int>({1, 2})));
+    EXPECT_FALSE(intersects(std::vector<int>({}), std::vector<int>({})));
+}
+
+TEST(Sets, Intersection) {
+    EXPECT_EQ(
+        intersection(std::vector<int>({1, 2, 3}), std::vector<int>({})),
+        std::vector<int>({})
+    );
+    EXPECT_EQ(
+        intersection(std::vector<int>({}), std::vector<int>({1, 2, 3})),
+        std::vector<int>({})
+    );
+
+    EXPECT_EQ(
+        intersection(std::vector<int>({1, 2}), std::vector<int>({2, 3})),
+        std::vector<int>({2})
+    );
+    EXPECT_EQ(
+        intersection(std::vector<int>({1, 2}), std::vector<int>({1, 2})),
+        std::vector<int>({1, 2})
+    );
+
+    EXPECT_EQ(
+        intersection(std::vector<int>({1, 1, 2}), std::vector<int>({1, 1, 2})),
+        std::vector<int>({1, 2})
+    );
+}
+
+TEST(Sets, Difference) {
     EXPECT_EQ(
         difference(std::vector<int>({1, 2, 3}), std::vector<int>({})),
         std::vector<int>({1, 2, 3})
@@ -97,27 +102,25 @@ TEST(Immutable, Difference) {
     );
 }
 
-TEST(Immutable, Intersection) {
-    EXPECT_EQ(
-        intersection(std::vector<int>({1, 2, 3}), std::vector<int>({})),
-        std::vector<int>({})
-    );
-    EXPECT_EQ(
-        intersection(std::vector<int>({}), std::vector<int>({1, 2, 3})),
-        std::vector<int>({})
-    );
+TEST(Sets, Index) {
+    EXPECT_EQ(index(std::vector<int>({1, 2, 3}), 1), 0UL);
+    EXPECT_EQ(index(std::vector<int>({1, 2, 3}), 2), 1UL);
+    EXPECT_EQ(index(std::vector<int>({1, 2, 3}), 3), 2UL);
+    EXPECT_EQ(index(std::vector<int>({1, 2, 3}), 4), 0UL);
+}
 
-    EXPECT_EQ(
-        intersection(std::vector<int>({1, 2}), std::vector<int>({2, 3})),
-        std::vector<int>({2})
-    );
-    EXPECT_EQ(
-        intersection(std::vector<int>({1, 2}), std::vector<int>({1, 2})),
-        std::vector<int>({1, 2})
-    );
+TEST(Sets, Find) {
+    EXPECT_EQ(find(even, std::vector<int>({1, 2, 3})), 1UL);
+}
 
-    EXPECT_EQ(
-        intersection(std::vector<int>({1, 1, 2}), std::vector<int>({1, 1, 2})),
-        std::vector<int>({1, 2})
-    );
+TEST(Sets, Min) {
+    EXPECT_EQ(min(std::vector<int>({}), 0), 0);
+    EXPECT_EQ(min(std::vector<int>({1}), 0), 1);
+    EXPECT_EQ(min(std::vector<int>({1, 2}), 0), 1);
+}
+
+TEST(Sets, Max) {
+    EXPECT_EQ(max(std::vector<int>({}), 0), 0);
+    EXPECT_EQ(max(std::vector<int>({1}), 0), 1);
+    EXPECT_EQ(max(std::vector<int>({1, 2}), 0), 2);
 }

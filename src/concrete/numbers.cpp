@@ -31,31 +31,7 @@ int funky::order(double n) {
     return 0;
 }
 
-std::string funky::units_prefix(double n) {
-    auto magnitude = order(std::abs(n));
-
-    if (magnitude == 0) {
-        return "";
-    }
-
-    auto operand = std::pow(10, std::abs(magnitude) % 3);
-
-    std::string prefix = magnitude > 0 ? "⋅" : "÷";
-
-    std::vector<std::string> named =
-        {"f", "p", "n", "μ", "m", "", "k", "M", "G", "T", "P"};
-
-    auto index  = (magnitude / 3) + 5;
-    auto symbol = index >= 0 && index < named.size() ? named.at(index) : "";
-
-    auto trimmed = std::to_string(operand);
-    trimmed.erase(trimmed.find_last_not_of('0') + 1, std::string::npos);
-    trimmed.erase(trimmed.find_last_not_of('.') + 1, std::string::npos);
-
-    return operand == 1 ? symbol : join({prefix, trimmed, symbol}, "");
-}
-
-double funky::clamp_proportion(double x) {
+double funky::proportion(double x) {
     return clamp(0.0, x, 1.0);
 }
 
@@ -81,4 +57,29 @@ double funky::ratio(size_t dividend, size_t divisor) {
     auto numerator   = static_cast<double>(dividend);
     auto denominator = static_cast<double>(divisor);
     return numerator / denominator;
+}
+
+std::string funky::unit(double n, const std::string &metric) {
+    auto magnitude = order(std::abs(n));
+
+    if (magnitude == 0) {
+        return metric;
+    }
+
+    auto index   = magnitude / 3 + 5;
+    auto prefix  = magnitude > 0 ? "⋅" : "÷";
+    auto operand = std::pow(10, std::abs(magnitude) % 3);
+
+    std::vector<std::string> named(
+        {"f", "p", "n", "μ", "m", "", "k", "M", "G", "T", "P"}
+    );
+
+    auto symbol = index >= 0 && index < named.size() ? named.at(index) : "";
+
+    auto trimmed = std::to_string(operand);
+    trimmed.erase(trimmed.find_last_not_of('0') + 1, std::string::npos);
+    trimmed.erase(trimmed.find_last_not_of('.') + 1, std::string::npos);
+
+    auto prefixed = join({prefix, trimmed, symbol}, "");
+    return (operand == 1 ? symbol : prefixed) + metric;
 }

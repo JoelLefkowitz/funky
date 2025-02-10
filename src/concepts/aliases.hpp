@@ -1,5 +1,5 @@
-#ifndef FUNKY_GENERICS_ALIASES_HPP
-#define FUNKY_GENERICS_ALIASES_HPP
+#ifndef FUNKY_CONCEPTS_ALIASES_HPP
+#define FUNKY_CONCEPTS_ALIASES_HPP
 
 #include <concepts>
 #include <functional>

@@ -4,18 +4,18 @@
 #include "numbers.hpp"
 #include <algorithm>
 
-template <typename T>
-bool funky::between(T lower, T x, T higher) {
+template <typename A>
+bool funky::between(A lower, A x, A higher) {
     return lower < x && x < higher;
 }
 
-template <typename T>
-bool funky::contains(T lower, T x, T higher) {
+template <typename A>
+bool funky::included(A lower, A x, A higher) {
     return lower <= x && x <= higher;
 }
 
-template <typename T>
-T funky::clamp(T lower, T x, T higher) {
+template <typename A>
+A funky::clamp(A lower, A x, A higher) {
     return std::max(lower, std::min(higher, x));
 }
 

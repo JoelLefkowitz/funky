@@ -115,6 +115,20 @@ auto pipe(const T &f, const U &...gs);
 
 Available in: `funky/generics/iterables.hpp`
 
+#### convert
+
+```cpp
+// [ A ] → [ B ]
+FB convert(const FA &source);
+```
+
+#### reverse
+
+```cpp
+// [ A ] → [ A ]
+FA reverse(const FA &vec);
+```
+
 #### map
 
 ```cpp
@@ -158,46 +172,56 @@ FA filter(const T &condition, const FA &source);
 B fold(const T &folder, const B &initial, const FA &source);
 ```
 
-#### reverse
+#### concat
 
 ```cpp
-// std::vector<A> → std::vector<A>
-std::vector<A> reverse(const std::vector<A> &vec);
+// [ A ] → A → [ A ]
+FA concat(const FA &vec, const A &x);
+
+// [ A ] → [ A ] → [ A ]
+FA concat(const FA &vec, const FA &x);
+```
+
+#### flatten
+
+```cpp
+// std::vector<[ A ]> → [ A ]
+FA flatten(const std::vector<FA> &vec);
 ```
 
 #### slice
 
 ```cpp
-// std::vector<A> → size_t → size_t → std::vector<A>
-std::vector<A> slice(const std::vector<A> &vec,const size_t start,const size_t end);
+// [ A ] → size_t → size_t → [ A ]
+FA slice(const FA &vec, const size_t start, const size_t end);
 ```
 
 #### slice_first
 
 ```cpp
-// std::vector<A> → size_t → std::vector<A>
-std::vector<A> slice_first(const std::vector<A> &vec, size_t width);
+// [ A ] → size_t → [ A ]
+FA slice_first(const FA &vec, size_t width);
 ```
 
 #### slice_last
 
 ```cpp
-// std::vector<A> → size_t → std::vector<A>
-std::vector<A> slice_last(const std::vector<A> &vec, size_t width);
+// [ A ] → size_t → [ A ]
+FA slice_last(const FA &vec, size_t width);
 ```
 
 #### drop_first
 
 ```cpp
-// std::vector<A> → size_t → std::vector<A>
-std::vector<A> drop_first(const std::vector<A> &vec, size_t width);
+// [ A ] → size_t → [ A ]
+FA drop_first(const FA &vec, size_t width);
 ```
 
 #### drop_last
 
 ```cpp
-// std::vector<A> → size_t → std::vector<A>
-std::vector<A> drop_last(const std::vector<A> &vec, size_t width);
+// [ A ] → size_t → [ A ]
+FA drop_last(const FA &vec, size_t width);
 ```
 
 #### aperture
@@ -207,91 +231,78 @@ std::vector<A> drop_last(const std::vector<A> &vec, size_t width);
 std::vector<FA> aperture(const FA &vec, size_t width);
 ```
 
-#### concat
-
-```cpp
-// std::vector<A> → A → std::vector<A>
-std::vector<A> concat(const std::vector<A> &vec, const A &x);
-
-// std::vector<A> → std::vector<A> → std::vector<A>
-std::vector<A> concat(const std::vector<A> &vec, const std::vector<A> &x);
-```
-
-#### flatten
-
-```cpp
-// std::vector<std::vector<A>> → std::vector<A>
-std::vector<A> flatten(const std::vector<std::vector<A>> &vec);
-```
-
 ### Sets
 
 Available in: `funky/generics/sets.hpp`
 
-#### min
-
-```cpp
-// std::vector<A> → A → A
-A min(const std::vector<A> &vec, A empty);
-```
-
-#### max
-
-```cpp
-// std::vector<A> → A → A
-A max(const std::vector<A> &vec, A empty);
-```
-
-#### index
-
-```cpp
-// std::vector<A> → A → size_t
-size_t index(const std::vector<A> &vec, const A &x);
-
-// (const A & → bool) → std::vector<A> → size_t
-size_t index(std::function<bool(const A &)> condition,const std::vector<A> &vec);
-```
-
 #### contains
 
 ```cpp
-// std::vector<A> → A → bool
-bool contains(const std::vector<A> &vec, const A &x);
+// [ A ] → A → bool
+bool contains(const FA &vec, const A &x);
 ```
 
-#### repeats
+#### is_unique
 
 ```cpp
-// std::vector<A> → bool
-bool repeats(const std::vector<A> &vec);
-```
-
-#### overlaps
-
-```cpp
-// std::vector<A> → std::vector<A> → bool
-bool overlaps(const std::vector<A> &source, const std::vector<A> &target);
+// [ A ] → bool
+bool is_unique(const FA &vec);
 ```
 
 #### unique
 
 ```cpp
-// std::vector<A> → std::vector<A>
-std::vector<A> unique(const std::vector<A> &vec);
+// [ A ] → [ A ]
+FA unique(const FA &vec);
 ```
 
-#### difference
+#### intersects
 
 ```cpp
-// std::vector<A> → std::vector<A> → std::vector<A>
-std::vector<A> difference(const std::vector<A> &source,const std::vector<A> &target);
+// [ A ] → [ A ] → bool
+bool intersects(const FA &source, const FA &target);
 ```
 
 #### intersection
 
 ```cpp
-// std::vector<A> → std::vector<A> → std::vector<A>
-std::vector<A> intersection(const std::vector<A> &source,const std::vector<A> &target);
+// [ A ] → [ A ] → [ A ]
+FA intersection(const FA &source, const FA &target);
+```
+
+#### difference
+
+```cpp
+// [ A ] → [ A ] → [ A ]
+FA difference(const FA &source, const FA &target);
+```
+
+#### index
+
+```cpp
+// [ A ] → A → size_t
+size_t index(const FA &vec, const A &x);
+```
+
+#### find
+
+```cpp
+// (A → bool) → [ A ] → size_t
+size_t find(const T &condition, const FA &source);
+```
+
+#### min
+
+```cpp
+// [ A ] → A → A
+A min(const FA &vec, A empty);
+```
+
+#### max
+
+```cpp
+// [ A ] → A → A
+A max(const FA &vec, A empty);
 ```
 
 ### Pairs
@@ -326,22 +337,22 @@ Available in: `funky/generics/mutable.hpp`
 #### insert
 
 ```cpp
-// std::vector<A> → std::vector<A> → void
-void insert(const std::vector<A> &source, std::vector<A> &target);
+// [ A ] → [ A ] → void
+void insert(const FA &source, FA &target);
 ```
 
 #### remove
 
 ```cpp
-// std::vector<A> → A → void
-void remove(std::vector<A> &vec, A x);
+// [ A ] → A → void
+void remove(FA &vec, const A &x);
 ```
 
-#### move_to_back
+#### partition
 
 ```cpp
-// (A → bool) → std::vector<A> → void
-void move_to_back(const std::function<bool(A)> &filter,std::vector<A> &vec);
+// (A → bool) → [ A ] → void
+void partition(const T &filter, FA &vec);
 ```
 
 ### Booleans
@@ -355,7 +366,7 @@ Available in: `funky/concrete/booleans.hpp`
 bool all(const FA &source);
 
 // (A → bool) → [ A ] → bool
-bool all(const T &mapper, const FA &source);
+bool all(const T &predicate, const FA &source);
 ```
 
 #### any
@@ -365,7 +376,7 @@ bool all(const T &mapper, const FA &source);
 bool any(const FA &source);
 
 // (A → bool) → [ A ] → bool
-bool any(const T &mapper, const FA &source);
+bool any(const T &predicate, const FA &source);
 ```
 
 #### at_least
@@ -375,18 +386,18 @@ bool any(const T &mapper, const FA &source);
 bool at_least(size_t min, const FA &source);
 
 // (A → bool) → size_t → [ A ] → bool
-bool at_least(const T &mapper, size_t min, const FA &source);
+bool at_least(const T &predicate, size_t min, const FA &source);
 ```
 
 ### Numbers
 
 Available in: `funky/concrete/numbers.hpp`
 
-#### frac
+#### fractional
 
 ```cpp
 // double → double
-double frac(double x);
+double fractional(double x);
 ```
 
 #### round
@@ -410,39 +421,11 @@ int sign(int n);
 int order(double n);
 ```
 
-#### units_prefix
-
-```cpp
-// double → std::string
-std::string units_prefix(double n);
-```
-
-#### between
-
-```cpp
-// A → A → A → bool
-bool between(A lower, A x, A higher);
-```
-
-#### contains
-
-```cpp
-// A → A → A → bool
-bool contains(A lower, A x, A higher);
-```
-
-#### clamp
-
-```cpp
-// A → A → A → A
-A clamp(A lower, A x, A higher);
-```
-
-#### clamp_proportion
+#### proportion
 
 ```cpp
 // double → double
-double clamp_proportion(double x);
+double proportion(double x);
 ```
 
 #### normalise
@@ -472,37 +455,37 @@ double ratio(double dividend, size_t divisor);
 double ratio(size_t dividend, size_t divisor);
 ```
 
+#### unit
+
+```cpp
+// double → std::string → std::string
+std::string unit(double n, const std::string &metric);
+```
+
+#### between
+
+```cpp
+// A → A → A → bool
+bool between(A lower, A x, A higher);
+```
+
+#### included
+
+```cpp
+// A → A → A → bool
+bool included(A lower, A x, A higher);
+```
+
+#### clamp
+
+```cpp
+// A → A → A → A
+A clamp(A lower, A x, A higher);
+```
+
 ### Strings
 
 Available in: `funky/concrete/strings.hpp`
-
-#### reverse_copy
-
-```cpp
-// std::string → std::string
-std::string reverse_copy(const std::string &str);
-```
-
-#### pad
-
-```cpp
-// std::string → size_t → std::string
-std::string pad(const std::string &str, size_t size);
-```
-
-#### chunk
-
-```cpp
-// std::string → size_t → std::vector<std::string>
-std::vector<std::string> chunk(const std::string &str, size_t size);
-```
-
-#### split
-
-```cpp
-// std::string → std::string → std::vector<std::string>
-std::vector<std::string> split(const std::string &str,const std::string &delimiter);
-```
 
 #### starts_with
 
@@ -516,6 +499,27 @@ bool starts_with(const std::string &str, const std::string &prefix);
 ```cpp
 // std::string → std::string → bool
 bool ends_with(const std::string &str, const std::string &suffix);
+```
+
+#### reverse
+
+```cpp
+// std::string → std::string
+std::string reverse(const std::string &str);
+```
+
+#### pad
+
+```cpp
+// std::string → size_t → std::string
+std::string pad(const std::string &str, size_t size);
+```
+
+#### truncate
+
+```cpp
+// std::string → size_t → std::string → std::string
+std::string truncate(const std::string &str,size_t limit,const std::string &ellipsis = "...");
 ```
 
 #### uppercase
@@ -532,11 +536,11 @@ std::string uppercase(const std::string &str);
 std::string lowercase(const std::string &str);
 ```
 
-#### truncate
+#### split
 
 ```cpp
-// std::string → size_t → std::string → std::string
-std::string truncate(const std::string &str,size_t limit,const std::string &ellipsis = "...");
+// std::string → std::string → std::vector<std::string>
+std::vector<std::string> split(const std::string &str,const std::string &delimiter);
 ```
 
 #### join
@@ -546,18 +550,25 @@ std::string truncate(const std::string &str,size_t limit,const std::string &elli
 std::string join(const std::vector<std::string> &strings,const std::string &delimiter = "");
 ```
 
-#### remove_substrings
+#### chunk
+
+```cpp
+// std::string → size_t → std::vector<std::string>
+std::vector<std::string> chunk(const std::string &str, size_t size);
+```
+
+#### without_substrings
 
 ```cpp
 // std::string → std::vector<std::string> → std::string
-std::string remove_substrings(const std::string &str,const std::vector<std::string> &substr);
+std::string without_substrings(const std::string &str,const std::vector<std::string> &substr);
 ```
 
-#### hex
+#### format_hex
 
 ```cpp
 // int → size_t → std::string
-std::string hex(int n, size_t length);
+std::string format_hex(int n, size_t length = 6UL);
 ```
 
 #### parse_hex
@@ -593,13 +604,6 @@ std::vector<A> linspace(A start, A stop, size_t count);
 ```cpp
 // std::vector<A> → std::vector<Indexed<A>>
 std::vector<Indexed<A>> enumerate(const std::vector<A> &vec);
-```
-
-#### from_deque
-
-```cpp
-// std::deque<A> → std::vector<A>
-std::vector<A> from_deque(const std::deque<A> &deque);
 ```
 
 ## Tooling

@@ -1,12 +1,11 @@
 #include "pairs.tpp"
-#include <functional>
 #include <gtest/gtest.h>
 #include <utility>
 #include <vector>
 
 using namespace funky;
 
-TEST(Pair, Pair) {
+TEST(Pairs, Pair) {
     std::vector<std::pair<int, int>> paired({
         {1, 2},
         {2, 3},
@@ -16,7 +15,7 @@ TEST(Pair, Pair) {
     EXPECT_EQ(pairs(std::vector<int>({1, 2, 3, 4})), paired);
 }
 
-TEST(Product, Product) {
+TEST(Pairs, Product) {
     std::vector<std::pair<int, int>> pairs({
         {1, 3},
         {1, 4},
@@ -30,7 +29,7 @@ TEST(Product, Product) {
     );
 }
 
-TEST(Zip, Zip) {
+TEST(Pairs, Zip) {
     std::vector<std::pair<int, int>> pairs({
         {1, 3},
         {2, 4}

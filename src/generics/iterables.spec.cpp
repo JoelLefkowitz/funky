@@ -2,16 +2,12 @@
 #include "../concrete/numbers.hpp"
 #include <cctype>
 #include <cmath>
-#include <functional>
+#include <deque>
 #include <gtest/gtest.h>
 #include <string>
 #include <vector>
 
 using namespace funky;
-
-auto append = [](auto x, auto y) {
-    return x + ": " + std::to_string(y);
-};
 
 auto increment = [](auto x) {
     return x + 1;
@@ -25,92 +21,18 @@ auto sum = [](auto acc, auto x) {
     return acc + x;
 };
 
-std::map<std::string, int> points({
-    {"a", 1},
-    {"b", 2}
-});
+auto append = [](auto x, auto y) {
+    return x + ": " + std::to_string(y);
+};
 
-TEST(Map, MapString) {
-    EXPECT_EQ(map(::toupper, "abc"), "ABC");
-}
-
-TEST(Map, MapMap) {
+TEST(Iterables, Convert) {
     EXPECT_EQ(
-        map<std::string>(append, points),
-        std::vector<std::string>({"a: 1", "b: 2"})
+        convert<std::deque<int>>(std::vector<int>({1, 2, 3})),
+        std::deque<int>({1, 2, 3})
     );
 }
 
-TEST(Map, Map) {
-    EXPECT_EQ(
-        map<std::vector<int>>(increment, std::vector<int>({1, 2})),
-        std::vector<int>({2, 3})
-    );
-
-    std::vector<int> numbers({1, 2, 3});
-
-    auto output = map<std::vector<int>>(
-        [](auto x) {
-            return x + 1;
-        },
-        numbers
-    );
-}
-
-TEST(Foreach, Foreach) {
-    auto counter = 0;
-
-    auto sum = [&counter](auto x) {
-        counter += x;
-    };
-
-    // clang-format off
-    foreach(sum, std::vector<int>({1, 2, 3}));
-    // clang-format on
-    EXPECT_EQ(counter, 6);
-}
-
-TEST(Functional, ZipForeach) {
-    auto counter = 0;
-
-    auto sum_products = [&counter](auto x, auto y) {
-        counter += (x * y);
-    };
-
-    // clang-format off
-    foreach(sum_products, std::vector<int>({1, 2}), std::vector<int>({1, 2}));
-    // clang-format on
-
-    EXPECT_EQ(counter, 5);
-}
-
-TEST(Functional, IndexedForeach) {
-    auto counter = 0;
-
-    auto sum_index_products = [&counter](auto x, auto i) {
-        auto index = static_cast<int>(i);
-        counter += (x * index);
-    };
-
-    // clang-format off
-    foreach(sum_index_products, std::vector<int>({1, 2, 3}));
-    // clang-format on
-
-    EXPECT_EQ(counter, 8);
-}
-
-TEST(Filter, Filter) {
-    EXPECT_EQ(
-        funky::filter(even, std::vector<int>({1, 2, 3, 4})),
-        std::vector<int>({2, 4})
-    );
-}
-
-TEST(Fold, Fold) {
-    EXPECT_EQ(fold(sum, 0, std::vector<int>({1, 2, 3})), 6);
-}
-
-TEST(Immutable, Reverse) {
+TEST(Iterables, Reverse) {
     EXPECT_EQ(reverse(std::vector<int>({})), std::vector<int>({}));
     EXPECT_EQ(
         reverse(std::vector<int>({1, 2, 3})),
@@ -118,7 +40,99 @@ TEST(Immutable, Reverse) {
     );
 }
 
-TEST(Immutable, Slice) {
+TEST(Iterables, Map) {
+    EXPECT_EQ(map(::toupper, "abc"), "ABC");
+
+    std::map<std::string, int> points({
+        {"a", 1},
+        {"b", 2}
+    });
+
+    EXPECT_EQ(
+        map<std::string>(append, points),
+        std::vector<std::string>({"a: 1", "b: 2"})
+    );
+
+    EXPECT_EQ(
+        map<std::vector<int>>(increment, std::vector<int>({1, 2})),
+        std::vector<int>({2, 3})
+    );
+
+    std::vector<int> numbers({1, 2, 3});
+
+    auto output = map<std::vector<int>>(increment, numbers);
+}
+
+TEST(Iterables, Foreach) {
+    auto sum = 0;
+
+    auto add = [&sum](auto x) {
+        sum += x;
+    };
+
+    // clang-format off
+    foreach(add, std::vector<int>({1, 2, 3}));
+    // clang-format on
+    EXPECT_EQ(sum, 6);
+
+    auto products_sum = 0;
+
+    auto add_products = [&products_sum](auto x, auto y) {
+        products_sum += (x * y);
+    };
+
+    // clang-format off
+    foreach(add_products, std::vector<int>({1, 2}), std::vector<int>({1, 2}));
+    // clang-format on
+
+    EXPECT_EQ(products_sum, 5);
+
+    auto index_products_sum = 0;
+
+    auto add_index_products = [&index_products_sum](auto x, auto i) {
+        auto index = static_cast<int>(i);
+        index_products_sum += (x * index);
+    };
+
+    // clang-format off
+    foreach(add_index_products, std::vector<int>({1, 2, 3}));
+    // clang-format on
+
+    EXPECT_EQ(index_products_sum, 8);
+}
+
+TEST(Iterables, Filter) {
+    EXPECT_EQ(
+        funky::filter(even, std::vector<int>({1, 2, 3, 4})),
+        std::vector<int>({2, 4})
+    );
+}
+
+TEST(Iterables, Fold) {
+    EXPECT_EQ(fold(sum, 0, std::vector<int>({1, 2, 3})), 6);
+}
+
+TEST(Iterables, Concat) {
+    EXPECT_EQ(concat(std::vector<int>({}), 1), std::vector<int>({1}));
+    EXPECT_EQ(concat(std::vector<int>({1}), 2), std::vector<int>({1, 2}));
+    EXPECT_EQ(
+        concat(std::vector<int>({1}), std::vector<int>({2, 3})),
+        std::vector<int>({1, 2, 3})
+    );
+}
+
+TEST(Iterables, Flatten) {
+    EXPECT_EQ(flatten(std::vector<std::vector<int>>({})), std::vector<int>({}));
+    EXPECT_EQ(
+        flatten(std::vector<std::vector<int>>({
+            {1, 2},
+            {3, 4}
+    })),
+        std::vector<int>({1, 2, 3, 4})
+    );
+}
+
+TEST(Iterables, Slice) {
     EXPECT_EQ(slice(std::vector<int>({1, 2, 3}), 0, 0), std::vector<int>({}));
     EXPECT_EQ(slice(std::vector<int>({1, 2, 3}), 0, 1), std::vector<int>({1}));
     EXPECT_EQ(slice(std::vector<int>({1, 2, 3}), 1, 1), std::vector<int>({}));
@@ -134,7 +148,7 @@ TEST(Immutable, Slice) {
     EXPECT_EQ(slice(std::vector<int>({1, 2, 3}), 2, 1), std::vector<int>({}));
 }
 
-TEST(Immutable, SliceFirst) {
+TEST(Iterables, SliceFirst) {
     EXPECT_EQ(
         slice_first(std::vector<int>({1, 2, 3}), 0),
         std::vector<int>({})
@@ -157,7 +171,7 @@ TEST(Immutable, SliceFirst) {
     );
 }
 
-TEST(Immutable, SliceLast) {
+TEST(Iterables, SliceLast) {
     EXPECT_EQ(slice_last(std::vector<int>({1, 2, 3}), 0), std::vector<int>({}));
     EXPECT_EQ(
         slice_last(std::vector<int>({1, 2, 3}), 1),
@@ -177,7 +191,7 @@ TEST(Immutable, SliceLast) {
     );
 }
 
-TEST(Immutable, DropFirst) {
+TEST(Iterables, DropFirst) {
     EXPECT_EQ(drop_first(std::vector<int>({1, 2, 3}), 4), std::vector<int>({}));
     EXPECT_EQ(drop_first(std::vector<int>({1, 2, 3}), 3), std::vector<int>({}));
     EXPECT_EQ(
@@ -194,7 +208,7 @@ TEST(Immutable, DropFirst) {
     );
 }
 
-TEST(Immutable, DropLast) {
+TEST(Iterables, DropLast) {
     EXPECT_EQ(drop_last(std::vector<int>({1, 2, 3}), 4), std::vector<int>({}));
     EXPECT_EQ(drop_last(std::vector<int>({1, 2, 3}), 3), std::vector<int>({}));
     EXPECT_EQ(drop_last(std::vector<int>({1, 2, 3}), 2), std::vector<int>({1}));
@@ -208,53 +222,36 @@ TEST(Immutable, DropLast) {
     );
 }
 
-TEST(Immutable, Aperture) {
-    std::vector<std::vector<int>> slides({});
-    EXPECT_EQ(aperture(std::vector<int>({1, 2, 3, 4}), 0), slides);
+TEST(Iterables, Aperture) {
+    std::vector<int> sequence({1, 2, 3, 4});
+    EXPECT_EQ(aperture(sequence, 0), std::vector<std::vector<int>>({}));
 
-    slides = std::vector<std::vector<int>>({
-        {1},
-        {2},
-        {3},
-        {4},
-    });
-    EXPECT_EQ(aperture(std::vector<int>({1, 2, 3, 4}), 1), slides);
-
-    slides = std::vector<std::vector<int>>({
-        {1, 2},
-        {2, 3},
-        {3, 4},
-    });
-    EXPECT_EQ(aperture(std::vector<int>({1, 2, 3, 4}), 2), slides);
-
-    slides = std::vector<std::vector<int>>({
-        {1, 2, 3},
-        {2, 3, 4},
-    });
-    EXPECT_EQ(aperture(std::vector<int>({1, 2, 3, 4}), 3), slides);
-
-    slides = std::vector<std::vector<int>>({
-        {1, 2, 3, 4},
-    });
-    EXPECT_EQ(aperture(std::vector<int>({1, 2, 3, 4}), 4), slides);
-}
-
-TEST(Immutable, Concat) {
-    EXPECT_EQ(concat(std::vector<int>({}), 1), std::vector<int>({1}));
-    EXPECT_EQ(concat(std::vector<int>({1}), 2), std::vector<int>({1, 2}));
     EXPECT_EQ(
-        concat(std::vector<int>({1}), std::vector<int>({2, 3})),
-        std::vector<int>({1, 2, 3})
+        aperture(sequence, 1),
+        std::vector<std::vector<int>>({{1}, {2}, {3}, {4}})
     );
-}
 
-TEST(Immutable, Flatten) {
-    EXPECT_EQ(flatten(std::vector<std::vector<int>>({})), std::vector<int>({}));
     EXPECT_EQ(
-        flatten(std::vector<std::vector<int>>({
+        aperture(sequence, 2),
+        std::vector<std::vector<int>>({
             {1, 2},
+            {2, 3},
             {3, 4}
-    })),
-        std::vector<int>({1, 2, 3, 4})
+    })
+    );
+
+    EXPECT_EQ(
+        aperture(sequence, 3),
+        std::vector<std::vector<int>>({
+            {1, 2, 3},
+            {2, 3, 4}
+    })
+    );
+
+    EXPECT_EQ(
+        aperture(sequence, 4),
+        std::vector<std::vector<int>>({
+            {1, 2, 3, 4}
+    })
     );
 }

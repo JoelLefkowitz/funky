@@ -5,7 +5,7 @@
 
 using namespace funky;
 
-TEST(Ranges, Range) {
+TEST(Vectors, Range) {
     EXPECT_EQ(range(0), std::vector<size_t>({}));
     EXPECT_EQ(range(3), std::vector<size_t>({0, 1, 2}));
 
@@ -17,7 +17,7 @@ TEST(Ranges, Range) {
     EXPECT_EQ(range<double>(1, 2.5, 0.5), std::vector<double>({1.0, 1.5, 2.0}));
 }
 
-TEST(Ranges, Linspace) {
+TEST(Vectors, Linspace) {
     EXPECT_EQ(linspace(0.0, 10.0, 0), std::vector<double>({}));
     EXPECT_EQ(linspace(0.0, 10.0, 1), std::vector<double>({0}));
     EXPECT_EQ(linspace(0.0, 10.0, 2), std::vector<double>({0, 10}));
@@ -31,7 +31,7 @@ TEST(Ranges, Linspace) {
     EXPECT_EQ(linspace(1.0, 10.0, 4), std::vector<double>({1, 4, 7, 10}));
 }
 
-TEST(Ranges, Enumerate) {
+TEST(Vectors, Enumerate) {
     std::vector<std::pair<size_t, int>> pairs({
         {0, 2},
         {1, 4},

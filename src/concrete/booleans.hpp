@@ -1,8 +1,8 @@
 #ifndef FUNKY_CONCRETE_BOOLEANS_HPP
 #define FUNKY_CONCRETE_BOOLEANS_HPP
 
-#include "../generics/aliases.hpp"
-#include "../generics/concepts.hpp"
+#include "../concepts/aliases.hpp"
+#include "../concepts/callable.hpp"
 #include <cstddef>
 #include <functional>
 #include <vector>
@@ -15,7 +15,7 @@ namespace funky {
     // all ≔ (A → bool) → [ A ] → bool
     template <typename FA, typename A = Elements<FA>, typename T>
     requires Callable<T, bool(A)>
-    bool all(const T &mapper, const FA &source);
+    bool all(const T &predicate, const FA &source);
 
     // any ≔ [ A ] → bool
     template <typename FA>
@@ -24,7 +24,7 @@ namespace funky {
     // any ≔ (A → bool) → [ A ] → bool
     template <typename FA, typename A = Elements<FA>, typename T>
     requires Callable<T, bool(A)>
-    bool any(const T &mapper, const FA &source);
+    bool any(const T &predicate, const FA &source);
 
     // at_least ≔ size_t → [ A ] → bool
     template <typename FA>
@@ -33,7 +33,7 @@ namespace funky {
     // at_least ≔ (A → bool) → size_t → [ A ] → bool
     template <typename FA, typename A = Elements<FA>, typename T>
     requires Callable<T, bool(A)>
-    bool at_least(const T &mapper, size_t min, const FA &source);
+    bool at_least(const T &predicate, size_t min, const FA &source);
 }
 
 #endif

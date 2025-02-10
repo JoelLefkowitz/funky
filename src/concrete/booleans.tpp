@@ -1,7 +1,7 @@
 #ifndef FUNKY_CONCRETE_BOOLEANS_TPP
 #define FUNKY_CONCRETE_BOOLEANS_TPP
 
-#include "../generics/concepts.hpp"
+#include "../concepts/callable.hpp"
 #include "booleans.hpp"
 #include <cstddef>
 #include <vector>
@@ -21,8 +21,8 @@ bool funky::all(const FA &source) {
 
 template <typename FA, typename A, typename T>
 requires funky::Callable<T, bool(A)>
-bool funky::all(const T &mapper, const FA &source) {
-    return std::all_of(source.begin(), source.end(), mapper);
+bool funky::all(const T &predicate, const FA &source) {
+    return std::all_of(source.begin(), source.end(), predicate);
 }
 
 template <typename FA>
@@ -40,8 +40,8 @@ bool funky::any(const FA &source) {
 
 template <typename FA, typename A, typename T>
 requires funky::Callable<T, bool(A)>
-bool funky::any(const T &mapper, const FA &source) {
-    return std::any_of(source.begin(), source.end(), mapper);
+bool funky::any(const T &predicate, const FA &source) {
+    return std::any_of(source.begin(), source.end(), predicate);
 }
 
 template <typename FA>
@@ -65,13 +65,13 @@ bool funky::at_least(size_t min, const FA &source) {
 
 template <typename FA, typename A, typename T>
 requires funky::Callable<T, bool(A)>
-bool funky::at_least(const T &mapper, size_t min, const FA &source) {
+bool funky::at_least(const T &predicate, size_t min, const FA &source) {
     if (min == 0) {
         return true;
     }
 
     for (auto x : source) {
-        if (mapper(x)) {
+        if (predicate(x)) {
             --min;
         }
 

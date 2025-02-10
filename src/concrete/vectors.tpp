@@ -54,9 +54,4 @@ std::vector<std::pair<size_t, A>> funky::enumerate(const std::vector<A> &vec) {
     return pairs;
 }
 
-template <typename A>
-std::vector<A> funky::from_deque(const std::deque<A> &deque) {
-    return std::vector<A>({deque.begin(), deque.end()});
-}
-
 #endif
