@@ -1,12 +1,6 @@
-#include <funky/iterables/iterables.tpp>
-#include <vector>
-
-auto increment = [](auto x) {
-    return x + 1;
-};
+#include <funky/concrete/numbers.hpp>
 
 int main() {
-    std::vector<int> numbers({1, 2, 3});
-    auto output = map<std::vector<int>>(increment, numbers);
+    funky::fractional(0);
     return 0;
 }

@@ -1,9 +1,9 @@
 [project]
 name = "funky"
-description = "Functional type classes and instances."
+description = "Functional and ergonomic transformations."
 version = "0.0.0"
 
-keywords = ["functional", "instance", "functor", "applicative", "monad"]
+keywords = ["functional", "immutable", "iterables", "generics"]
 
 [project.optional-dependencies]
 all = [
