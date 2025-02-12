@@ -20,7 +20,7 @@ template <typename FA, typename A>
 bool funky::is_unique(const FA &vec) {
     FA unique;
 
-    for (auto x : vec) {
+    for (const auto &x : vec) {
         if (contains(unique, x)) {
             return false;
         } else {
@@ -35,7 +35,7 @@ template <typename FA, typename A>
 FA funky::unique(const FA &vec) {
     FA unique;
 
-    for (auto x : vec) {
+    for (const auto &x : vec) {
         if (!contains(unique, x)) {
             unique.push_back(x);
         }
@@ -66,7 +66,7 @@ template <typename FA, typename A>
 FA funky::difference(const FA &source, const FA &target) {
     FA unique;
 
-    for (auto x : source) {
+    for (const auto &x : source) {
         if (!contains(target, x) && !contains(unique, x)) {
             unique.push_back(x);
         }

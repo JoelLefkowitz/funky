@@ -11,12 +11,12 @@ namespace funky {
 
     // remove ≔ [ A ] → A → void
     template <typename FA, typename A = Elements<FA>>
-    void remove(FA &vec, const A &x);
+    void remove(FA &source, const A &x);
 
     // partition ≔ (A → bool) → [ A ] → void
     template <typename FA, typename A = Elements<FA>, typename T>
     requires Callable<T, bool(A)>
-    void partition(const T &filter, FA &vec);
+    void partition(const T &filter, FA &source);
 }
 
 #endif

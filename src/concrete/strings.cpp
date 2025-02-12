@@ -64,13 +64,11 @@ std::vector<std::string> funky::split(
     }
 
     if (delimiter.empty()) {
-        std::vector<std::string> strs;
+        auto singleton = [](auto x) {
+            return std::string(1, x);
+        };
 
-        for (auto i = str.begin(); i != str.end(); ++i) {
-            strs.emplace_back(1, *i);
-        }
-
-        return strs;
+        return map<std::vector<std::string>>(singleton, str);
     }
 
     size_t pos = 0;
@@ -101,7 +99,6 @@ std::string funky::join(
         };
 
     auto joined = funky::fold<std::string>(append, "", strings);
-    // std::string joined = "";
 
     return strings.empty() ? ""
                            : joined.substr(0, joined.size() - delimiter.size());
@@ -125,15 +122,15 @@ std::string funky::without_substrings(
     for (size_t i = 0; i < copy.size();) {
         bool erased = false;
 
-        for (const auto &substr : substrs) {
-            if (copy.substr(i, substr.size()) == substr) {
-                copy.erase(i, substr.size());
+        for (const auto &x : substrs) {
+            if (copy.substr(i, x.size()) == x) {
+                copy.erase(i, x.size());
                 erased = true;
             }
         }
 
         if (!erased) {
-            ++i;
+            i++;
         }
     }
 

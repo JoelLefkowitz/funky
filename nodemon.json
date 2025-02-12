@@ -1,5 +1,5 @@
 {
-  "exec": "scons test || exit 1",
+  "exec": "scons test lint || exit 1",
   "ext": ".cpp,.hpp,.tpp",
   "delay": 0.2,
   "events": { "start": "clear" },

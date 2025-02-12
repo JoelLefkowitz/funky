@@ -3,12 +3,18 @@
 
 #include "../concepts/aliases.hpp"
 #include "../concepts/callable.hpp"
+#include <map>
 #include <utility>
+#include <vector>
 
 namespace funky {
-    // pairs ≔ [ A ] → std::vector<std::pair<A,A>>
-    template <typename FA, typename A = Elements<FA>>
-    std::vector<std::pair<A, A>> pairs(const FA &source);
+    // zip ≔ [ A ] → [ B ] → std::vector<std::pair<A, B>>
+    template <
+        typename FB,
+        typename FA,
+        typename B = Elements<FB>,
+        typename A = Elements<FA>>
+    std::vector<std::pair<A, B>> zip(const FA &a, const FB &b);
 
     // product ≔ [ A ] → [ B ] → std::vector<std::pair<A, B>>
     template <
@@ -18,13 +24,9 @@ namespace funky {
         typename A = Elements<FA>>
     std::vector<std::pair<A, B>> product(const FA &a, const FB &b);
 
-    // zip ≔ [ A ] → [ B ] → std::vector<std::pair<A, B>>
-    template <
-        typename FB,
-        typename FA,
-        typename B = Elements<FB>,
-        typename A = Elements<FA>>
-    std::vector<std::pair<A, B>> zip(const FA &a, const FB &b);
+    // pairs ≔ std::map<A, B> → std::vector<std::pair<A, B>>
+    template <typename A, typename B>
+    std::vector<std::pair<A, B>> pairs(const std::map<A, B> &source);
 }
 
 #endif

@@ -13,7 +13,7 @@ std::vector<A> funky::range(A start, A stop, A step) {
     auto width = static_cast<double>(stop - start);
     auto steps = static_cast<size_t>(std::ceil(width / step));
 
-    for (auto i : range(steps)) {
+    for (size_t i = 0; i < steps; ++i) {
         auto index = static_cast<A>(i);
         sequence.push_back(start + step * index);
     }
@@ -35,7 +35,7 @@ std::vector<A> funky::linspace(A start, A stop, size_t count) {
 
     auto width = static_cast<double>(stop - start);
 
-    for (auto i : range(count)) {
+    for (size_t i = 0; i < count; ++i) {
         auto index = static_cast<A>(i);
         sequence.push_back(start + index * width / (count - 1));
     }
@@ -47,8 +47,8 @@ template <typename A>
 std::vector<std::pair<size_t, A>> funky::enumerate(const std::vector<A> &vec) {
     std::vector<std::pair<size_t, A>> pairs;
 
-    for (std::size_t i = 0; i < vec.size(); ++i) {
-        pairs.push_back({i, vec[i]});
+    for (size_t i = 0; i < vec.size(); ++i) {
+        pairs.push_back({i, vec.at(i)});
     }
 
     return pairs;

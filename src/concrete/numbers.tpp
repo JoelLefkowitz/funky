@@ -5,12 +5,12 @@
 #include <algorithm>
 
 template <typename A>
-bool funky::between(A lower, A x, A higher) {
+bool funky::bounds(A lower, A x, A higher) {
     return lower < x && x < higher;
 }
 
 template <typename A>
-bool funky::included(A lower, A x, A higher) {
+bool funky::includes(A lower, A x, A higher) {
     return lower <= x && x <= higher;
 }
 

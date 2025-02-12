@@ -14,15 +14,11 @@ auto increment = [](auto x) {
 };
 
 auto even = [](auto x) {
-    return funky::factor(x, 2);
+    return funky::has_factor(x, 2);
 };
 
-auto sum = [](auto acc, auto x) {
-    return acc + x;
-};
-
-auto append = [](auto x, auto y) {
-    return x + ": " + std::to_string(y);
+auto add = [](auto x, auto y) {
+    return x + y;
 };
 
 TEST(Iterables, Convert) {
@@ -43,62 +39,43 @@ TEST(Iterables, Reverse) {
 TEST(Iterables, Map) {
     EXPECT_EQ(map(::toupper, "abc"), "ABC");
 
-    std::map<std::string, int> points({
-        {"a", 1},
-        {"b", 2}
-    });
-
     EXPECT_EQ(
-        map<std::string>(append, points),
-        std::vector<std::string>({"a: 1", "b: 2"})
+        map<std::vector<int>>(increment, std::vector<int>({1, 2, 3})),
+        std::vector<int>({2, 3, 4})
     );
 
     EXPECT_EQ(
-        map<std::vector<int>>(increment, std::vector<int>({1, 2})),
-        std::vector<int>({2, 3})
+        map<std::vector<int>>(add, std::vector<int>({1, 2, 3})),
+        std::vector<int>({1, 3, 5})
     );
 
-    std::vector<int> numbers({1, 2, 3});
-
-    auto output = map<std::vector<int>>(increment, numbers);
+    EXPECT_EQ(
+        map<std::vector<int>>(add, std::vector<int>({1, 2, 3})),
+        std::vector<int>({1, 3, 5})
+    );
 }
 
 TEST(Iterables, Foreach) {
-    auto sum = 0;
-
-    auto add = [&sum](auto x) {
-        sum += x;
+    auto total = 0;
+    auto sum = [&total](auto x) {
+        total += x;
     };
 
     // clang-format off
-    foreach(add, std::vector<int>({1, 2, 3}));
+    foreach(sum, std::vector<int>({1, 2, 3}));
     // clang-format on
-    EXPECT_EQ(sum, 6);
+    EXPECT_EQ(total, 6);
 
-    auto products_sum = 0;
+    total = 0;
 
-    auto add_products = [&products_sum](auto x, auto y) {
-        products_sum += (x * y);
+    auto sum_index = [&total](auto x, auto index) {
+        total += x + index;
     };
 
     // clang-format off
-    foreach(add_products, std::vector<int>({1, 2}), std::vector<int>({1, 2}));
+    foreach(sum_index, std::vector<int>({1, 2, 3}));
     // clang-format on
-
-    EXPECT_EQ(products_sum, 5);
-
-    auto index_products_sum = 0;
-
-    auto add_index_products = [&index_products_sum](auto x, auto i) {
-        auto index = static_cast<int>(i);
-        index_products_sum += (x * index);
-    };
-
-    // clang-format off
-    foreach(add_index_products, std::vector<int>({1, 2, 3}));
-    // clang-format on
-
-    EXPECT_EQ(index_products_sum, 8);
+    EXPECT_EQ(total, 9);
 }
 
 TEST(Iterables, Filter) {
@@ -109,7 +86,7 @@ TEST(Iterables, Filter) {
 }
 
 TEST(Iterables, Fold) {
-    EXPECT_EQ(fold(sum, 0, std::vector<int>({1, 2, 3})), 6);
+    EXPECT_EQ(fold(add, 0, std::vector<int>({1, 2, 3})), 6);
 }
 
 TEST(Iterables, Concat) {

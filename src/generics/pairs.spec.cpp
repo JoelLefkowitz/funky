@@ -5,18 +5,17 @@
 
 using namespace funky;
 
-TEST(Pairs, Pair) {
+TEST(Pairs, Zip) {
     std::vector<std::pair<int, int>> paired({
-        {1, 2},
-        {2, 3},
-        {3, 4}
+        {1, 3},
+        {2, 4}
     });
 
-    EXPECT_EQ(pairs(std::vector<int>({1, 2, 3, 4})), paired);
+    EXPECT_EQ(zip(std::vector<int>({1, 2}), std::vector<int>({3, 4})), paired);
 }
 
 TEST(Pairs, Product) {
-    std::vector<std::pair<int, int>> pairs({
+    std::vector<std::pair<int, int>> paired({
         {1, 3},
         {1, 4},
         {2, 3},
@@ -25,15 +24,21 @@ TEST(Pairs, Product) {
 
     EXPECT_EQ(
         product(std::vector<int>({1, 2}), std::vector<int>({3, 4})),
-        pairs
+        paired
     );
 }
 
-TEST(Pairs, Zip) {
-    std::vector<std::pair<int, int>> pairs({
-        {1, 3},
-        {2, 4}
+TEST(Pairs, Pairs) {
+    std::vector<std::pair<int, int>> paired({
+        {1, 2},
+        {3, 4},
     });
 
-    EXPECT_EQ(zip(std::vector<int>({1, 2}), std::vector<int>({3, 4})), pairs);
+    EXPECT_EQ(
+        pairs(std::map<int, int>({
+            {1, 2},
+            {3, 4},
+    })),
+        paired
+    );
 }

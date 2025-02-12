@@ -10,15 +10,15 @@
 namespace funky {
     // contains ≔ [ A ] → A → bool
     template <typename FA, typename A = Elements<FA>>
-    bool contains(const FA &vec, const A &x);
+    bool contains(const FA &source, const A &x);
 
     // is_unique ≔ [ A ] → bool
     template <typename FA, typename A = Elements<FA>>
-    bool is_unique(const FA &vec);
+    bool is_unique(const FA &source);
 
     // unique ≔ [ A ] → [ A ]
     template <typename FA, typename A = Elements<FA>>
-    FA unique(const FA &vec);
+    FA unique(const FA &source);
 
     // intersects ≔ [ A ] → [ A ] → bool
     template <typename FA, typename A = Elements<FA>>
@@ -34,7 +34,7 @@ namespace funky {
 
     // index ≔ [ A ] → A → size_t
     template <typename FA, typename A = Elements<FA>>
-    size_t index(const FA &vec, const A &x);
+    size_t index(const FA &source, const A &x);
 
     // find ≔ (A → bool) → [ A ] → size_t
     template <typename FA, typename A = Elements<FA>, typename T>
@@ -43,11 +43,11 @@ namespace funky {
 
     // min ≔ [ A ] → A → A
     template <typename FA, typename A = Elements<FA>>
-    A min(const FA &vec, A empty);
+    A min(const FA &source, A empty);
 
     // max ≔ [ A ] → A → A
     template <typename FA, typename A = Elements<FA>>
-    A max(const FA &vec, A empty);
+    A max(const FA &source, A empty);
 }
 
 #endif

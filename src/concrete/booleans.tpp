@@ -27,7 +27,7 @@ bool funky::all(const T &predicate, const FA &source) {
 
 template <typename FA>
 bool funky::any(const FA &source) {
-    for (auto x : source) {
+    for (const auto &x : source) {
         // This is identical to std::any_of without a predicate
         // cppcheck-suppress useStlAlgorithm
         if (x) {
@@ -70,7 +70,7 @@ bool funky::at_least(const T &predicate, size_t min, const FA &source) {
         return true;
     }
 
-    for (auto x : source) {
+    for (const auto &x : source) {
         if (predicate(x)) {
             --min;
         }

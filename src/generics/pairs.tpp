@@ -7,14 +7,15 @@
 #include <utility>
 #include <vector>
 
-template <typename FA, typename A>
-std::vector<std::pair<A, A>> funky::pairs(const FA &source) {
-    std::vector<std::pair<A, A>> target;
+template <typename FB, typename FA, typename B, typename A>
+std::vector<std::pair<A, B>> funky::zip(const FA &a, const FB &b) {
+    std::vector<std::pair<A, B>> target;
 
-    if (!source.empty()) {
-        for (auto i = source.begin(); (i + 1) != source.end(); ++i) {
-            target.push_back({*i, *(i + 1)});
-        }
+    auto x = a.begin();
+
+    for (const auto &y : b) {
+        target.push_back({*x, y});
+        x++;
     }
 
     return target;
@@ -24,26 +25,22 @@ template <typename FB, typename FA, typename B, typename A>
 std::vector<std::pair<A, B>> funky::product(const FA &a, const FB &b) {
     std::vector<std::pair<A, B>> target;
 
-    for (auto x = a.begin(); x != a.end(); ++x) {
-        for (auto y = b.begin(); y != b.end(); ++y) {
-            target.push_back({*x, *y});
+    for (const auto &x : a) {
+        for (const auto &y : b) {
+            // This is identical to std::transform without creating extra
+            // closures
+            // cppcheck-suppress useStlAlgorithm
+            target.push_back({x, y});
         }
     }
 
     return target;
 }
 
-template <typename FB, typename FA, typename B, typename A>
-std::vector<std::pair<A, B>> funky::zip(const FA &a, const FB &b) {
+template <typename A, typename B>
+std::vector<std::pair<A, B>> funky::pairs(const std::map<A, B> &source) {
     std::vector<std::pair<A, B>> target;
-
-    auto x = a.begin();
-    auto y = b.begin();
-
-    for (; x != a.end() && y != b.end(); ++x, ++y) {
-        target.push_back({*x, *y});
-    }
-
+    std::copy(source.begin(), source.end(), std::back_inserter(target));
     return target;
 }
 

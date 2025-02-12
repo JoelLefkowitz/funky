@@ -140,6 +140,9 @@ std::vector<C> map(const T &mapper, const std::map<A, B> &source);
 
 // (A → B) → [ A ] → [ B ]
 FB map(const T &mapper, const FA &source);
+
+// (A → size_t → B) → [ A ] → [ B ]
+FB map(const T &mapper, const FA &source);
 ```
 
 #### foreach
@@ -150,12 +153,6 @@ void foreach (const T &effect, const FA &source);
 
 // (A → size_t → void) → [ A ] → void
 void foreach (const T &effect, const FA &source);
-
-// (A → B → void) → [ A ] → [ B ] → void
-void foreach (const T &effect, const FA &a, const FB &b);
-
-// (A → B → size_t → void) → [ A ] → [ B ] → void
-void foreach (const T &effect, const FA &a, const FB &b);
 ```
 
 #### filter
@@ -309,11 +306,11 @@ A max(const FA &vec, A empty);
 
 Available in: `funky/generics/pairs.hpp`
 
-#### pairs
+#### zip
 
 ```cpp
-// [ A ] → std::vector<std::pair<A,A>>
-std::vector<std::pair<A, A>> pairs(const FA &source);
+// [ A ] → [ B ] → std::vector<std::pair<A, B>>
+std::vector<std::pair<A, B>> zip(const FA &a, const FB &b);
 ```
 
 #### product
@@ -323,11 +320,11 @@ std::vector<std::pair<A, A>> pairs(const FA &source);
 std::vector<std::pair<A, B>> product(const FA &a, const FB &b);
 ```
 
-#### zip
+#### pairs
 
 ```cpp
-// [ A ] → [ B ] → std::vector<std::pair<A, B>>
-std::vector<std::pair<A, B>> zip(const FA &a, const FB &b);
+// std::map<A, B> → std::vector<std::pair<A, B>>
+std::vector<std::pair<A, B>> pairs(const std::map<A, B> &source);
 ```
 
 ### Mutable
@@ -435,11 +432,18 @@ double proportion(double x);
 double normalise(double x, double min, double max, double scale);
 ```
 
-#### factor
+#### is_factor
 
 ```cpp
 // int → int → bool
-bool factor(int dividend, int divisor);
+bool is_factor(int divisor, int dividend);
+```
+
+#### has_factor
+
+```cpp
+// int → int → bool
+bool has_factor(int dividend, int divisor);
 ```
 
 #### ratio
@@ -462,18 +466,18 @@ double ratio(size_t dividend, size_t divisor);
 std::string unit(double n, const std::string &metric);
 ```
 
-#### between
+#### bounds
 
 ```cpp
 // A → A → A → bool
-bool between(A lower, A x, A higher);
+bool bounds(A lower, A x, A higher);
 ```
 
-#### included
+#### includes
 
 ```cpp
 // A → A → A → bool
-bool included(A lower, A x, A higher);
+bool includes(A lower, A x, A higher);
 ```
 
 #### clamp

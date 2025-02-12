@@ -9,7 +9,7 @@
 using namespace funky;
 
 auto even = [](auto x) {
-    return factor(x, 2);
+    return has_factor(x, 2);
 };
 
 TEST(Sets, Contains) {

@@ -15,7 +15,7 @@ namespace funky {
 
     // reverse ≔ [ A ] → [ A ]
     template <typename FA, typename A = Elements<FA>>
-    FA reverse(const FA &vec);
+    FA reverse(const FA &source);
 
     // map ≔ (char → char) → std::string → std::string
     template <typename T>
@@ -27,7 +27,7 @@ namespace funky {
     requires Callable<T, C(A, B)>
     std::vector<C> map(const T &mapper, const std::map<A, B> &source);
 
-    // map ≔ (A → B) → [ A ] → [ B ]
+    // map ≔ (A → size_t → B) → [ A ] → [ B ]
     template <
         typename FB,
         typename FA,
@@ -35,6 +35,16 @@ namespace funky {
         typename A = Elements<FA>,
         typename T>
     requires Callable<T, B(A)>
+    FB map(const T &mapper, const FA &source);
+
+    // map ≔ (A → B) → [ A ] → [ B ]
+    template <
+        typename FB,
+        typename FA,
+        typename B = Elements<FB>,
+        typename A = Elements<FA>,
+        typename T>
+    requires Callable<T, B(A, size_t)>
     FB map(const T &mapper, const FA &source);
 
     // foreach ≔ (A → void) → [ A ] → void
@@ -46,26 +56,6 @@ namespace funky {
     template <typename FA, typename A = Elements<FA>, typename T>
     requires Callable<T, void(A, size_t)>
     void foreach (const T &effect, const FA &source);
-
-    // foreach ≔ (A → B → void) → [ A ] → [ B ] → void
-    template <
-        typename FA,
-        typename FB,
-        typename A = Elements<FA>,
-        typename B = Elements<FB>,
-        typename T>
-    requires Callable<T, void(A, B)>
-    void foreach (const T &effect, const FA &a, const FB &b);
-
-    // foreach ≔ (A → B → size_t → void) → [ A ] → [ B ] → void
-    template <
-        typename FA,
-        typename FB,
-        typename A = Elements<FA>,
-        typename B = Elements<FB>,
-        typename T>
-    requires Callable<T, void(A, B, size_t)>
-    void foreach (const T &effect, const FA &a, const FB &b);
 
     // filter ≔ (A → bool) → [ A ] → [ A ]
     template <typename FA, typename A = Elements<FA>, typename T>
@@ -79,39 +69,39 @@ namespace funky {
 
     // concat ≔ [ A ] → A → [ A ]
     template <typename FA, typename A = Elements<FA>>
-    FA concat(const FA &vec, const A &x);
+    FA concat(const FA &source, const A &x);
 
     // concat ≔ [ A ] → [ A ] → [ A ]
     template <typename FA, typename A = Elements<FA>>
-    FA concat(const FA &vec, const FA &x);
+    FA concat(const FA &source, const FA &x);
 
     // flatten ≔ std::vector<[ A ]> → [ A ]
     template <typename FA, typename A = Elements<FA>>
-    FA flatten(const std::vector<FA> &vec);
+    FA flatten(const std::vector<FA> &source);
 
     // slice ≔ [ A ] → size_t → size_t → [ A ]
     template <typename FA, typename A = Elements<FA>>
-    FA slice(const FA &vec, const size_t start, const size_t end);
+    FA slice(const FA &source, const size_t start, const size_t end);
 
     // slice_first ≔ [ A ] → size_t → [ A ]
     template <typename FA, typename A = Elements<FA>>
-    FA slice_first(const FA &vec, size_t width);
+    FA slice_first(const FA &source, size_t width);
 
     // slice_last ≔ [ A ] → size_t → [ A ]
     template <typename FA, typename A = Elements<FA>>
-    FA slice_last(const FA &vec, size_t width);
+    FA slice_last(const FA &source, size_t width);
 
     // drop_first ≔ [ A ] → size_t → [ A ]
     template <typename FA, typename A = Elements<FA>>
-    FA drop_first(const FA &vec, size_t width);
+    FA drop_first(const FA &source, size_t width);
 
     // drop_last ≔ [ A ] → size_t → [ A ]
     template <typename FA, typename A = Elements<FA>>
-    FA drop_last(const FA &vec, size_t width);
+    FA drop_last(const FA &source, size_t width);
 
     // aperture ≔ [ A ] → size_t → std::vector<[ A ]>
     template <typename FA, typename A = Elements<FA>>
-    std::vector<FA> aperture(const FA &vec, size_t width);
+    std::vector<FA> aperture(const FA &source, size_t width);
 }
 
 #endif

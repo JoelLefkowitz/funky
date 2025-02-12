@@ -23,8 +23,11 @@ namespace funky {
     // normalise ≔ double → double → double → double → double
     double normalise(double x, double min, double max, double scale);
 
-    // factor ≔ int → int → bool
-    bool factor(int dividend, int divisor);
+    // is_factor ≔ int → int → bool
+    bool is_factor(int divisor, int dividend);
+
+    // has_factor ≔ int → int → bool
+    bool has_factor(int dividend, int divisor);
 
     // ratio ≔ size_t → double → double
     double ratio(size_t dividend, double divisor);
@@ -38,13 +41,13 @@ namespace funky {
     // unit ≔ double → std::string → std::string
     std::string unit(double n, const std::string &metric);
 
-    // between ≔ A → A → A → bool
+    // bounds ≔ A → A → A → bool
     template <typename A>
-    bool between(A lower, A x, A higher);
+    bool bounds(A lower, A x, A higher);
 
-    // included ≔ A → A → A → bool
+    // includes ≔ A → A → A → bool
     template <typename A>
-    bool included(A lower, A x, A higher);
+    bool includes(A lower, A x, A higher);
 
     // clamp ≔ A → A → A → A
     template <typename A>

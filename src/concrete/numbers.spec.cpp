@@ -44,9 +44,14 @@ TEST(Numbers, Order) {
     EXPECT_EQ(order(-0.1), 0);
 }
 
-TEST(Numbers, Factor) {
-    EXPECT_TRUE(factor(10, 2));
-    EXPECT_FALSE(factor(10, 3));
+TEST(Numbers, IsFactor) {
+    EXPECT_TRUE(is_factor(2, 10));
+    EXPECT_FALSE(is_factor(3, 10));
+}
+
+TEST(Numbers, HasFactor) {
+    EXPECT_TRUE(has_factor(10, 2));
+    EXPECT_FALSE(has_factor(10, 3));
 }
 
 TEST(Numbers, Ratio) {
@@ -76,26 +81,26 @@ TEST(Numbers, Unit) {
     EXPECT_EQ(unit(-1, "m"), "m");
 }
 
-TEST(Numbers, Between) {
-    EXPECT_TRUE(between(1, 2, 3));
-    EXPECT_TRUE(between(1.0, 2.0, 3.0));
+TEST(Numbers, bounds) {
+    EXPECT_TRUE(bounds(1, 2, 3));
+    EXPECT_TRUE(bounds(1.0, 2.0, 3.0));
 
-    EXPECT_FALSE(between(1, 4, 3));
-    EXPECT_FALSE(between(1, 0, 3));
+    EXPECT_FALSE(bounds(1, 4, 3));
+    EXPECT_FALSE(bounds(1, 0, 3));
 
-    EXPECT_FALSE(between(1, 1, 3));
-    EXPECT_FALSE(between(1, 3, 3));
+    EXPECT_FALSE(bounds(1, 1, 3));
+    EXPECT_FALSE(bounds(1, 3, 3));
 }
 
-TEST(Numbers, Included) {
-    EXPECT_TRUE(included(1, 2, 3));
-    EXPECT_TRUE(included(1.0, 2.0, 3.0));
+TEST(Numbers, includes) {
+    EXPECT_TRUE(includes(1, 2, 3));
+    EXPECT_TRUE(includes(1.0, 2.0, 3.0));
 
-    EXPECT_FALSE(included(1, 4, 3));
-    EXPECT_FALSE(included(1, 0, 3));
+    EXPECT_FALSE(includes(1, 4, 3));
+    EXPECT_FALSE(includes(1, 0, 3));
 
-    EXPECT_TRUE(included(1, 1, 3));
-    EXPECT_TRUE(included(1, 3, 3));
+    EXPECT_TRUE(includes(1, 1, 3));
+    EXPECT_TRUE(includes(1, 3, 3));
 }
 
 TEST(Numbers, Clamp) {

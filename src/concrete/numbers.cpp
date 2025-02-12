@@ -39,8 +39,12 @@ double funky::normalise(double x, double min, double max, double scale) {
     return (x * scale - min) / (max - min);
 }
 
-bool funky::factor(int dividend, int divisor) {
+bool funky::is_factor(int divisor, int dividend) {
     return dividend % divisor == 0;
+}
+
+bool funky::has_factor(int dividend, int divisor) {
+    return is_factor(divisor, dividend);
 }
 
 double funky::ratio(size_t dividend, double divisor) {
