@@ -9,7 +9,6 @@ keywords = ["functional", "instance", "functor", "applicative", "monad"]
 all = [
     "breathe~=4.35.0",
     "conan~=2.2.0",
-    "cppclean@git+https://github.com/myint/cppclean.git@811ed459c9f650ad6135e9c73455136af8885716",
     "furo~=2024.1.0",
     "matplotlib~=3.8.0",
     "miniscons~=0.12.0",
