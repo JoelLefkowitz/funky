@@ -9,19 +9,11 @@
 
 namespace funky {
     // zip ≔ [ A ] → [ B ] → std::vector<std::pair<A, B>>
-    template <
-        typename FB,
-        typename FA,
-        typename B = Elements<FB>,
-        typename A = Elements<FA>>
+    template <typename FB, typename FA, typename B = Elements<FB>, typename A = Elements<FA>>
     std::vector<std::pair<A, B>> zip(const FA &a, const FB &b);
 
     // product ≔ [ A ] → [ B ] → std::vector<std::pair<A, B>>
-    template <
-        typename FB,
-        typename FA,
-        typename B = Elements<FB>,
-        typename A = Elements<FA>>
+    template <typename FB, typename FA, typename B = Elements<FB>, typename A = Elements<FA>>
     std::vector<std::pair<A, B>> product(const FA &a, const FB &b);
 
     // pairs ≔ std::map<A, B> → std::vector<std::pair<A, B>>

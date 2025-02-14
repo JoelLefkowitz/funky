@@ -12,7 +12,7 @@ from miniscons import (
 from walkmate import tree
 
 name = "funky"
-conandeps = "build-release/conan/SConscript_conandeps"
+conandeps = "build/conan/SConscript_conandeps"
 
 env = conan(source=conandeps)
 
@@ -117,7 +117,7 @@ docs = Routine(
 cli = Tasks(
     [runtime, tests],
     [test],
-    [*lint.scripts, *fmt.scripts, *docs.scripts, cppcheck, clang_tidy],
+    [*lint.scripts, *fmt.scripts, *docs.scripts, clang_tidy],
     [lint, fmt, docs],
 )
 

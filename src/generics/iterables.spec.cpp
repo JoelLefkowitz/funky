@@ -22,42 +22,27 @@ auto add = [](auto x, auto y) {
 };
 
 TEST(Iterables, Convert) {
-    EXPECT_EQ(
-        convert<std::deque<int>>(std::vector<int>({1, 2, 3})),
-        std::deque<int>({1, 2, 3})
-    );
+    EXPECT_EQ(convert<std::deque<int>>(std::vector<int>({1, 2, 3})), std::deque<int>({1, 2, 3}));
 }
 
 TEST(Iterables, Reverse) {
     EXPECT_EQ(reverse(std::vector<int>({})), std::vector<int>({}));
-    EXPECT_EQ(
-        reverse(std::vector<int>({1, 2, 3})),
-        std::vector<int>({3, 2, 1})
-    );
+    EXPECT_EQ(reverse(std::vector<int>({1, 2, 3})), std::vector<int>({3, 2, 1}));
 }
 
 TEST(Iterables, Map) {
     EXPECT_EQ(map(::toupper, "abc"), "ABC");
 
-    EXPECT_EQ(
-        map<std::vector<int>>(increment, std::vector<int>({1, 2, 3})),
-        std::vector<int>({2, 3, 4})
-    );
+    EXPECT_EQ(map<std::vector<int>>(increment, std::vector<int>({1, 2, 3})), std::vector<int>({2, 3, 4}));
 
-    EXPECT_EQ(
-        map<std::vector<int>>(add, std::vector<int>({1, 2, 3})),
-        std::vector<int>({1, 3, 5})
-    );
+    EXPECT_EQ(map<std::vector<int>>(add, std::vector<int>({1, 2, 3})), std::vector<int>({1, 3, 5}));
 
-    EXPECT_EQ(
-        map<std::vector<int>>(add, std::vector<int>({1, 2, 3})),
-        std::vector<int>({1, 3, 5})
-    );
+    EXPECT_EQ(map<std::vector<int>>(add, std::vector<int>({1, 2, 3})), std::vector<int>({1, 3, 5}));
 }
 
 TEST(Iterables, Foreach) {
     auto total = 0;
-    auto sum = [&total](auto x) {
+    auto sum   = [&total](auto x) {
         total += x;
     };
 
@@ -79,10 +64,7 @@ TEST(Iterables, Foreach) {
 }
 
 TEST(Iterables, Filter) {
-    EXPECT_EQ(
-        funky::filter(even, std::vector<int>({1, 2, 3, 4})),
-        std::vector<int>({2, 4})
-    );
+    EXPECT_EQ(funky::filter(even, std::vector<int>({1, 2, 3, 4})), std::vector<int>({2, 4}));
 }
 
 TEST(Iterables, Fold) {
@@ -92,10 +74,7 @@ TEST(Iterables, Fold) {
 TEST(Iterables, Concat) {
     EXPECT_EQ(concat(std::vector<int>({}), 1), std::vector<int>({1}));
     EXPECT_EQ(concat(std::vector<int>({1}), 2), std::vector<int>({1, 2}));
-    EXPECT_EQ(
-        concat(std::vector<int>({1}), std::vector<int>({2, 3})),
-        std::vector<int>({1, 2, 3})
-    );
+    EXPECT_EQ(concat(std::vector<int>({1}), std::vector<int>({2, 3})), std::vector<int>({1, 2, 3}));
 }
 
 TEST(Iterables, Flatten) {
@@ -113,100 +92,49 @@ TEST(Iterables, Slice) {
     EXPECT_EQ(slice(std::vector<int>({1, 2, 3}), 0, 0), std::vector<int>({}));
     EXPECT_EQ(slice(std::vector<int>({1, 2, 3}), 0, 1), std::vector<int>({1}));
     EXPECT_EQ(slice(std::vector<int>({1, 2, 3}), 1, 1), std::vector<int>({}));
-    EXPECT_EQ(
-        slice(std::vector<int>({1, 2, 3}), 0, 2),
-        std::vector<int>({1, 2})
-    );
-    EXPECT_EQ(
-        slice(std::vector<int>({1, 2, 3}), 0, 3),
-        std::vector<int>({1, 2, 3})
-    );
+    EXPECT_EQ(slice(std::vector<int>({1, 2, 3}), 0, 2), std::vector<int>({1, 2}));
+    EXPECT_EQ(slice(std::vector<int>({1, 2, 3}), 0, 3), std::vector<int>({1, 2, 3}));
     EXPECT_EQ(slice(std::vector<int>({1, 2, 3}), 1, 2), std::vector<int>({2}));
     EXPECT_EQ(slice(std::vector<int>({1, 2, 3}), 2, 1), std::vector<int>({}));
 }
 
 TEST(Iterables, SliceFirst) {
-    EXPECT_EQ(
-        slice_first(std::vector<int>({1, 2, 3}), 0),
-        std::vector<int>({})
-    );
-    EXPECT_EQ(
-        slice_first(std::vector<int>({1, 2, 3}), 1),
-        std::vector<int>({1})
-    );
-    EXPECT_EQ(
-        slice_first(std::vector<int>({1, 2, 3}), 2),
-        std::vector<int>({1, 2})
-    );
-    EXPECT_EQ(
-        slice_first(std::vector<int>({1, 2, 3}), 3),
-        std::vector<int>({1, 2, 3})
-    );
-    EXPECT_EQ(
-        slice_first(std::vector<int>({1, 2, 3}), 4),
-        std::vector<int>({1, 2, 3})
-    );
+    EXPECT_EQ(slice_first(std::vector<int>({1, 2, 3}), 0), std::vector<int>({}));
+    EXPECT_EQ(slice_first(std::vector<int>({1, 2, 3}), 1), std::vector<int>({1}));
+    EXPECT_EQ(slice_first(std::vector<int>({1, 2, 3}), 2), std::vector<int>({1, 2}));
+    EXPECT_EQ(slice_first(std::vector<int>({1, 2, 3}), 3), std::vector<int>({1, 2, 3}));
+    EXPECT_EQ(slice_first(std::vector<int>({1, 2, 3}), 4), std::vector<int>({1, 2, 3}));
 }
 
 TEST(Iterables, SliceLast) {
     EXPECT_EQ(slice_last(std::vector<int>({1, 2, 3}), 0), std::vector<int>({}));
-    EXPECT_EQ(
-        slice_last(std::vector<int>({1, 2, 3}), 1),
-        std::vector<int>({3})
-    );
-    EXPECT_EQ(
-        slice_last(std::vector<int>({1, 2, 3}), 2),
-        std::vector<int>({2, 3})
-    );
-    EXPECT_EQ(
-        slice_last(std::vector<int>({1, 2, 3}), 3),
-        std::vector<int>({1, 2, 3})
-    );
-    EXPECT_EQ(
-        slice_last(std::vector<int>({1, 2, 3}), 4),
-        std::vector<int>({1, 2, 3})
-    );
+    EXPECT_EQ(slice_last(std::vector<int>({1, 2, 3}), 1), std::vector<int>({3}));
+    EXPECT_EQ(slice_last(std::vector<int>({1, 2, 3}), 2), std::vector<int>({2, 3}));
+    EXPECT_EQ(slice_last(std::vector<int>({1, 2, 3}), 3), std::vector<int>({1, 2, 3}));
+    EXPECT_EQ(slice_last(std::vector<int>({1, 2, 3}), 4), std::vector<int>({1, 2, 3}));
 }
 
 TEST(Iterables, DropFirst) {
     EXPECT_EQ(drop_first(std::vector<int>({1, 2, 3}), 4), std::vector<int>({}));
     EXPECT_EQ(drop_first(std::vector<int>({1, 2, 3}), 3), std::vector<int>({}));
-    EXPECT_EQ(
-        drop_first(std::vector<int>({1, 2, 3}), 2),
-        std::vector<int>({3})
-    );
-    EXPECT_EQ(
-        drop_first(std::vector<int>({1, 2, 3}), 1),
-        std::vector<int>({2, 3})
-    );
-    EXPECT_EQ(
-        drop_first(std::vector<int>({1, 2, 3}), 0),
-        std::vector<int>({1, 2, 3})
-    );
+    EXPECT_EQ(drop_first(std::vector<int>({1, 2, 3}), 2), std::vector<int>({3}));
+    EXPECT_EQ(drop_first(std::vector<int>({1, 2, 3}), 1), std::vector<int>({2, 3}));
+    EXPECT_EQ(drop_first(std::vector<int>({1, 2, 3}), 0), std::vector<int>({1, 2, 3}));
 }
 
 TEST(Iterables, DropLast) {
     EXPECT_EQ(drop_last(std::vector<int>({1, 2, 3}), 4), std::vector<int>({}));
     EXPECT_EQ(drop_last(std::vector<int>({1, 2, 3}), 3), std::vector<int>({}));
     EXPECT_EQ(drop_last(std::vector<int>({1, 2, 3}), 2), std::vector<int>({1}));
-    EXPECT_EQ(
-        drop_last(std::vector<int>({1, 2, 3}), 1),
-        std::vector<int>({1, 2})
-    );
-    EXPECT_EQ(
-        drop_last(std::vector<int>({1, 2, 3}), 0),
-        std::vector<int>({1, 2, 3})
-    );
+    EXPECT_EQ(drop_last(std::vector<int>({1, 2, 3}), 1), std::vector<int>({1, 2}));
+    EXPECT_EQ(drop_last(std::vector<int>({1, 2, 3}), 0), std::vector<int>({1, 2, 3}));
 }
 
 TEST(Iterables, Aperture) {
     std::vector<int> sequence({1, 2, 3, 4});
     EXPECT_EQ(aperture(sequence, 0), std::vector<std::vector<int>>({}));
 
-    EXPECT_EQ(
-        aperture(sequence, 1),
-        std::vector<std::vector<int>>({{1}, {2}, {3}, {4}})
-    );
+    EXPECT_EQ(aperture(sequence, 1), std::vector<std::vector<int>>({{1}, {2}, {3}, {4}}));
 
     EXPECT_EQ(
         aperture(sequence, 2),

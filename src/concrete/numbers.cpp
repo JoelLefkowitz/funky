@@ -74,9 +74,7 @@ std::string funky::unit(double n, const std::string &metric) {
     auto prefix  = magnitude > 0 ? "⋅" : "÷";
     auto operand = std::pow(10, std::abs(magnitude) % 3);
 
-    std::vector<std::string> named(
-        {"f", "p", "n", "μ", "m", "", "k", "M", "G", "T", "P"}
-    );
+    std::vector<std::string> named({"f", "p", "n", "μ", "m", "", "k", "M", "G", "T", "P"});
 
     auto symbol = index >= 0 && index < named.size() ? named.at(index) : "";
 

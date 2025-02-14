@@ -37,69 +37,32 @@ TEST(Sets, Intersects) {
     EXPECT_TRUE(intersects(std::vector<int>({1}), std::vector<int>({1})));
     EXPECT_TRUE(intersects(std::vector<int>({1, 2}), std::vector<int>({2, 3})));
 
-    EXPECT_FALSE(intersects(std::vector<int>({1, 2}), std::vector<int>({3, 4}))
-    );
+    EXPECT_FALSE(intersects(std::vector<int>({1, 2}), std::vector<int>({3, 4})));
     EXPECT_FALSE(intersects(std::vector<int>({}), std::vector<int>({1, 2})));
     EXPECT_FALSE(intersects(std::vector<int>({}), std::vector<int>({})));
 }
 
 TEST(Sets, Intersection) {
-    EXPECT_EQ(
-        intersection(std::vector<int>({1, 2, 3}), std::vector<int>({})),
-        std::vector<int>({})
-    );
-    EXPECT_EQ(
-        intersection(std::vector<int>({}), std::vector<int>({1, 2, 3})),
-        std::vector<int>({})
-    );
+    EXPECT_EQ(intersection(std::vector<int>({1, 2, 3}), std::vector<int>({})), std::vector<int>({}));
+    EXPECT_EQ(intersection(std::vector<int>({}), std::vector<int>({1, 2, 3})), std::vector<int>({}));
 
-    EXPECT_EQ(
-        intersection(std::vector<int>({1, 2}), std::vector<int>({2, 3})),
-        std::vector<int>({2})
-    );
-    EXPECT_EQ(
-        intersection(std::vector<int>({1, 2}), std::vector<int>({1, 2})),
-        std::vector<int>({1, 2})
-    );
+    EXPECT_EQ(intersection(std::vector<int>({1, 2}), std::vector<int>({2, 3})), std::vector<int>({2}));
+    EXPECT_EQ(intersection(std::vector<int>({1, 2}), std::vector<int>({1, 2})), std::vector<int>({1, 2}));
 
-    EXPECT_EQ(
-        intersection(std::vector<int>({1, 1, 2}), std::vector<int>({1, 1, 2})),
-        std::vector<int>({1, 2})
-    );
+    EXPECT_EQ(intersection(std::vector<int>({1, 1, 2}), std::vector<int>({1, 1, 2})), std::vector<int>({1, 2}));
 }
 
 TEST(Sets, Difference) {
-    EXPECT_EQ(
-        difference(std::vector<int>({1, 2, 3}), std::vector<int>({})),
-        std::vector<int>({1, 2, 3})
-    );
-    EXPECT_EQ(
-        difference(std::vector<int>({1, 2, 3}), std::vector<int>({2})),
-        std::vector<int>({1, 3})
-    );
+    EXPECT_EQ(difference(std::vector<int>({1, 2, 3}), std::vector<int>({})), std::vector<int>({1, 2, 3}));
+    EXPECT_EQ(difference(std::vector<int>({1, 2, 3}), std::vector<int>({2})), std::vector<int>({1, 3}));
 
-    EXPECT_EQ(
-        difference(std::vector<int>({1, 2, 3}), std::vector<int>({1, 2, 3})),
-        std::vector<int>({})
-    );
-    EXPECT_EQ(
-        difference(std::vector<int>({1, 2, 3}), std::vector<int>({1, 2, 3, 4})),
-        std::vector<int>({})
-    );
+    EXPECT_EQ(difference(std::vector<int>({1, 2, 3}), std::vector<int>({1, 2, 3})), std::vector<int>({}));
+    EXPECT_EQ(difference(std::vector<int>({1, 2, 3}), std::vector<int>({1, 2, 3, 4})), std::vector<int>({}));
 
-    EXPECT_EQ(
-        difference(std::vector<int>({}), std::vector<int>({})),
-        std::vector<int>({})
-    );
-    EXPECT_EQ(
-        difference(std::vector<int>({}), std::vector<int>({1})),
-        std::vector<int>({})
-    );
+    EXPECT_EQ(difference(std::vector<int>({}), std::vector<int>({})), std::vector<int>({}));
+    EXPECT_EQ(difference(std::vector<int>({}), std::vector<int>({1})), std::vector<int>({}));
 
-    EXPECT_EQ(
-        difference(std::vector<int>({1, 1, 2}), std::vector<int>({1, 1, 2})),
-        std::vector<int>({})
-    );
+    EXPECT_EQ(difference(std::vector<int>({1, 1, 2}), std::vector<int>({1, 1, 2})), std::vector<int>({}));
 }
 
 TEST(Sets, Index) {

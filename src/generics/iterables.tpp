@@ -36,12 +36,7 @@ requires funky::Callable<T, char(char)>
 std::string funky::map(const T &mapper, const std::string &source) {
     std::string target;
 
-    std::transform(
-        source.begin(),
-        source.end(),
-        std::back_inserter(target),
-        mapper
-    );
+    std::transform(source.begin(), source.end(), std::back_inserter(target), mapper);
 
     return target;
 }
@@ -51,14 +46,9 @@ requires funky::Callable<T, C(A, B)>
 std::vector<C> funky::map(const T &mapper, const std::map<A, B> &source) {
     std::vector<C> target;
 
-    std::transform(
-        source.begin(),
-        source.end(),
-        std::back_inserter(target),
-        [&mapper](const auto &x) {
-            return mapper(x.first, x.second);
-        }
-    );
+    std::transform(source.begin(), source.end(), std::back_inserter(target), [&mapper](const auto &x) {
+        return mapper(x.first, x.second);
+    });
 
     return target;
 }
@@ -68,12 +58,7 @@ requires funky::Callable<T, B(A)>
 FB funky::map(const T &mapper, const FA &source) {
     FB target;
 
-    std::transform(
-        source.begin(),
-        source.end(),
-        std::back_inserter(target),
-        mapper
-    );
+    std::transform(source.begin(), source.end(), std::back_inserter(target), mapper);
 
     return target;
 }
@@ -172,9 +157,7 @@ FA funky::slice_first(const FA &source, size_t width) {
 
 template <typename FA, typename A>
 FA funky::slice_last(const FA &source, size_t width) {
-    return source.size() > width
-        ? slice(source, source.size() - width, source.size())
-        : source;
+    return source.size() > width ? slice(source, source.size() - width, source.size()) : source;
 }
 
 template <typename FA, typename A>
@@ -184,8 +167,7 @@ FA funky::drop_first(const FA &source, size_t width) {
 
 template <typename FA, typename A>
 FA funky::drop_last(const FA &source, size_t width) {
-    return source.size() > width ? slice(source, 0, source.size() - width)
-                                 : FA();
+    return source.size() > width ? slice(source, 0, source.size() - width) : FA();
 }
 
 template <typename FA, typename A>

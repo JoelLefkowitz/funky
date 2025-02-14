@@ -28,22 +28,12 @@ namespace funky {
     std::vector<C> map(const T &mapper, const std::map<A, B> &source);
 
     // map ≔ (A → size_t → B) → [ A ] → [ B ]
-    template <
-        typename FB,
-        typename FA,
-        typename B = Elements<FB>,
-        typename A = Elements<FA>,
-        typename T>
+    template <typename FB, typename FA, typename B = Elements<FB>, typename A = Elements<FA>, typename T>
     requires Callable<T, B(A)>
     FB map(const T &mapper, const FA &source);
 
     // map ≔ (A → B) → [ A ] → [ B ]
-    template <
-        typename FB,
-        typename FA,
-        typename B = Elements<FB>,
-        typename A = Elements<FA>,
-        typename T>
+    template <typename FB, typename FA, typename B = Elements<FB>, typename A = Elements<FA>, typename T>
     requires Callable<T, B(A, size_t)>
     FB map(const T &mapper, const FA &source);
 

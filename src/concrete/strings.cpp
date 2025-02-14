@@ -9,13 +9,11 @@
 #include <vector>
 
 bool funky::starts_with(const std::string &str, const std::string &prefix) {
-    return str.length() >= prefix.length() &&
-        str.substr(0, prefix.length()) == prefix;
+    return str.length() >= prefix.length() && str.substr(0, prefix.length()) == prefix;
 }
 
 bool funky::ends_with(const std::string &str, const std::string &suffix) {
-    return str.length() >= suffix.length() &&
-        str.substr(str.length() - suffix.length(), str.length()) == suffix;
+    return str.length() >= suffix.length() && str.substr(str.length() - suffix.length(), str.length()) == suffix;
 }
 
 std::string funky::reverse(const std::string &str) {
@@ -28,11 +26,7 @@ std::string funky::pad(const std::string &str, size_t size) {
     return size > str.size() ? str + std::string(size - str.size(), ' ') : str;
 }
 
-std::string funky::truncate(
-    const std::string &str,
-    size_t limit,
-    const std::string &ellipsis
-) {
+std::string funky::truncate(const std::string &str, size_t limit, const std::string &ellipsis) {
     if (str.size() <= limit) {
         return str;
     }
@@ -55,10 +49,7 @@ std::string funky::lowercase(const std::string &str) {
     return funky::map(lower, str);
 }
 
-std::vector<std::string> funky::split(
-    const std::string &str,
-    const std::string &delimiter
-) {
+std::vector<std::string> funky::split(const std::string &str, const std::string &delimiter) {
     if (str.empty()) {
         return {str};
     }
@@ -89,19 +80,15 @@ std::vector<std::string> funky::split(
     return chunks;
 }
 
-std::string funky::join(
-    const std::vector<std::string> &strings,
-    const std::string &delimiter
-) {
-    std::function<std::string(const std::string &, const std::string &)>
-        append = [&delimiter](const auto &acc, const auto &x) {
+std::string funky::join(const std::vector<std::string> &strings, const std::string &delimiter) {
+    std::function<std::string(const std::string &, const std::string &)> append =
+        [&delimiter](const auto &acc, const auto &x) {
             return acc + x + delimiter;
         };
 
     auto joined = funky::fold<std::string>(append, "", strings);
 
-    return strings.empty() ? ""
-                           : joined.substr(0, joined.size() - delimiter.size());
+    return strings.empty() ? "" : joined.substr(0, joined.size() - delimiter.size());
 }
 
 std::vector<std::string> funky::chunk(const std::string &str, size_t size) {
@@ -113,10 +100,7 @@ std::vector<std::string> funky::chunk(const std::string &str, size_t size) {
     );
 }
 
-std::string funky::without_substrings(
-    const std::string &str,
-    const std::vector<std::string> &substrs
-) {
+std::string funky::without_substrings(const std::string &str, const std::vector<std::string> &substrs) {
     std::string copy = str;
 
     for (size_t i = 0; i < copy.size();) {

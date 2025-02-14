@@ -23,10 +23,7 @@ TEST(Vectors, Linspace) {
     EXPECT_EQ(linspace(0.0, 10.0, 2), std::vector<double>({0, 10}));
     EXPECT_EQ(linspace(0.0, 10.0, 3), std::vector<double>({0, 5, 10}));
 
-    EXPECT_EQ(
-        linspace(0.0, 10.0, 5),
-        std::vector<double>({0, 2.5, 5, 7.5, 10})
-    );
+    EXPECT_EQ(linspace(0.0, 10.0, 5), std::vector<double>({0, 2.5, 5, 7.5, 10}));
 
     EXPECT_EQ(linspace(1.0, 10.0, 4), std::vector<double>({1, 4, 7, 10}));
 }

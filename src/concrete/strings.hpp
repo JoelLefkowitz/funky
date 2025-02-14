@@ -19,11 +19,7 @@ namespace funky {
     std::string pad(const std::string &str, size_t size);
 
     // truncate ≔ std::string → size_t → std::string → std::string
-    std::string truncate(
-        const std::string &str,
-        size_t limit,
-        const std::string &ellipsis = "..."
-    );
+    std::string truncate(const std::string &str, size_t limit, const std::string &ellipsis = "...");
 
     // uppercase ≔ std::string → std::string
     std::string uppercase(const std::string &str);
@@ -32,25 +28,16 @@ namespace funky {
     std::string lowercase(const std::string &str);
 
     // split ≔ std::string → std::string → std::vector<std::string>
-    std::vector<std::string> split(
-        const std::string &str,
-        const std::string &delimiter
-    );
+    std::vector<std::string> split(const std::string &str, const std::string &delimiter);
 
     // join ≔ std::vector<std::string> → std::string → std::string
-    std::string join(
-        const std::vector<std::string> &strings,
-        const std::string &delimiter = ""
-    );
+    std::string join(const std::vector<std::string> &strings, const std::string &delimiter = "");
 
     // chunk ≔ std::string → size_t → std::vector<std::string>
     std::vector<std::string> chunk(const std::string &str, size_t size);
 
     // without_substrings ≔ std::string → std::vector<std::string> → std::string
-    std::string without_substrings(
-        const std::string &str,
-        const std::vector<std::string> &substr
-    );
+    std::string without_substrings(const std::string &str, const std::vector<std::string> &substr);
 
     // format_hex ≔ int → size_t → std::string
     std::string format_hex(int n, size_t length = 6UL);

@@ -22,10 +22,7 @@ TEST(Pairs, Product) {
         {2, 4}
     });
 
-    EXPECT_EQ(
-        product(std::vector<int>({1, 2}), std::vector<int>({3, 4})),
-        paired
-    );
+    EXPECT_EQ(product(std::vector<int>({1, 2}), std::vector<int>({3, 4})), paired);
 }
 
 TEST(Pairs, Pairs) {
