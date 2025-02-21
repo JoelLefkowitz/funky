@@ -69,7 +69,8 @@ class FunkyConan(ConanFile):
             os.path.join(self.build_folder, "..", "dist"),
             os.path.join(self.package_folder, "lib"),
         )
-
+        self.run("tree .. -L 5")
+        
     def package_info(self):
         self.cpp_info.bindirs = []
         self.cpp_info.libs = [self.name]
