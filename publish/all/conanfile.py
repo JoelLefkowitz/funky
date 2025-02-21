@@ -1,9 +1,10 @@
 import os
-
 from conan import ConanFile
 from conan.tools.files import copy, get
 from conan.tools.scons import SConsDeps
 from conan.tools.layout import basic_layout
+
+required_conan_version = ">=2.0.0"
 
 
 class FunkyConan(ConanFile):
@@ -13,6 +14,7 @@ class FunkyConan(ConanFile):
 
     url = "https://github.com/conan-io/conan-center-index"
     homepage = "https://github.com/JoelLefkowitz/funky"
+    author = "Joel Lefkowitz (joellefkowitz@hotmail.com)"
 
     topics = (
         "functional",
@@ -28,11 +30,10 @@ class FunkyConan(ConanFile):
         "build_type",
     )
 
+    package_type = "library"
+
     def layout(self):
         basic_layout(self)
-
-    def package_id(self):
-        self.info.clear()
 
     def source(self):
         get(
@@ -69,8 +70,7 @@ class FunkyConan(ConanFile):
             os.path.join(self.build_folder, "..", "dist"),
             os.path.join(self.package_folder, "lib"),
         )
-        self.run("tree .. -L 5")
-        
+
     def package_info(self):
         self.cpp_info.bindirs = []
         self.cpp_info.libs = [self.name]
