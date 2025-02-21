@@ -1,4 +1,4 @@
 sources:
-  "0.2.0":
-    url: "https://github.com/JoelLefkowitz/funky/archive/refs/tags/v0.2.0.tar.gz"
-    sha256: "fdf7cc91588f66eb8be54ad2e7204a110d0f994ecf92d34ea9e434aba77a85f3"
+  "0.2.1":
+    url: "https://github.com/JoelLefkowitz/funky/archive/refs/tags/v0.2.1.tar.gz"
+    sha256: "955b1a3354a5656d39a41301e132d65b4624c978e7a375f1396450221f8b3ecb"
