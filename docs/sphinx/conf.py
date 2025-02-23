@@ -5,7 +5,7 @@ from glob import glob
 
 project = "Funky"
 package = "funky"
-version = "0.2.1"
+version = "0.3.0"
 
 project_copyright = f"{date.today().year} Joel Lefkowitz"
 

@@ -1,7 +1,7 @@
 [project]
 name = "funky"
 description = "Functional and ergonomic transformations."
-version = "0.2.1"
+version = "0.3.0"
 
 keywords = ["functional", "immutable", "iterables", "generics"]
 
