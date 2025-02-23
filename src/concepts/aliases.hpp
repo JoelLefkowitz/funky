@@ -11,7 +11,10 @@ namespace funky {
     using Elements = std::ranges::range_value_t<A>;
 
     template <typename A>
-    using Indexed = std::pair<size_t, A>;
+    using Indexes = std::pair<size_t, A>;
+
+    template <typename A>
+    using Pairs = std::pair<A, A>;
 }
 
 #endif

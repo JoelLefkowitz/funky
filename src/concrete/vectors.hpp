@@ -20,9 +20,9 @@ namespace funky {
     template <typename A>
     std::vector<A> linspace(A start, A stop, size_t count);
 
-    // enumerate ≔ std::vector<A> → std::vector<Indexed<A>>
+    // enumerate ≔ std::vector<A> → std::vector<Indexes<A>>
     template <typename A>
-    std::vector<Indexed<A>> enumerate(const std::vector<A> &vec);
+    std::vector<Indexes<A>> enumerate(const std::vector<A> &vec);
 }
 
 #endif
